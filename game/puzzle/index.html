@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>demo by hans</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        ul {
+            list-style-type: none;
+        }
+        .wrap {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            background-color: #eee;
+            border: 1px solid #aaa;
+        }
+        .item {
+            position: absolute;
+            border: 1px solid #aaa;
+            background-image: url(img/1.jpg);
+            background-size: 250px 250px;;
+            transition: .5s;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <!-- <input type="file" name="" id="upload"> -->
+        <div class="wrap">
+            <ul></ul>
+        </div>
+    </div>
+</body>
+<script src="./game.js"></script>
+<script>
+    let $ = sel => document.querySelector(sel);
+    let $$ = sel => document.querySelectorAll(sel);
+    let log = console.log.bind(console);
+
+    let game = new Puzzle({
+        container: $('.wrap ul'),
+    }).init();
+
+
+    function shuffle(arr) {
+        let len = arr.length;
+        for (let i = 0; i < len; i++) {
+            let m = Math.random() * (len - i) | 0;
+            [arr[len - i - 1], arr[m]] = [arr[m], arr[len - i - 1]];
+        }
+        return arr;
+    }    
+    function merge(left, right) {
+        let tmp = [];
+        while (left.length && right.length) {
+            if (left[0] < right[0]) {
+                tmp.push(left.shift());
+                count++;
+            } else {
+                tmp.push(right.shift());
+            }
+        }
+        return tmp.concat(left, right);
+    }
+    function mergeSort(arr) {
+        let len = arr.length;
+        if (len === 1) return arr;
+
+        let mid = len / 2 | 0;
+        let left = arr.slice(0, mid);
+        let right = arr.slice(mid);
+        return merge(mergeSort(left), mergeSort(right));
+    }
+
+    let stack = [];
+    function bfc(arr) {
+        if (arr.join('') === '012345678') {
+            return arr;
+        }
+        
+        bfc(arr);
+    }
+
+
+
+
+
+
+
+</script>
+</html>
