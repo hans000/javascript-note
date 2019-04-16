@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>demo by hans</title>
+    <style>
+        .on {
+            color: #f60;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h3>Todolist</h3>
+        <div v-if="isVisible">
+            <span>输入待做的事</span>
+            <input type="text" @keyup.13="add" v-model="msg">
+        </div>
+        <div v-else="isVisible">
+            <span>修改内容</span>
+            <input type="text" @keyup.13="modify(text)" v-model="text">
+        </div>
+        <ul>
+            <li :class="{on:item.isSelect}" v-for="(item, index) in list">
+                {{item.msg}}
+                <button @click="show(index)">修改</button>
+                <button @click="remove(index)">删除</button>
+            </li>
+        </ul>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    let $ = sel => document.querySelector(sel);
+    let $$ = sel => document.querySelectorAll(sel);
+    let log = console.log.bind(console);
+
+    new Vue({
+        el: '#app',
+        data: {
+            list: [],
+            msg: '',
+            text: '',
+            index: -1,
+            isVisible: true,
+        },
+        methods: {
+            modify(text) {
+                this.list[this.index].msg = text;
+                this.list[this.index].isSelect = false;
+
+                this.isVisible = true;
+            },
+            show(index) {
+                this.isVisible = false;
+                this.index = index;
+
+                this.text = this.list[index].msg;
+                this.list[index].isSelect = true;
+            },
+            add() {
+                this.list.push({
+                    msg: this.msg,
+                    isSelect: false,
+                });
+                this.msg = '';
+            },
+            remove(index) {
+                this.list.splice(index, 1);
+            },
+        }
+    })
+</script>
+</html>
