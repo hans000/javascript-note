@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>demo by hans</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .main {
+            width: 800px;
+            margin: 40px auto;
+        }
+        .wrap {
+            width: 400px;
+            height: 400px;
+            margin: 40px auto;
+            border: 1px solid #aaa;
+        }
+        #scene li {
+            float: left;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="wrap">
+            <ul id="scene"></ul>
+        </div>
+    </div>
+</body>
+<script>
+    let $ = sel => document.querySelector(sel);
+    let $$ = sel => document.querySelectorAll(sel);
+    let log = console.log.bind(console);
+    let scene = $('#scene')
+
+    let offset = [-1, -1, -1, 0, -1, 1, 0, -1, 0, 1, 1, -1, 1, 0, 1, 1];
+
+
+    function Scene(data) {
+        this.map = [];
+        this.scale = 10;
+        this.bombCount = 20;
+    }
+    Scene.prototype = {
+        init() {
+            this.initmap();
+            this.initUI();
+            this.bindEvent();
+            return this;
+        },
+        initUI() {
+            const CELL = 400 / this.scale - 2;
+            let frg = document.createDocumentFragment();
+            for (let i = 0; i < this.scale; i++) {
+                for (let j = 0; j < this.scale; j++) {
+                    let li = document.createElement('LI');
+                    li.x = i;
+                    li.y = j;
+                    li.style.width = CELL + 'px';
+                    li.style.height = CELL + 'px';
+                    li.style.backgroundColor = '#eee';
+                    li.style.border = '1px solid #aaa';
+                    li.style.lineHeight = CELL + 'px';
+                    li.mark = this.map[i][j];
+                    frg.appendChild(li);
+                }
+            }
+            scene.appendChild(frg);
+        },
+        initmap() {
+            let self = this;
+            for (let i = 0; i < self.scale; i++) {
+                self.map.push(new Array(self.scale).fill(0));
+            }
+            for (let i = 0; i < self.bombCount; i++) {
+                while (1) {
+                    let x = rand(0, self.scale);
+                    let y = rand(0, self.scale);
+                    if (!self.map[x][y]) {
+                        self.map[x][y] = '@'
+                        break;
+                    }
+                }
+            }
+            for (let i = 0; i < self.scale; i++) {
+                for (let j = 0; j < self.scale; j++) {
+                    if (self.map[i][j] !== '@') {
+                        let count = 0;
+                        for (let k = 0; k < 16; k += 2) {
+                            let x = i + offset[k];
+                            let y = j + offset[k + 1];
+                            if (x < 0 || y < 0 || x >= self.scale || y >= self.scale) {
+                                continue;
+                            }
+                            if (self.map[x][y] === '@') {
+                                count++;
+                            }
+                        }
+                        self.map[i][j] = count;
+                    }
+                }
+            }
+        },
+        bindEvent() {
+            let self = this;
+            this.items = $$('.wrap li');
+            window.addEventListener('click', function (e) {
+                let tag = e.target;
+                if (tag.nodeName === 'LI') {
+                    if (tag.mark === '@') {
+                        for (const o of self.items) {
+                            o.innerHTML = o.mark;
+                            if (o.mark === '@') {
+                                o.style.backgroundColor = 'red'
+                            }
+                        }
+                        alert('当前是雷！');
+                    } else {
+                        if (tag.mark === 0) {
+                            let arr = [tag];
+                            tag.flag = true;
+                            while (arr.length) {
+                                let node = arr.pop();
+                                for (let k = 0; k < 16; k += 2) {
+                                    let x = node.x + offset[k];
+                                    let y = node.y + offset[k + 1];
+                                    // over the border
+                                    if (x < 0 || y < 0 || x >= self.scale || y >= self.scale) {
+                                        continue;
+                                    }
+                                    let item = self.items[x * self.scale + y];
+                                    if (item.mark === 0 && !item.flag) {
+                                        arr.push(item);
+                                        item.flag = true;
+                                        item.style.backgroundColor = 'white';
+                                    } else {
+                                        item.flag = true;
+                                        item.innerHTML = item.mark ? item.mark : '';
+                                        item.style.backgroundColor = 'white';
+                                    }
+                                }                            
+                            }
+                        } else {
+                            tag.innerHTML = tag.mark;
+                            tag.style.backgroundColor = 'white';
+                        }
+                    }
+                }
+            })
+        },
+        update() {
+    
+        },
+    }
+    function rand(min, max) {
+        return min + Math.random() * (max - min) | 0;
+    }
+    let game = new Scene().init();
+    
+    
+</script>
+</html>

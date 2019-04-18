@@ -46,49 +46,30 @@
         container: $('.wrap ul'),
     }).init();
 
-
-    function shuffle(arr) {
-        let len = arr.length;
-        for (let i = 0; i < len; i++) {
-            let m = Math.random() * (len - i) | 0;
-            [arr[len - i - 1], arr[m]] = [arr[m], arr[len - i - 1]];
-        }
-        return arr;
-    }    
-    function merge(left, right) {
-        let tmp = [];
-        while (left.length && right.length) {
-            if (left[0] < right[0]) {
-                tmp.push(left.shift());
-                count++;
-            } else {
-                tmp.push(right.shift());
-            }
-        }
-        return tmp.concat(left, right);
-    }
-    function mergeSort(arr) {
-        let len = arr.length;
-        if (len === 1) return arr;
-
-        let mid = len / 2 | 0;
-        let left = arr.slice(0, mid);
-        let right = arr.slice(mid);
-        return merge(mergeSort(left), mergeSort(right));
-    }
-
+    let arr = [0, 1, 2, 
+               3, 8, 4,
+               6, 7, 5];
+    let store = [];
     let stack = [];
-    function bfc(arr) {
-        if (arr.join('') === '012345678') {
-            return arr;
-        }
+    let i = arr.indexOf(8);
+    let scale = 3;
+
+    // up
+    if (i >= scale) {
         
-        bfc(arr);
     }
-
-
-
-
+    // down
+    if (i < scale * (scale - 1)) {
+        
+    }
+    // left
+    if ((i + 1) % scale !== 0) {
+        
+    }
+    // right
+    if (i % scale !== 0) {
+        
+    }
 
 
 

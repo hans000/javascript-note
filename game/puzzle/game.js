@@ -181,6 +181,5 @@
             }
         }
     }
-
     window.Puzzle = Puzzle;
 }())
