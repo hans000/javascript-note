@@ -56,21 +56,28 @@
 
     // up
     if (i >= scale) {
-        
+        stack.push(i - scale);
     }
     // down
     if (i < scale * (scale - 1)) {
-        
+        stack.push(i + scale);
     }
     // left
-    if ((i + 1) % scale !== 0) {
-        
+    if (i % scale !== 0) {
+        stack.push(i - 1);
     }
     // right
-    if (i % scale !== 0) {
-        
+    if ((i + 1) % scale !== 0) {
+        stack.push(i + 1);
     }
-
+    while(stack.length) {
+        let pos = stack.pop();
+        let tmp = [...arr];
+        [tmp[i], tmp[pos]] = [tmp[pos], tmp[i]];
+        if (store.indexOf(tmp.toString()) === -1) {
+            store.push(tmp.toString());
+        }
+    }
 
 
 </script>
