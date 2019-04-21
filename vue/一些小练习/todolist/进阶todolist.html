@@ -28,7 +28,7 @@
     <div id="app">
         <div class="panel panel-default">
             <!-- Default panel contents -->
-            <div class="panel-heading">当前还有{{remain}}件事要做</div>
+            <div class="panel-heading">当前还有{{remainCount}}件事要做</div>
             <div class="panel-body">
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon3">输入你要做的事</span>
@@ -41,7 +41,7 @@
                     <th>备注</th>
                     <th>操作</th>
                 </tr>
-                <tr :class="{finished: item.isSelected}" v-for="(item, idx) in things">
+                <tr :class="{finished: item.isSelected}" v-for="(item, idx) in remainItems">
                     <td>
                         <input type="checkbox" v-model="item.isSelected">
                         {{idx + 1}}
@@ -52,9 +52,9 @@
             </table>
         </div>
         <ul class="nav nav-pills">
-            <li role="presentation" class="active"><a href="#all">全部</a></li>
-            <li role="presentation"><a href="#finished">已完成</a></li>
-            <li role="presentation"><a href="#unfinished">未完成</a></li>
+            <li role="presentation" :class="{active:hash === '#all'}"><a href="#all">全部</a></li>
+            <li role="presentation" :class="{active:hash === '#finished'}"><a href="#finished">已完成</a></li>
+            <li role="presentation" :class="{active:hash === '#unfinished'}"><a href="#unfinished">未完成</a></li>
         </ul>
     </div>
 </body>
@@ -67,8 +67,8 @@
         el: '#app',
         data: {
             info: '',
-            things: [
-            ],
+            things: [],
+            hash: '#all',
         },
         watch: {
             things: {
@@ -91,9 +91,18 @@
             },
         },
         computed: {
-            remain() {
-                return this.things.filter(e =>  !e.isSelected).length
+            remainCount() {
+                return this.things.filter(e =>  !e.isSelected).length;
             },
+            remainItems() {
+                if (this.hash === '#unfinished') {
+                    return this.things.filter(e => !e.isSelected);
+                }
+                if (this.hash === '#finished') {
+                    return this.things.filter(e => e.isSelected);
+                }
+                return this.things;
+            }
         },
         created() {
             this.things = JSON.parse(localStorage.getItem('todos')) || [];
