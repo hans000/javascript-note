@@ -104,6 +104,11 @@
                 return this.things;
             }
         },
+        directives: {
+            focus(el) {
+                el.focus();
+            }
+        },
         created() {
             this.things = JSON.parse(localStorage.getItem('todos')) || [];
             //监听hash值的变化

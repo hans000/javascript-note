@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>demo by hans</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        * { padding: 0; margin: 0; }
+        #app {
+            margin: 20px 20px;
+        }
+        .input-group {
+            margin-bottom: 10px;
+        }
+        .btn-group {
+            float: right;
+        }
+        button {
+            border: none;
+            outline: none;
+            background-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="panel panel-default">
+            <sheet></sheet>
+            <tablex></tablex>
+        </div>
+    </div>
+</body>
+<template id="sheet">
+    <div>
+        <div class="panel-heading">学生管理系统（当前学生数量：remainCount）</div>
+        <div class="panel-body">
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon3">姓名：</span>
+                <input v-model="name" type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon3">学号：</span>
+                <input v-model="number" type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+            </div>
+            <div class="btn-group" role="group" aria-label="...">
+                <button @click="add()" type="button" class="btn btn-default">添加</button>
+            </div>
+        </div>
+    </div>
+</template>
+<template id="tablex">
+    <table class="table">
+        <tr>
+            <th>姓名</th>
+            <th>学号</th>
+            <th>操作</th>
+        </tr>
+        <tr v-for="(el, idx) in list">
+            <td>{{el.name}}</td>
+            <td>{{el.number}}</td>
+            <td><button @click="remove(idx)" class="glyphicon glyphicon-remove-sign g-delete" aria-hidden="true"></button>
+            </td>
+        </tr>
+    </table>
+</template>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    let $ = sel => document.querySelector(sel);
+    let $$ = sel => document.querySelectorAll(sel);
+    let log = console.log.bind(console);
+    
+    let eventBus = new Vue();
+
+    let sheet = {
+        template: '#sheet',
+        data() {
+            return {
+                name: '',
+                number: '',
+                list: [],
+            }
+        },
+        created() {
+            this.list = JSON.parse(localStorage.getItem('studentInfo')) || [];
+            this.$nextTick(() => {
+                eventBus.$emit('addHandler', this.list);
+            })
+            eventBus.$on('removeHandler', (idx) => {
+               this.list.splice(idx, 1);
+            });
+        },
+        methods: {
+            update() {
+                eventBus.$emit('addHandler', this.list);
+            },
+            add() {
+                this.list.push({
+                    name: this.name,
+                    number: this.number,
+                })
+                
+                this.name = '';
+                this.number = '';
+                eventBus.$emit('sendHandler', this.list);
+            },
+        },
+        watch: {
+            list: {
+                handler() {
+                    localStorage.setItem('studentInfo', JSON.stringify(this.list));
+                },
+                deep: true,
+            }
+        }
+    }
+    let tablex = {
+        template: '#tablex',
+        data() {
+            return {
+                list: [],
+            }
+        },
+        created() {
+            eventBus.$on('addHandler', (list) => {
+                log(list)
+                this.list = list;
+            });
+        },
+        methods: {
+            remove(idx) {
+                eventBus.$emit('removeHandler', idx);
+            },
+        }
+    }
+    let vm = new Vue({
+        el: '#app',
+        components: {
+            sheet,
+            tablex,
+        }
+    })
+</script>
+</html>
