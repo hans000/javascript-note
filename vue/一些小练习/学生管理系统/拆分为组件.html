@@ -182,12 +182,12 @@
                 this.list = list;
             });
             eventBus.$on('closeHandler', (e) => {
-                if (e && e.flag) {
+                if (e.flag) {
                     this.remove();
                 }
             });
             eventBus.$on('closeHandler', (e) => {
-                this.idx = e.idx && e.idx;
+                this.idx = e.idx;
             });
         },
         methods: {
@@ -216,9 +216,6 @@
             eventBus.$on('closeHandler', () => {
                 this.isShow = !this.isShow;
             });
-            // eventBus.$on('ejectHandler', () => {
-            //     this.isShow = !this.isShow;
-            // });
         },
         components: {
             sheet,
