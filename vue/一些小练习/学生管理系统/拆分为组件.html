@@ -20,6 +20,34 @@
             outline: none;
             background-color: transparent;
         }
+        /* 弹窗组件样式 */
+        .mask {
+            z-index: 99999;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+
+        }
+        .pane {
+            position: absolute;
+            width: 500px;
+            left: 50%;
+            top: 50%;
+            padding: 20px;
+            background-color: #fff;
+            margin-left: -250px;
+            margin-top: -150px;
+        }
+        .mask .title {
+            height: 150px;
+            font-size: 24px;
+        }
+        .ctrl {
+            text-align: right;
+        }
     </style>
 </head>
 <body>
@@ -28,11 +56,12 @@
             <sheet></sheet>
             <tablex></tablex>
         </div>
+        <toast v-if="isShow"></toast>
     </div>
 </body>
 <template id="sheet">
     <div>
-        <div class="panel-heading">学生管理系统（当前学生数量：remainCount）</div>
+        <div class="panel-heading">学生管理系统（当前学生数量：{{remainCount}}）</div>
         <div class="panel-body">
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon3">姓名：</span>
@@ -49,7 +78,7 @@
     </div>
 </template>
 <template id="tablex">
-    <table class="table">
+    <table v-if="remainCount" class="table">
         <tr>
             <th>姓名</th>
             <th>学号</th>
@@ -58,10 +87,23 @@
         <tr v-for="(el, idx) in list">
             <td>{{el.name}}</td>
             <td>{{el.number}}</td>
-            <td><button @click="remove(idx)" class="glyphicon glyphicon-remove-sign g-delete" aria-hidden="true"></button>
+            <td><button @click="eject(idx)" class="glyphicon glyphicon-remove-sign g-delete" aria-hidden="true"></button>
             </td>
         </tr>
     </table>
+</template>
+<template id="toast">
+    <div class="mask">
+        <div class="pane">
+            <div class="title">
+                <p>确定删除？</p>
+            </div>
+            <div class="ctrl">
+                <button @click="okCancel(true)" class="btn btn-danger">确定</button>
+                <button @click="okCancel(false)" class="btn btn-default">取消</button>
+            </div>
+        </div>
+    </div>
 </template>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
@@ -70,7 +112,14 @@
     let log = console.log.bind(console);
     
     let eventBus = new Vue();
-
+    let toast = {
+        template: '#toast',
+        methods: {
+            okCancel(flag) {
+                eventBus.$emit('closeHandler', flag);
+            },
+        },
+    }
     let sheet = {
         template: '#sheet',
         data() {
@@ -104,6 +153,11 @@
                 eventBus.$emit('sendHandler', this.list);
             },
         },
+        computed: {
+            remainCount() {
+                return this.list.length;
+            }
+        },
         watch: {
             list: {
                 handler() {
@@ -118,25 +172,57 @@
         data() {
             return {
                 list: [],
+                idx: -1,
             }
         },
         created() {
             eventBus.$on('addHandler', (list) => {
-                log(list)
                 this.list = list;
+            });
+            eventBus.$on('closeHandler', (flag) => {
+                if (flag) {
+                    this.remove();
+                }
+            });
+            eventBus.$on('ejectHandler', (idx) => {
+                this.idx = idx;
             });
         },
         methods: {
-            remove(idx) {
-                eventBus.$emit('removeHandler', idx);
+            remove() {
+                this.list.splice(this.idx, 1);
             },
-        }
+            eject(idx) {
+                eventBus.$emit('ejectHandler', idx);
+            }
+        },
+        computed: {
+            remainCount() {
+                return this.list.length;
+            }
+        },
     }
+
     let vm = new Vue({
         el: '#app',
+        data: {
+            isShow: false,
+        },
+        created() {
+            eventBus.$on('closeHandler', () => {
+                this.isShow = !this.isShow;
+            });
+            eventBus.$on('ejectHandler', () => {
+                this.isShow = !this.isShow;
+            });
+        },
         components: {
             sheet,
             tablex,
+            toast,
+        },
+        methods: {
+
         }
     })
 </script>

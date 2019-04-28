@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>demo by hans</title>
+    <style>
+    
+    </style>
+</head>
+<body>
+    
+</body>
+<script>
+    let $ = sel => document.querySelector(sel);
+    let $$ = sel => document.querySelectorAll(sel);
+    let log = console.log.bind(console);
+
+    // function Fn(name) {
+    //     this.name = name;
+    // }
+    // Fn.prototype = {
+    //     say() {
+    //         console.log('我是%s', this.name)
+    //     }
+    // }
+    // let fn = new Fn('Tom');
+
+    // Parent1原型上的say没法拿到console.log(new Child1(), new Child1().say());
+    function Parent() {
+        // this.name = 'parent';
+        // this.eat = function (food) {
+        //     console.log('我吃%s', food);
+        // }
+    }
+    Parent.prototype = {
+        name: 'parent',
+        say() {
+            console.log('我是%s', this.name);
+        }
+    };
+    function Child() {
+        Parent.call(this);
+        this.type = 'child';
+    }
+    let child = new Child();
+</script>
+</html>
