@@ -116,7 +116,9 @@
         template: '#toast',
         methods: {
             okCancel(flag) {
-                eventBus.$emit('closeHandler', flag);
+                eventBus.$emit('closeHandler', {
+                    flag,
+                });
             },
         },
     }
@@ -179,13 +181,13 @@
             eventBus.$on('addHandler', (list) => {
                 this.list = list;
             });
-            eventBus.$on('closeHandler', (flag) => {
-                if (flag) {
+            eventBus.$on('closeHandler', (e) => {
+                if (e && e.flag) {
                     this.remove();
                 }
             });
-            eventBus.$on('ejectHandler', (idx) => {
-                this.idx = idx;
+            eventBus.$on('closeHandler', (e) => {
+                this.idx = e.idx && e.idx;
             });
         },
         methods: {
@@ -193,7 +195,9 @@
                 this.list.splice(this.idx, 1);
             },
             eject(idx) {
-                eventBus.$emit('ejectHandler', idx);
+                eventBus.$emit('closeHandler', {
+                    idx,
+                });
             }
         },
         computed: {
@@ -212,9 +216,9 @@
             eventBus.$on('closeHandler', () => {
                 this.isShow = !this.isShow;
             });
-            eventBus.$on('ejectHandler', () => {
-                this.isShow = !this.isShow;
-            });
+            // eventBus.$on('ejectHandler', () => {
+            //     this.isShow = !this.isShow;
+            // });
         },
         components: {
             sheet,
