@@ -8,15 +8,57 @@
     </style>
 </head>
 <body>
-    
+    <div id="app">
+        输入要查询的字：<input type="text" v-model="msg">
+        <router-link :to="{name: 'home', query: {char: msg}}">查询</router-link>
+        <router-view></router-view>
+    </div>
 </body>
+<template id="home">
+    <div>
+        <p>{{char}}</p>
+        <img :src="src" alt="">
+    </div>
+</template>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 <script>
     let $ = sel => document.querySelector(sel);
     let $$ = sel => document.querySelectorAll(sel);
     let log = console.log.bind(console);
-    let str = 'http://att.chaiwubi.com/wubi/86tj/我.gif';
+    let str = 'http://att.chaiwubi.com/wubi/86tj/尼.gif';
 
+    let home = {
+        template: '#home',
+        data() {
+            return {
+                char: '',
+                src: '',
+            }
+        },
+        watch: {
+            '$route'(to, from) {
+                log(this.$route.query.char)
+                this.src = `https://www.52wubi.com/wbbmcx/tp/${this.$route.query.char}.gif`;
+            }
+        }
+    }
+    const routes = [
+        { path: '/home' , name: 'home', component: home },
+    ]
+    const router = new VueRouter({
+        routes,
+    })
+    let vm = new Vue({
+        el: '#app',
+        router,
+        data: {
+            msg: '',
+        },
+        methods: {
+            
+        },
+
+    })
 </script>
 </html>
