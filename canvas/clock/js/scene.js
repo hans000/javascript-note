@@ -15,9 +15,9 @@ class Scene {
     this.drawPoint()
     if (this.time > 40) this.drawRect()
     let { min, sec, hour } = this.getAngle()
-    if (this.time > 75) this.drawScale(cx, cy, 4, 120, sec, '#de6655')
-    if (this.time > 80) this.drawScale(cx, cy, 4, 100, min, '#666665')
-    if (this.time > 90) this.drawScale(cx, cy, 4, 80, hour, '#666665')
+    if (this.time > 75) this.drawNeedle(cx, cy, 4, 120, sec, '#de6655')
+    if (this.time > 80) this.drawNeedle(cx, cy, 4, 100, min, '#666665')
+    if (this.time > 90) this.drawNeedle(cx, cy, 4, 80, hour, '#666665')
     if (this.time > 100) this.drawPane2()
   }
   update() {
@@ -32,7 +32,7 @@ class Scene {
       let angle = (i * 360/12 + 90) * Math.PI / 180
       ctx.save()
       ctx.translate(cx + x, cy + y)
-      if (this.time > 52 + i) this.drawScale(0, 0, w, h, angle, '#b70d0d')
+      if (this.time > 52 + i) this.drawNeedle(0, 0, w, h, angle, '#b70d0d')
       ctx.rotate(angle)
       ctx.font="24px Verdana";
       ctx.fillStyle = '#272727'
@@ -81,7 +81,7 @@ class Scene {
    * @param {number} angle 偏移角度
    * @param {string} color 颜色值
    */
-  drawScale(x, y, w, h, angle, color='#000') {
+  drawNeedle(x, y, w, h, angle, color='#000') {
     ctx.save()
     ctx.translate(x, y)
     ctx.rotate(angle)
@@ -102,10 +102,5 @@ class Scene {
     ctx.fillStyle = color
     ctx.arc(x, y, r, 0, 6.28)
     ctx.fill()  
-  }
-  delayDraw(fn, ms=1000) {
-    return new Promise((resolve, reject) => {
-      setTimeout(resolve(ms), ms)
-    })
   }
 }

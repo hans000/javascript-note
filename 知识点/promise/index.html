@@ -10,27 +10,56 @@
   
 </body>
 <script>
-  function fn1() {
-    console.log(1)
+  /**
+   * 
+   * 需求：
+   *   有fn1 fn2 fn3等函数，要求实现函数延时t1 t2 t3时间依次执行
+   *   后一个函数按前一个执行结束开始计时，不得修改fn1 fn2 fn3等函数代码
+   * 
+   */
+  let t1 = 1000, 
+      t2 = 1000,
+      t3 = 1000
+
+  function fn1(a) {
+    console.log('fn1:' + a)
   }
-  function fn2() {
-    console.log(2)
+  function fn2(b) {
+    console.log('fn2:' + b)
   }
-  function fn3() {
-    console.log(3)
+  function fn3(c) {
+    console.log('fn3:' + c)
   }
 
+
+  // 方式一
+  // 俗称回调地狱，这使得代码横向发展，不易阅读、维护，开发应尽量避免
+  setTimeout(() => {
+    fn1(1)
+    setTimeout(() => {
+      fn2(2)
+      setTimeout(() => {
+        fn3(3)
+      }, t3)      
+    }, t2)    
+  }, t1)
+
+
+  // 方式二
+  // 使用promise封装，避免代码横向发展，链式操作
   function wait(func, ms) {
     return new Promise(resolve => {
       setTimeout(resolve, ms, func)
     })
   }
-
-  wait(fn1, 1000).then(r => {
-    r()
-    return wait(fn2, 1000)
+  wait(fn1, t1).then(r => {
+    
+    return r(1), wait(fn2, t2)
   }).then(r => {
-    r()
+    
+    return r(2), wait(fn3, t3)
+  }).then(r => {
+    r(3)
   })
 
 </script>

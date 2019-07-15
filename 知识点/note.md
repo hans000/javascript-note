@@ -18,6 +18,84 @@
 
 - 比如login和regisger组件里的校验
 
+```
+const register = (data) => {
+  let { username, password, repassword, code } = data
+
+  if (!validate(username.rule, username.value)) {
+    username.callback()
+    return false
+  }
+  if (!validate(password.rule, password.value)) {
+    password.callback()
+    return false
+  }
+  if (!validate(repassword.rule, repassword.value)) {
+    repassword.callback()
+    return false
+  }
+  if (!validate(code.rule, code.value)) {
+    code.callback()
+    return false
+  }
+  return true
+}
+
+const login = (data) => {
+  let { username, password } = data
+
+  if (!validate(username.rule, username.value)) {
+    username.callback()
+    return false
+  }
+  if (!validate(password.rule, password.value)) {
+    password.callback()
+    return false
+  }
+  return true
+}
+
+const write = (data) => {
+  let { title, category, description, text } = data
+  
+  return Object.values(data).some(e => {
+    return !validate(e.rule, e.value)
+  })
+
+  if (!validate(title.rule, title.value)) {
+    title.callback()
+    return false
+  }
+  if (!validate(category.rule, category.value)) {
+    category.callback()
+    return false
+  }
+  if (!validate(description.rule, description.value)) {
+    description.callback()
+    return false
+  }
+  if (!validate(text.rule, text.value)) {
+    text.callback()
+    return false
+  }
+  return true
+}
+
+const validate = (rule, value) => {
+  let reg = new RegExp(rule)
+  return reg.test(value)
+}
+
+export default {
+  register,
+  login,
+  write,
+  validate,
+}
+```
+
+
+
 ## 2. 一些算法
 
 ### 数组操作
@@ -114,3 +192,56 @@
    ```
 
 9. 介绍一下Set Map对象
+
+
+
+## 一些问题
+
+1. h5新增标签，为啥加强标签语义化
+
+   常用的新增标签：header nav main section asider footer canvas video audio
+
+- 对开发者友好，结构清晰，便于开发维护
+- 对设备优化，利于SEO，利于设备解析（屏幕阅读器、盲人阅读器）
+
+2. 为啥要清楚浮动，如何清除浮动
+
+   高度塌陷
+
+- 父元素设置高度
+- overflow：hidden
+- clear：both
+
+3. 行内元素、块元素有那些，有什么不同
+
+   行内：span input img button a（宽、高内容撑开）
+
+   块：div p h1-h6 ul dl（宽度独占一行，高度内容撑开）
+
+   现象
+
+   - 行内元素默认水平排列
+   - 块级元素可以包含行内元素和块级元素，行内元素不能包含块级元素
+   - 行内元素设置width height无效，margin上下无效，padding上下无效。
+
+4. 前端存储方式有那些
+
+- cookie 请求头上带着数据，大小是4KB，document.cookie = '名字=值'
+- sessionStorage 本地存储，关闭页面后即被清空
+- localstorage 本地存储，key-value存储，永久存储，5MB
+- application cache 离线缓存，离线浏览，提升页面载入速度
+
+5. VUE双向绑定的原理
+
+6. css不换行、超出省略号
+
+   ```
+   overflow: hidden;
+   text-overflow:ellipsis;
+   white-space: nowrap;
+   ```
+
+7. 跨域问题
+
+
+
