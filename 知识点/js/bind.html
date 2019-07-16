@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+  // 原生js实现bind方法
+  Function.prototype.bindX = function() {
+    // 保存原函数
+    let self = this
+    // 保存this、剩余参数
+    // 方式一
+    // let [thisArg, ...args] = arguments
+    // 方式二
+    let thisArg = arguments[0]
+    let args = Array.prototype.slice.call(arguments, 1)
+
+    return function() {
+      // 方式一
+      // self.apply(thisArg, [...args, ...arguments])
+      // 方式二
+      self.apply(thisArg, args.concat(Array.prototype.slice.call(arguments)))
+    }
+  }
+
+  function a(m, n, o) {
+    console.log(this.name + ' ' + m + ' ' + n + ' ' + o);
+  }
+  var b = {
+    name: 'xing'
+  }
+  a.bind(b, 7, 8)(9)
+  a.bindX(b, 7, 8)(9) // xing 7 8 9
+
+  // 扩展
+  // 箭头函数不绑定Arguments 对象
+  // 箭头函数只能用于非方法函数
+  // 箭头函数不能作为构造函数
+  // 箭头函数没有property属性
+</script>
+</html>
