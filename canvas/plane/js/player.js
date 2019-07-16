@@ -13,7 +13,6 @@ class Player extends Sprite {
     this.registAction('d', this.moveRight.bind(this));
     this.registAction('w', this.moveUp.bind(this));
     this.registAction('s', this.moveDown.bind(this));
-    this.registAction(' ', this.attack.bind(this));
     this.bindEvent();
   }
   moveLeft() {

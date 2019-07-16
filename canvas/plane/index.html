@@ -8,6 +8,13 @@
       margin: 0;
       padding: 0;
     }
+    .main {
+      width: 500px;
+      margin: 0 auto;
+    }
+    p {
+      line-height: 2;
+    }
     #canvas {
       background-color: #000;
     }
@@ -15,6 +22,7 @@
 </head>
 <body>
   <div class="main">
+    <p>控制：w a s d，空格暂停</p>
     <canvas id="canvas" width="500" height="600">浏览器不支持！</canvas>
   </div>
 </body>
@@ -27,7 +35,6 @@
 <script src="./js/player.js"></script>
 <script>
   let ctx = canvas.getContext('2d');
-
 
   let stage = new Stage()
   let gs = new GameScene()

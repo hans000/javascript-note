@@ -18,7 +18,10 @@ class Scene {
     if (this.time > 75) this.drawNeedle(cx, cy, 4, 120, sec, '#de6655')
     if (this.time > 80) this.drawNeedle(cx, cy, 4, 100, min, '#666665')
     if (this.time > 90) this.drawNeedle(cx, cy, 4, 80, hour, '#666665')
-    if (this.time > 100) this.drawPane2()
+    if (this.time > 100) {
+      this.drawPane2()
+      clearTimeout(this.time)
+    }
   }
   update() {
     this.render()

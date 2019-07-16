@@ -15,10 +15,10 @@ class SceneBase {
 class GameScene extends SceneBase {
   constructor() {
     super();
-    this.setEnemyCD = 3000;
   }
   init() {
     super.init();
+    this.setEnemyCD = 3000;
     this.createEnemyTime = -1
     this.bullets = [];
     this.enemys = [];
