@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * { margin: 0; padding: 0; }
+    .left {
+      width: 200px;
+      float: left;
+      margin-left: -100%;
+      background: yellow;
+    }
+    .right {
+      width: 200px;
+      float: left;
+      margin-left: -200px;
+      background: purple;
+    }
+    .container {
+      float: left;
+      width: 100%;
+    }
+    .content {
+      padding-left: 200px;
+      padding-right: 200px;
+      background: pink;
+    }
+  </style>
+</head>
+<body>
+  <header>header</header>
+  <main>
+    <div class="container">
+      <div class="content col">content</div>
+    </div>
+    <div class="left col">left</div>
+    <div class="right col">right</div>
+  </main>
+  <footer>footer</footer>
+</body>
+</html>

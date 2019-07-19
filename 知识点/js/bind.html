@@ -9,38 +9,93 @@
   
 </body>
 <script>
-  // 原生js实现bind方法
-  Function.prototype.bindX = function() {
-    // 保存原函数
-    let self = this
-    // 保存this、剩余参数
-    // 方式一
-    // let [thisArg, ...args] = arguments
-    // 方式二
-    let thisArg = arguments[0]
-    let args = Array.prototype.slice.call(arguments, 1)
+  let name = 'g_name'
+  // let a = { age: 18, }
 
-    return function() {
-      // 方式一
-      // self.apply(thisArg, [...args, ...arguments])
-      // 方式二
-      self.apply(thisArg, args.concat(Array.prototype.slice.call(arguments)))
+  // function B(name, age) {
+  //   this.msg = function(n1, n2) {
+  //     console.log(this.name, this.age, n1, n2);
+  //   }
+  // }
+  // B.prototype = a
+  class A {
+    constructor(age=18) {
+      this.age = age
     }
   }
+  class B extends A {
+    constructor(name, ...args) {
+      super(...args)
+      this.name = name
+    }
+    msg(n1, n2) {
+      console.log(this, this.name, this.age, n1, n2);
+    }
+  }
+  
+  let b = new B('b_name')
 
-  function a(m, n, o) {
-    console.log(this.name + ' ' + m + ' ' + n + ' ' + o);
+  let c = {
+    name: 'c_name',
+    fn: 'hello',
   }
-  var b = {
-    name: 'xing'
+
+  // 原生js实现bind方法
+  Function.prototype.bindX = function() {
+    let self = this
+    let [thisArg, ...args] = arguments
+    return function() {
+      self.apply(thisArg, [...args, ...arguments])
+    }
   }
-  a.bind(b, 7, 8)(9)
-  a.bindX(b, 7, 8)(9) // xing 7 8 9
+  // bind test
+  b.msg(7, 8)
+  b.msg.bind(c, 7, 8)(9)
+  b.msg.bindX(c, 7, 8)(9)
 
   // 扩展
   // 箭头函数不绑定Arguments 对象
   // 箭头函数只能用于非方法函数
   // 箭头函数不能作为构造函数
   // 箭头函数没有property属性
+  // 比较权威https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/bind
+
+  // 
+  // 实现call
+  Function.prototype.callX = function () {
+    let [thisArg, ...args] = arguments
+    let fn = Symbol()
+    thisArg[fn] = this
+    let result = thisArg[fn](...args)
+    delete thisArg[fn]
+    return result
+  }
+  // call test
+  // b.call(c, 7, 8, 9)
+  // b.call(null, 7, 8, 9)
+  // b.callX(c, 7, 8, 9)
+  // b.callX(1, 7, 8, 9)
+
+  // apply
+  Function.prototype.applyX = function () {
+    let [thisArg, args] = arguments
+    let fn = Symbol()
+    thisArg[fn] = this
+    let result = thisArg[fn](...args)
+    delete thisArg[fn]
+    return result
+  }
+  // apply test
+  // b.apply(c, [7, 8, 9])
+  // b.applyX(c, [7, 8, 9])
+
+  // 保存当前对象this
+  // 保存绑定对象thisArg
+  // 保存剩余参数
+  // 根据具体功能处理
+  //   - bind 返回的是函数
+  //   - call 返回的是函数执行的结果，剩余参数是展开形式
+  //   - apply 返回的是函数执行的结果，剩余参数是数组形式
+
 </script>
 </html>

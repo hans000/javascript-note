@@ -243,5 +243,84 @@ export default {
 
 7. 跨域问题
 
+8. 数组API
 
 
+- Array.from(arrayLike[, mapFn[, thisArg]]): newArray
+- Array.isArray(any): boolean
+- Array.of(element0[, element1[, ...[, elementN]]]): newArray
+- arr.pop(): popedElement || undefined
+- arr.push(element1[, element2[, ...[, elementN]]]): newLength
+- arr.reverse(): newArray
+- arr.shift(): deleteElement || undefined
+- arr.join([separator]): string
+- arr.unshift(element1[, element2[, ...[, elementN]]]): newLength
+- arr.concat(value1[, value2[, ...[, valueN]]]): newArray
+- arr.entries(): newArray
+- arr.every(callback(element[, index[, array]])[, thisArg]): boolean
+- arr.fill(value[, start[, end]]): newArray
+- arr.filter(callback(element[, index[, array]])[, thisArg]): newArray
+- arr.find(callback(element[, index[, array]])[, thisArg]): matchElement || undefined
+- arr.findIndex(callback(element[, index[, array]])[, thisArg]): matchIndex || -1
+- arr.flat(depth): newArray
+- arr.forEach(callback(element[, index[, array]])[, thisArg]): undefined
+- arr.includes(searchElement[, fromIndex]): boolean
+- arr.indexOf(searchElement[, fromIndex]): boolean
+- arr.lastIndexOf(searchElement[, fromIndex]): boolean
+- arr.map(callback(element[, index[, array]])[, thisArg]): newArray
+- arr.reduce(callback(accumulator, element[, index[, array]])[, initValue]): newArray
+- arr.slice([fromIndex[, toIndex]]): newArray
+- arr.some(callback(element[, index[, array]])[, thisArg]): newArray
+- arr.sort([compareFunction]): newArray
+- arr.splice(start[, deleteCount[, element1[, element2[, ...[, elementN]]]]]): deleteArray
+
+
+# 自定义bind、call、apply，命名为bindX、callX、applyX
+
+## bind
+```
+Function.prototype.bindX = function() {
+  let self = this
+  let [thisArg, ...args] = arguments
+  return function() {
+    self.apply(thisArg, [...args, ...arguments])
+  }
+}
+```
+## call
+```
+Function.prototype.callX = function () {
+  let [thisArg, ...args] = arguments
+  let fn = Symbol()
+  thisArg[fn] = this
+  let result = thisArg[fn](...args)
+  delete thisArg[fn]
+  return result
+}
+```
+## apply
+```
+Function.prototype.applyX = function () {
+  let [thisArg, args] = arguments
+  let fn = Symbol()
+  thisArg[fn] = this
+  let result = thisArg[fn](...args)
+  delete thisArg[fn]
+  return result
+}
+```
+
+说它多有用吧，真的没多大意义，仅仅是个人拿来玩的，退一万步讲，即便在某种情况下没有原生的bind，call，appay的支持，项目中也会用别人已经写好的。
+
+如果硬要说些什么，那应该是js真的越来越好用了
+
+个人的一些感悟
+- 保存当前对象this
+- 保存绑定对象thisArg
+- 保存剩余参数
+- 根据具体功能处理
+  - bind 返回的是函数
+  - call 返回的是函数执行的结果，剩余参数是展开形式
+  - apply 返回的是函数执行的结果，剩余参数是数组形式
+
+您可以查看[MDN上比较权威的实现](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
