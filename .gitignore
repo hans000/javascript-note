@@ -2,3 +2,4 @@
 *.ppt
 test.*
 .vscode/
+node_modules/
