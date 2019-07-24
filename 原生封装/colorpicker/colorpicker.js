@@ -148,7 +148,7 @@
             let lvl = X / unit | 0;
             let offset = X % unit;
             let s = ColorPicker.matrix[lvl];
-            let t = offset * 255 / unit;
+            let t = offset / unit * 255;
             let r = s[0] + s[3] * t | 0;
             let g = s[1] + s[4] * t | 0;
             let b = s[2] + s[5] * t | 0;

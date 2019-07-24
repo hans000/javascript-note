@@ -16,7 +16,7 @@
 
 ### 3、原生封装
 
-- colorpicker拾色器
+- [colorpicker拾色器]([https://github.com/haima16/JavaScript/tree/master/%E5%8E%9F%E7%94%9F%E5%B0%81%E8%A3%85/colorpicker](https://github.com/haima16/JavaScript/tree/master/原生封装/colorpicker))    [掘金详解](https://juejin.im/post/5d386043f265da1b7f29c1ab)
 
 ### 4、game
 - [拼图游戏](https://github.com/haima16/JavaScript/tree/master/game/puzzle/test)
@@ -24,7 +24,7 @@
 
 ### 5、canvas
 
-- [真实clock](https://github.com/haima16/JavaScript/tree/master/canvas/clock)
-- [绚丽的数字时钟](https://github.com/haima16/JavaScript/tree/master/canvas/digit-clock)
-- [飞机大战游戏](https://github.com/haima16/JavaScript/tree/master/canvas/plane)
+- [真实clock](https://github.com/haima16/JavaScript/tree/master/canvas/clock)    [掘金详解](https://juejin.im/post/5d2bf800f265da1bab29de81)
+- [绚丽的数字时钟](https://github.com/haima16/JavaScript/tree/master/canvas/digit-clock)    [掘金详解](https://juejin.im/post/5d006433e51d45775c73dcc1)
+- [飞机大战游戏](https://github.com/haima16/JavaScript/tree/master/canvas/plane)    [掘金详解](https://juejin.im/post/5d2d46506fb9a07ed740afe8)
 
