@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+  let arr = [5, 2, 4, 1, 6, 3]
+  // 选择排序
+  function selectSort(arr) {
+    for (let i = 1; i < arr.length; i++) {
+      for (let j = i; j < arr.length; j++) {
+        if (arr[i-1] > arr[j]) {
+          [arr[i-1], arr[j]] = [arr[j], arr[i-1]]
+        }
+      }
+    }
+    return arr
+  }
+  // 插入排序
+  function insertSort(arr) {
+    for (let i = 0; i < arr.length-1; i++) {
+      for (let j = i; j >= 0; j--) {
+        if (arr[j+1] < arr[j]) {
+          [arr[j+1], arr[j]] = [arr[j], arr[j+1]]
+        }
+        console.log(arr);
+      }
+      console.log(' ');
+    }
+    return arr
+  }
+  // 冒泡排序
+  function bubbleSort(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      for (let j = 0; j < i; j++) {
+        if (arr[j+1] < arr[j]) {
+          [arr[j+1], arr[j]] = [arr[j], arr[j+1]]
+        }
+      }
+    }
+    return arr
+  }  
+  // 希尔排序
+  function shellSort(arr) {
+    for (let gap = arr.length/2 ; gap> 0; gap = Math.floor(gap/2)) {
+      for (let i = gap; i < arr.length; i++) {
+        for (let j = i - gap; j >= 0; j -= gap) {
+          if (arr[j + gap] < arr[j]) {
+            [arr[j + gap], arr[j]] = [arr[j], arr[j + gap]]
+          }
+        }
+      }      
+    }
+    return arr;
+  }
+  // 堆排序
+  function heapSort(arr) {
+    let lastNodeIndex = arr.length / 2 - 1 | 0
+    while (lastNodeIndex > -1) {
+      shiftDown(arr, lastNodeIndex--, arr.length)
+    }
+    for (let i = arr.length - 1; i > 0; i--) {
+      shiftDown(arr, 0, i);
+      [arr[0], arr[i]] = [arr[i], arr[0]]
+    }
+    return arr
+    function shiftDown(arr, i, len) {
+      let j = 2 * i + 1
+      if (j + 1 < len && arr[j] < arr[j + 1]) {
+        j++
+      }
+      if (j < len && arr[i] < arr[j]) {
+        [arr[i], arr[j]] = [arr[j], arr[i]]
+        shiftDown(arr, j, len)
+      }
+    }
+  }
+  // 归并排序
+  function mergeSort(arr) {
+    if (arr.length === 1) {
+      return arr
+    }
+    let mid = arr.length / 2 | 0
+    return merge(mergeSort(arr.slice(0, mid)), mergeSort(arr.slice(mid)))
+    function merge(left, right) {
+      let result = []
+      while (left.length && right.length) {
+        if (left[0] < right[0]) {
+          result.push(left.shift())
+        } else {
+          result.push(right.shift())
+        }
+      }
+      return result.concat(left, right)
+    }
+  }
+  
+  console.log('start: ', arr);
+  console.log('end: ', insertSort(arr));
+  
+</script>
+</html>
