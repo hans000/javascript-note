@@ -43,10 +43,7 @@
                     ['div', {class:'info',ref:'info'}, []]
                 ]
             ]]
-            this.dom = this.vnode2Dom(arr);
-
-            window.dom = this.refs;
-            this.el.appendChild(this.dom);
+            this.el.appendChild(this.vnode2Dom(arr));
         },
         vnode2Dom(arr, node) {
             if (!node) {
