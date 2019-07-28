@@ -21,6 +21,7 @@
 <script src="./js/scene.js"></script>
 <script>
   let $ = sel => document.querySelector(sel)
+
   let startWrap = $('.start-wrap')
   let editWrap = $('.edit-wrap')
   let custom = $('.custom')
@@ -28,6 +29,7 @@
   let play2 = $('.play2')
 
   let game = new Scene($('.game'))
+  
   custom.onclick = () => {
     startWrap.style.display = 'none'
     editWrap.style.display = 'flex'

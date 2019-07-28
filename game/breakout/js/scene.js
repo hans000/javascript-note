@@ -8,6 +8,8 @@ class Scene {
   static BLOCK_COLS = 8
   static BLOCK_WIDTH = Scene.SCENE_WIDTH / Scene.BLOCK_COLS
   static BLOCK_HEIGHT = 20
+  static MIN_ANGLE = 30
+  static MAX_ANGLE = 90
   constructor(el, options) {
     this.el = el
     this.options = options
@@ -124,20 +126,16 @@ class Scene {
     })
     for (let i = this.blocks.length - 1; i >= 0; i--) {
       let block = this.blocks[i]
-      let c = this.ball.collide(block)
-      if (c) {
-        c === 1 ? this.ball.flipY() : this.ball.flipX()
-        block.remove()
-      }
+      this.ball.collide(block) && block.remove()
     }
     this.ball.update()
   }
   paddleUpdate() {
     if (!this.paddle) return
     this.paddle.update()
-    let c = this.paddle.collide(this.ball)
-    if (c) {
-      c === 1 ? this.ball.flipY() : this.ball.flipX()
+    if (this.ball.collide(this.paddle)) {
+      this.ball.angle += this.paddle.angle
+      this.ball.posY = this.paddle.posY - this.ball.height
     }
   }
   update() {
@@ -162,21 +160,6 @@ class Sprite {
     this.dom.style.height = this.height + 'px'
     this.dom.style.left = this.posX + 'px'
     this.dom.style.top = this.posY + 'px'
-  }
-  collide(sprite) {
-    let dx1 = this.posX + this.width - sprite.posX
-    let dx2 = sprite.posX + sprite.width - this.posX
-    let dx = Math.min(dx1, dx2)
-    let dy1 = this.posY + this.height - sprite.posY
-    let dy2 = sprite.posY + sprite.height - this.posY
-    let dy = Math.min(dy1, dy2)
-    if (dx >=0 && dy >= 0) {
-      if (dy - dx > 0) {
-        return 2
-      }
-      return 1
-    }
-    return 0
   }
 }
 /**
@@ -207,29 +190,47 @@ class Ball extends Sprite {
   }
   init() {
     super.init()
-    this.vx = -2
-    this.vy = -2
+    this.speed = 4
+    this.angle = 45
+    this.minAngle = Scene.MIN_ANGLE
+    this.maxAngle = Scene.MAX_ANGLE
     this.canMove = true
   }
+  collide(sprite) {
+    if (this.posX + this.width > sprite.posX &&
+        this.posX < sprite.posX + sprite.width &&
+        sprite.posY < this.posY + this.height / 2 &&
+        this.posY + this.height / 2 < sprite.posY + sprite.height) {
+      this.flipX()
+      return true
+    }
+    if (this.posY + this.height > sprite.posY && 
+        this.posY < sprite.posY + sprite.height &&
+        sprite.posX < this.posX + this.width / 2 &&
+        this.posX + this.width / 2 < sprite.posX + sprite.width) {
+      this.flipY()
+      return true
+    }
+    return false
+  }
+  // 边界检测
   edge() {
     let { offsetLeft: x, offsetTop: y } = this.dom
     let w = Scene.SCENE_WIDTH, h = Scene.SCENE_HEIGHT
-    if (x <= 0 || x >= w - this.width) {
-      this.vx *= -1
-    }
-    if (y <= 0 || y >= h - this.height) {
-      this.vy *= -1
-    }
+    if (x <= 0 || x >= w - this.width) this.angle *= -1
+    if (y <= 0 || y >= h - this.height) this.angle = 180 - this.angle
   }
   move() {
+    this.vx = this.speed * Math.sin(this.angle * Math.PI / 180)
+    this.vy = this.speed * Math.cos(this.angle * Math.PI / 180)
     this.posX += this.vx
     this.posY += this.vy
   }
   flipX() {
-    this.vx *= -1
+      this.angle *= -1
   }
   flipY() {
-    this.vy *= -1
+    this.angle = 180 - this.angle
   }
   render() {
     this.dom.style.left = this.posX + 'px'
@@ -254,6 +255,10 @@ class Paddle extends Sprite {
   init() {
     super.init()
     this.vx = 5
+    this.ax = .2
+    this.min = -90
+    this.max = 90
+    this.angle = 0
     this.keydowns = {}
     this.actions = {}
     this.registAction('a', this.moveLeft.bind(this))
@@ -262,9 +267,17 @@ class Paddle extends Sprite {
   }
   moveLeft() {
     this.posX -= this.vx
+    if (this.angle > 0) this.angle = 0
+    this.angle--
   }
   moveRight() {
     this.posX += this.vx
+    if (this.angle < 0) this.angle = 0 
+    this.angle++
+  }
+  updateAngle() {
+    if (!this.keydowns['a'] && !this.keydowns['d']) this.angle = 0
+    this.angle = Math.max(this.min, Math.min(this.angle, this.max))
   }
   bindEvent() {
     window.addEventListener('keydown', ev => {
@@ -292,6 +305,7 @@ class Paddle extends Sprite {
   update() {
     this.render()
     this.edge()
+    this.updateAngle()
     let actions = Object.keys(this.actions);
     actions.forEach(k => this.keydowns[k] && this.actions[k]())
   }
