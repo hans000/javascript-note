@@ -15,16 +15,20 @@
 
 - [OOE（Only One Element）](https://github.com/haima16/JavaScript/tree/master/OOE)
 
-### 3、原生封装
+### 3、布局
+
+- 移动端qq空间布局
+
+### 4、原生封装
 
 - [colorpicker拾色器]([https://github.com/haima16/JavaScript/tree/master/%E5%8E%9F%E7%94%9F%E5%B0%81%E8%A3%85/colorpicker](https://github.com/haima16/JavaScript/tree/master/原生封装/colorpicker))    [掘金详解](https://juejin.im/post/5d386043f265da1b7f29c1ab)
 
-### 4、game
+### 5、game
 - [拼图游戏](https://github.com/haima16/JavaScript/tree/master/game/puzzle/test)
 - [扫雷游戏](https://github.com/haima16/JavaScript/blob/master/game/%E6%89%AB%E9%9B%B7/index.1.html)
 - [打砖块游戏]
 
-### 5、canvas
+### 6、canvas
 
 - [真实clock](https://github.com/haima16/JavaScript/tree/master/canvas/clock)    [掘金详解](https://juejin.im/post/5d2bf800f265da1bab29de81)
 - [绚丽的数字时钟](https://github.com/haima16/JavaScript/tree/master/canvas/digit-clock)    [掘金详解](https://juejin.im/post/5d006433e51d45775c73dcc1)
