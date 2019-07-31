@@ -20,7 +20,7 @@
 }
 
 
-
+/* icon css */
 i[class^=icon] {
   position: relative;
   display: inline-block;
@@ -122,6 +122,13 @@ i[class^=icon]::after {
   /* transform: translateY(-20%); */
 }
 .icon-chat::after {
+  bottom: .28em;
+  left: .18em;
+  border: .08em solid #fff;
+  border-radius: 50%;
+  box-shadow: .25em 0 0 #fff, .5em 0 0 #fff;
+}
+.icon-chat::before {
   bottom: -.15em;
   border: .3em solid #000;
   border-right: .3em solid transparent;
@@ -196,3 +203,119 @@ i[class^=icon]::after {
   height: .25em;
   background-color: #fff;
 }
+.icon-add {
+  width: 1em;
+  height: 1em;
+}
+.icon-add::before {
+  left: 50%;
+  top: 50%;
+  width: .1em;
+  height: .8em;
+  background-color: #000;
+  transform: translate(-50%, -50%);
+}
+.icon-add::after {
+  left: 50%;
+  top: 50%;
+  width: .8em;
+  height: .1em;
+  background-color: #000;
+  transform: translate(-50%, -50%);
+}
+.icon-add-circle {
+  width: 1em;
+  height: 1em;
+  background-color: #000;
+  border-radius: 50%;
+}
+.icon-add-circle::before {
+  left: 50%;
+  top: 50%;
+  width: .1em;
+  height: .6em;
+  background-color: #fff;
+  transform: translate(-50%, -50%);
+}
+.icon-add-circle::after {
+  left: 50%;
+  top: 50%;
+  width: .6em;
+  height: .1em;
+  background-color: #fff;
+  transform: translate(-50%, -50%);
+}
+.icon-alert {
+  width: 1em;
+  height: 1em;
+  background-color: #000;
+  border-radius: 50%;
+}
+.icon-alert::before {
+  left: 50%;
+  width: .1em;
+  height: .4em;
+  background-color: #fff;
+  transform: translate(-50%, .2em);
+}
+.icon-alert::after {
+  left: 50%;
+  width: .1em;
+  height: .1em;
+  background-color: #fff;
+  transform: translate(-50%, .7em);
+}
+.icon-arrow-left {
+  width: 1em;
+  height: 1em;
+}
+.icon-arrow-left::before {
+  width: .4em;
+  height: .4em;
+  border-top: .1em solid #000;
+  border-right: .1em solid #000;
+  transform-origin: 0 100%;
+  transform: rotate(45deg);
+}
+.icon-arrow-right {
+  width: 1em;
+  height: 1em;
+}
+.icon-arrow-right::before {
+  left: 1em;
+  width: .4em;
+  height: .4em;
+  border-top: .1em solid #000;
+  border-right: .1em solid #000;
+  transform-origin: 0 100%;
+  transform: rotate(-135deg);
+}
+.icon-arrow-top {
+  width: 1em;
+  height: 1em;
+}
+.icon-arrow-top::before {
+  left: 50%;
+  top: 50%;
+  width: .4em;
+  height: .4em;
+  border-top: .1em solid #000;
+  border-right: .1em solid #000;
+  transform-origin: 0 100%;
+  transform: rotate(-45deg);
+}
+.icon-arrow-bottom {
+  width: 1em;
+  height: 1em;
+}
+.icon-arrow-bottom::before {
+  left: 50%;
+  top: -50%;
+  width: .4em;
+  height: .4em;
+  border-top: .1em solid #000;
+  border-right: .1em solid #000;
+  transform-origin: 0 100%;
+  transform: rotate(135deg);
+}
+
