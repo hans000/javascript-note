@@ -99,9 +99,72 @@
       return result.concat(left, right)
     }
   }
+
+  /**
+   *     A
+   *   B   C
+   *  D E F G
+   */
+  let tree = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F', 'G']
+  }
+  // 深度优先搜索
+  function dfs(tree, node, list=[]) {
+    list.push(node)
+    let child = tree[node]
+    child && child.forEach(e => dfs(tree, e, list))
+    return list
+  }
+  // console.log(dfs(tree, 'A'));
+
+  // 广度优先搜索
+  function bfs(tree, node, list=[]) {
+    let stack = [node]
+    while (stack.length) {
+      let child = stack.shift()
+      list.push(child)
+      tree[child] && stack.push(...tree[child])
+    }
+    return list
+  }
+  // console.log(bfs(tree, 'A'));
   
-  console.log('start: ', arr);
-  console.log('end: ', insertSort(arr));
-  
+  // 节流
+  // 如果一个函数持续地触发，那么在固定的事件执行一次
+  function throttle(fn, ms=1000) {
+    let cd = true
+    return function() {
+      if (!cd) return
+      cd = false
+      setTimeout(_=> {
+        fn.apply(this, arguments)
+        cd = true
+      }, ms)
+    }
+  }
+  // 防抖
+  // 如果一个函数持续地触发，那么只在它结束后过一段时间只执行一次
+  function debounce(fn, ms=1000) {
+    let timer = null
+    return function() {
+      clearTimeout(timer)
+      timer = setTimeout(_=> {
+        fn.apply(this, arguments)
+      }, ms)
+    }
+  }
+  function sayHi(name) {
+    console.log(name);
+  }
+  let fn = debounce(sayHi)
+  window.onmousemove = function() {
+    fn('debounce: hans')
+  }
+  let fn2 = throttle(sayHi)
+  setInterval(_=> {
+    fn2('throttle: hans')
+  }, 10)
 </script>
 </html>

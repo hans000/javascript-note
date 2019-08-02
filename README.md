@@ -9,7 +9,7 @@
 ### 1、知识点
 
 - [数组常用的api](https://github.com/haima16/JavaScript/tree/master/%E7%9F%A5%E8%AF%86%E7%82%B9)
-- 排序算法
+- 常用算法
 
 ### 2、OOE
 
