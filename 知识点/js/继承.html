@@ -1,47 +1,130 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title>demo by hans</title>
-    <style>
-    
-    </style>
+  <meta charset="utf-8" />
+  <title>demo by hans</title>
 </head>
 <body>
     
 </body>
 <script>
-    let $ = sel => document.querySelector(sel);
-    let $$ = sel => document.querySelectorAll(sel);
-    let log = console.log.bind(console);
+  let $ = sel => document.querySelector(sel);
+  let $$ = sel => document.querySelectorAll(sel);
+  let log = console.log.bind(console);
 
-    // function Fn(name) {
-    //     this.name = name;
-    // }
-    // Fn.prototype = {
-    //     say() {
-    //         console.log('我是%s', this.name)
-    //     }
-    // }
-    // let fn = new Fn('Tom');
+  // 满足
+  // 继承父类及父类原型的属性
+  // 可以向父类构造函数传参
+  // 继承仅发生一次
 
-    // Parent1原型上的say没法拿到console.log(new Child1(), new Child1().say());
-    function Parent() {
-        // this.name = 'parent';
-        // this.eat = function (food) {
-        //     console.log('我吃%s', food);
-        // }
+  function Sprite(posX=0, posY=0, width=10, height=10) {
+    this.posX = posX
+    this.posY = posY
+    this.width = width
+    this.height = height
+    this.color = ['red', 'blue']
+  }
+  Sprite.prototype = {
+    render() {
+      console.log('this is a render function')
+    },
+    update() {
+      console.log('this is a update function')
     }
-    Parent.prototype = {
-        name: 'parent',
-        say() {
-            console.log('我是%s', this.name);
-        }
-    };
-    function Child() {
-        Parent.call(this);
-        this.type = 'child';
-    }
-    let child = new Child();
+  }
+  function Ball(vx, vy) {
+    this.vx = vx
+    this.vy  = vy
+  }
+
+  // ------------------------------------------------------------------------
+  // 原型链继承
+  // Ball.prototype = new Sprite()
+  // let ball = new Ball(0.1, 0.1)
+  // ball.width = 50
+  // ball.height = 50
+  // ball.color.push('black')
+  // let ball2 = new Ball(0.2, 0.2)
+
+  // 缺陷：
+  // 1、实例化子类时无法向父类构造函数传参
+  // 2、单一继承
+  // 3、子类共享父类实例属性
+
+  // ------------------------------------------------------------------------
+  // 借用构造函数
+  // function Ball(posX, posY, width, height, vx, vy) {
+  //   Sprite.call(this, posX, posY, width, height)
+  //   this.vx = vx
+  //   this.vy = vy
+  // }
+  // let ball = new Ball(100, 100, 50, 50, 0.1, 0.1)
+  // 缺陷：
+  // 1、子类无法继承父类原型上的属性、方法
+  // 2、无法实现构造函数的复用，每次实例化都会重新调用
+  // 3、每个实例都有父类构造函数的副本，臃肿
+
+
+  // ------------------------------------------------------------------------
+  // 组合继承
+  // function Ball(posX, posY, width, height, vx, vy) {
+  //   Sprite.call(this, posX, posY, width, height)
+  //   this.vx = vx
+  //   this.vy = vy
+  // }
+  // Ball.prototype = new Sprite()
+
+  // 缺陷：
+  // 调用了两次构造函数
+
+  // let ball = new Ball(100, 100, 50, 50, 0.1, 0.1)
+  // ball.color.push('black')
+  // let ball2 = new Ball(200, 200, 20, 20, 0.2, 0.2)
+
+  // ------------------------------------------------------------------------
+  // 原型继承
+  // Ball.prototype = Sprite.prototype
+  // Ball.prototype.canMove = true
+  // function Ball(vx, vy) {
+  //   this.vx = vx
+  //   this.vy = vy
+  // }
+
+  // 缺陷：
+  // 1、实例化子类时无法向父类构造函数传参
+  // 2、单一继承
+  // 3、子类共享父类实例属性
+  // 4、修改子类原型会修改父类原型
+  // 5、子类无法继承父类构造函数的属性
+
+  // let ball = new Ball(0.1, 0.1)
+  // ball.width = 50
+  // ball.height = 50
+  // ball.color.push('black')
+  // let ball2 = new Ball(0.2, 0.2)
+
+  // ------------------------------------------------------------------------
+  // 
+  Ball.prototype = Object.create(Sprite.prototype)
+  Ball.prototype.constructor = Ball
+  Ball.prototype.canMove = true
+  function Ball(posX, posY, width, height, vx, vy) {
+    Sprite.call(this, posX, posY, width, height)
+    this.vx = vx
+    this.vy = vy
+  }
+
+  let ball = new Ball(100, 100, 50, 50, 0.1, 0.1)
+  ball.color.push('black')
+  let ball2 = new Ball(200, 200, 20, 20, 0.2, 0.2)
+
+  
+
+  for (const key in ball) {
+    console.log(key, ball[key]);
+  }
+  for (const key in ball2) {
+    console.log(key, ball2[key]);
+  }  
 </script>
 </html>

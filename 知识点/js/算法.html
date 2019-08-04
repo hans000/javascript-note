@@ -158,13 +158,88 @@
   function sayHi(name) {
     console.log(name);
   }
-  let fn = debounce(sayHi)
-  window.onmousemove = function() {
-    fn('debounce: hans')
+  // let fn = debounce(sayHi)
+  // window.onmousemove = function() {
+  //   fn('debounce: hans')
+  // }
+  // let fn2 = throttle(sayHi)
+  // setInterval(_=> {
+  //   fn2('throttle: hans')
+  // }, 10)
+
+  // 对象深拷贝
+  // JSON实现简单的对象深拷贝，不能拷贝函数、undefined和Symbol
+  function JSONClone(obj) {
+    return JSON.parse(JSON.stringify(obj))
   }
-  let fn2 = throttle(sayHi)
-  setInterval(_=> {
-    fn2('throttle: hans')
-  }, 10)
+  function simpleClone(obj) {
+    let copy = Array.isArray(obj) ? [] : {}
+    for (const key in obj) {
+      const elt = obj[key];
+      copy[key] = (typeof elt === 'object' && elt !== 'null')
+        ? simpleClone(elt)
+        : elt
+    }
+    return copy
+  }
+
+  // let syb = Symbol('obj')
+  // let array = [1, 2, 3, 4, 5]
+  // let bar = {
+  //   name: 'bar',
+  //   baz: {
+  //     name: 'baz',
+  //     aChild: null //待会让它指向obj.foo
+  //   }
+  // }
+  // let circleObj = {
+  //   foo: {
+  //     name: function() {
+  //       console.log(1)
+  //     },
+  //     syb: syb,
+  //     un: undefined,
+  //     num: NaN,
+  //     arr: array,
+  //     bar: bar
+  //   }
+  // }
+  // bar.baz.aChild = circleObj.foo
+  // console.log(simpleClone(circleObj));
+  
+  // 实现一个newX函数，具有new的功能
+  // function newX(Fn, ...args) {
+  //   let obj = Object.create(Fn.prototype)
+  //   let ret = Fn.apply(obj, args)
+  //   return ret instanceof Object ? ret : obj
+  // }
+  // function Ball(radius=10, color='red') {
+  //   this.randius = radius
+  //   this.color = color
+  //   this.move = function() {
+  //     console.log('move');
+  //   }
+  // }
+  // let ball = new Ball(20)
+  // let ball2 = newX(Ball, 100)
+  // console.log(ball, ball2);
+  
+  // 完善typeof
+  // function getType(val) {
+  //   let cfg = {
+  //     '[object Object]': 'object',
+  //     '[object Array]': 'array',
+  //     '[object Number]': 'object number',
+  //     '[object Boolean]': 'object boolean',
+  //     '[object String]': 'object string',
+  //     '[object Null]': 'null',
+  //   }
+  //   let type = typeof val
+  //   let toString = e => Object.prototype.toString.call(e)
+  //   return type === 'object' ? cfg[toString(val)] : type
+  // }
+
+
+  
 </script>
 </html>
