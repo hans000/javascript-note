@@ -239,7 +239,56 @@
   //   return type === 'object' ? cfg[toString(val)] : type
   // }
 
-
+  // 给定一个整数数组 nums 和一个目标值 target
+  // 请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
+  // function twoSum(nums, target) {
+  //   let map = new Map()
+  //   for (let i = nums.length - 1; i >= 0; i--) {
+  //     let val = map.get(target - nums[i])
+  //     if (val) {
+  //       return [i, val]
+  //     }
+  //     map.set(nums[i], i)
+  //   }
+  //   return null
+  // }
+  // let nums = [2, 7, 11, 15], target = 9
+  // console.log(twoSum(nums, target));
   
+  // var reverse = function(x) {
+  //     let i = 0, val = 0
+  //     while(x) {
+  //         let a = x % 10
+  //         x = x / 10 | 0
+  //         val = val * 10 + a
+  //     }
+  //     return val
+  // };
+  // console.log(reverse(1534236469));
+  
+  //判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数
+  // function isPalindrome(num) {
+  //   if (num < 0) return false
+  //   let i = 0, val = 0, x = num
+  //   while (x) {
+  //     let a = x % 10
+  //     x = x / 10 | 0
+  //     val = val * 10 + a
+  //   }
+  //   return num === val
+  // }
+  // console.log(isPalindrome(123))
+  // console.log(isPalindrome(121))
+
+  // 给定一个字符串，你需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序
+  // 输入: "Let's take LeetCode contest"
+  // 输出: "s'teL ekat edoCteeL tsetnoc"
+
+  // function reverseWords(s) {
+  //   return s.split(' ').reduce((s, e) => s += e.split('').reverse().join('') + ' ', '').trim()
+  // }
+  // console.log(reverseWords("Let's take LeetCode contest"));
+  
+
 </script>
 </html>
