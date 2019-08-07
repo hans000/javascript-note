@@ -1,0 +1,93 @@
+.swiper {
+  overflow: hidden;
+  position: relative;
+
+}
+
+/* slider */
+.swiper__wrapper {
+  position: relative;
+  height: 100%;
+  transition-duration: .5s;
+}
+.swiper__slider {
+  position: absolute;
+  float: left;
+  width: 100%;
+  height: 100%;
+}
+
+/* 分页器 */
+.swiper__pagination {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 10px;
+  text-align: center;
+}
+.swiper__dot.active {
+  background-color: #00f;
+  opacity: .6;
+}
+.swiper__dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin: 0 4px;
+  border-radius: 50%;
+  background: #000;
+  opacity: .2;
+  cursor: pointer;
+}
+
+/* swiper__navigation */
+.swiper__navigation {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.swiper__nav-prev {
+  position: relative;
+  float: left;
+  left: 10px;
+  width: 20px;
+  height: 40px;
+  cursor: pointer;
+}
+.swiper__nav-prev::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 6px;
+  top: 7px;
+  border-left: 3px solid #00f;
+  border-bottom: 3px solid #00f;
+  opacity: .2;
+  transform: rotate(45deg);
+}
+.swiper__nav-next {
+  position: relative;
+  float: right;
+  right: 10px;
+  width: 20px;
+  height: 40px;
+  cursor: pointer;
+}
+.swiper__nav-next::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: -8px;
+  top: 7px;
+  border-left: 3px solid #00f;
+  border-bottom: 3px solid #00f;
+  opacity: .2;
+  transform: rotate(225deg);
+  cursor: pointer;
+}
+.swiper__navigation >div[class^="swiper__nav"]:hover::after {
+  opacity: 1;
+}
