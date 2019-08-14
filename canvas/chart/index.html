@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #canvas {
+      width: 500px;
+      height: 400px;
+      background-color: #eee;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="500" height="400"></canvas>
+  <div>
+    <button class="btn">随机添加</button>
+  </div>
+</body>
+<script src="./scene.js"></script>
+<script>
+  let $ = sel => document.querySelector(sel)
+  let canvas = $('#canvas')
+  let ctx = canvas.getContext('2d')
+
+  let data = [
+    { text: 'userA', user: 'userA', time: 1565785250705 - 200000000, like: 666 },
+    { text: 'userB', user: 'userB', time: 1565785250705 - 188880, like: 800 },
+    { text: 'userC', user: 'userC', time: 1565785250705 - 6000000, like: 200 },
+    { text: 'userD', user: 'userD', time: 1565785250705 - 1000000, like: 666 },
+    { text: 'userE', user: 'userE', time: 1565785250705 - 800, like: 11000 },
+    { text: 'userF', user: 'userF', time: 1565785250705 - 100000, like: 666 },
+    { text: 'userG', user: 'userG', time: 1565785250705 - 0, like: 20 },
+    { text: 'userH', user: 'userH', time: 1565785250705 - 660, like: 8000 },
+    { text: 'userI', user: 'userI', time: 1565785250705 - 66660, like: 1000 },
+    { text: 'userJ', user: 'userJ', time: 1565785250705 - 50000000, like: 500 },
+    { text: 'userK', user: 'userK', time: 1565785250705 - 80000, like: 100 },
+  ]
+  
+  let { offsetWidth: w, offsetHeight: h } = canvas
+  let scene = new Scene(ctx, w, h)
+  $('.btn').addEventListener('click', _=> {
+    let num = rand(1, 15)
+    console.log('添加了' + num);
+    scene.add(new Tile(scene, num))
+  })
+
+  function rand(min, max, decimal=0) {
+    return +((max-min) * Math.random() + min).toFixed(decimal)
+  }
+</script>
+</html>

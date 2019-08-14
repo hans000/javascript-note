@@ -13,13 +13,13 @@ class Barrage {
     this.init()
   }
   init() {
-    this.pass()
+    this.valide()
     this.on = false
     this.ctx.font='18px 微软雅黑'
     this.rowCount = this.height / Number.parseInt(this.ctx.font) | 0
     this.ctx.shadowColor = 'rgba(0, 0, 0, 0.4)'
     this.ctx.shadowBlur = 2
-    this.initChunks()
+    this.initTracks()
   }
   start() {
     this.on = true
@@ -33,13 +33,13 @@ class Barrage {
   setCtx(options={}) {
     Object.keys(options).forEach(e => this.ctx[e] = options[e])
   }
-  initChunks() {
-    this.chunks = []
+  initTracks() {
+    this.tracks = []
     for (let i = 0; i < this.rowCount; i++) {
-      this.chunks.push(new Chunk(this, i))
+      this.tracks.push(new Track(this, i))
     }
   }
-  pass() {
+  valide() {
     let store = ['data', 'ctx', 'width', 'height']
     store.forEach(e => {
       if (!this[e]) {
@@ -54,7 +54,7 @@ class Barrage {
         if (this.data.length) {
           let per = this.data.shift()
           let row = Util.rand(0, this.rowCount)
-          this.chunks[row].add(per.text)
+          this.tracks[row].add(per.text, Track.COLORS[Util.rand(0, 4)], per.type)
         } 
         break
       }
@@ -62,12 +62,13 @@ class Barrage {
   }
   update() {
     this.ctx.clearRect(0, 0, this.width, this.height)
-    this.chunks.forEach(e => e.update())
+    this.tracks.forEach(e => e.update())
     requestAnimationFrame(this.update.bind(this))
   }
 }
-class Chunk {
-  static speeds = [1.2, 0.4, 0.6, 0.8, 1]
+class Track {
+  static SPEEDS = [1.2, 0.6, 0.9, 1.5]
+  static COLORS = ['#fff', '#00cf80', '#e70012', '#ffb02c']
   constructor(scene, order) {
     this.scene = scene
     this.order = order
@@ -78,16 +79,19 @@ class Chunk {
     this.updateSpeed()
     this.cd = true
   }
-  add(text) {
+  add(text, color, type) {
     let w = this.scene.width
     let h = Number.parseInt(this.scene.ctx.font) * (this.order + 1)
-    this.tiles.push(new Tile(this, text, w, h))
+    let tile = type
+        ? new RollTile(this, text, color, w, h)
+        : new StaticTile(this, text, color, w, h)
+    this.tiles.push(tile)
     this.cd = true
   }
   updateSpeed() {
     if (this.cd && !this.tiles.length) {
-      let num = Util.rand(0, Chunk.speeds.length)
-      this.vx = Chunk.speeds[num]
+      let num = Util.rand(0, Track.SPEEDS.length)
+      this.vx = Track.SPEEDS[num]
       this.cd = false
     }
   }
@@ -114,40 +118,76 @@ class Chunk {
     }
   }
 }
-class Tile {
-  static speeds = [1.2, 0.4, 0.6, 0.8, 1]
-  constructor(chunk, text, posX, posY) {
-    this.chunk = chunk
+class TileBase {
+  constructor(Track, text, color='#fff', posX, posY) {
+    this.Track = Track
     this.text = text
+    this.color = color
     this.posX = posX
     this.posY = posY
     this.init()
   }
   init() {
-    let { ctx } = this.chunk.scene
-    let h = Number.parseInt(ctx.font)
     this.alive = true
-    this.life = 10000
-    this.birth = new Date()
-    this.color = '#fff'
-    this.width = this.text.length * h
   }
   render() {
-    let { ctx } = this.chunk.scene
+    let { ctx } = this.Track.scene
     ctx.fillStyle = this.color
     ctx.fillText(this.text, this.posX, this.posY)
   }
+  getTextWidth() {
+    let { ctx } = this.Track.scene
+    return ctx.measureText(this.text).width
+  }
+  update() {
+    this.render()
+  }
+}
+class RollTile extends TileBase {
+  constructor(...args) {
+    super(...args)
+  }
+  init() {
+    super.init()
+  }
   edgeLeft() {
-    if (this.posX + this.width < 0) {
+    if (this.posX + this.getTextWidth() < 0) {
       this.alive = false
     }
   }
   edgeRight() {
-    return this.posX + this.width > this.chunk.scene.width
+    return this.posX + this.getTextWidth() > this.Track.scene.width
   }
   update(vx) {
     this.posX -= vx
     this.edgeLeft()
     this.render()
   }
+}
+class StaticTile extends TileBase {
+  constructor(...args) {
+    super(...args)
+  }
+  init() {
+    super.init()
+    this.life = 1000
+    this.alive = true
+    this.birth = new Date()
+    this.setPosition()
+  }
+  setPosition() {
+    let { width: W } = this.Track.scene
+    let w = this.getTextWidth()
+    this.posX = (W - w) / 2
+  }
+  exist() {
+    if (Date.now() - this.birth > this.life) {
+      this.alive = false
+    }
+  }
+  update() {
+    this.exist()
+    this.alive && this.render()
+  }
+
 }
