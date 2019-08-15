@@ -39,16 +39,22 @@
     { text: 'userK', user: 'userK', time: 1565785250705 - 80000, like: 100 },
   ]
   
-  let { offsetWidth: w, offsetHeight: h } = canvas
-  let scene = new Scene(ctx, w, h)
+  let { offsetWidth: width, offsetHeight: height } = canvas
+  let scene = new Scene(data, {
+    ctx,
+    width,
+    height
+  })
   $('.btn').addEventListener('click', _=> {
     let num = rand(1, 15)
     console.log('添加了' + num);
     scene.add(new Tile(scene, num))
   })
 
+
   function rand(min, max, decimal=0) {
     return +((max-min) * Math.random() + min).toFixed(decimal)
   }
+
 </script>
 </html>
