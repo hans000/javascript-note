@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #canvas {
+      display: block;
+      margin: 0 auto; 
+      background-color: #f1f1f1;
+    }
+    .ctrl {
+      margin-top: 20px;
+      text-align: center;
+    }
+    span {
+      user-select: none;
+    }
+    span:hover {
+      background-color: #eee;
+      cursor: pointer;
+    }
+    h2 {
+      margin: 5px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h2>动动大脑，推理一个有几个三角形、四、五、六边形？</h2>
+  <canvas id="canvas" width="800" height="500"></canvas>
+  <div class="ctrl">
+    <span id="show">是否显示外轮廓</span>
+    <span id="update">重新生成</span>
+  </div>
+</body>
+<script src="./scene.js"></script>
+<script>
+  let ctx = canvas.getContext('2d')
+  if (devicePixelRatio) {
+    let oldWidth = canvas.width;
+    let oldHeight = canvas.height;
+    canvas.width = oldWidth * devicePixelRatio;
+    canvas.height = oldHeight * devicePixelRatio;
+    canvas.style.width = oldWidth + 'px';
+    canvas.style.height = oldHeight + 'px';
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+  }
+  let game = new Scene(ctx, 800, 500)
+  let radius = [100, 150, 200, 250]
+  let speed = [1, 1.5, 2, 2.5]
+
+  update.onclick = function() {
+    create()
+    show.flag = false
+  }
+  show.onclick = function() {
+    show.flag = !show.flag
+    game.setOutline(show.flag)
+  }
+  function create() {
+    let count = rand(5, 11)
+    game.clear()
+    for (let i = 0; i < count; i++) {
+      let p = new Polygon(game, rand(3, 7), 100 * rand(1, 7), 100 * rand(1, 4), radius[rand(0, radius.length-1)], 15 * rand(0, 24))
+      p.setSpeed(speed[rand(0, speed.length-1)])
+      game.add(p)
+      
+    }
+  }
+  function rand(min, max) {
+    return ((max - min) * Math.random() + min) | 0
+  }
+</script>
+</html>
