@@ -47,11 +47,10 @@
 
 > Vue
 
-- 封装slider组件
+- [封装slider组件](https://github.com/haima16/JavaScript/tree/master/vue-components/Slider) 
 - [封装移动端组件](https://github.com/haima16/mobile-layout)
 - ⭐[打砖块游戏案例 - vue版](https://github.com/haima16/breakout)  |  💿[演示视频](https://www.bilibili.com/video/av61756000) 
 
 - ⭐[网易云音乐评论转弹幕](https://github.com/haima16/music)  |  💿[演示视频](https://www.bilibili.com/video/av63579877) 
 
 - [博客](https://github.com/haima16/blog)
-
