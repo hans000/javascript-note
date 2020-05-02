@@ -79,6 +79,44 @@
         }
     }
 
+nums = [-2,0,1,1,2]
+var threeSum = function(nums) {
+    if (nums.length < 3) {
+        return []
+    }
+    nums = nums.sort((a, b) => a - b)
+    let lp, rp, result = []
+    for (let i = 0; i < nums.length - 2; i++) {
+        lp = i + 1, rp = nums.length - 1
+        while(1) {
+            debugger
+            const sum = nums[i] + nums[lp] + nums[rp]
+            if (sum === 0) {
+                if (i + 1 !== lp) {
+                    while(1) {
+                        if (nums[i] !== nums[i + 1]) {
+                            break
+                        }
+                        i++
+                    }
+                }
+                result.push([nums[i], nums[lp], nums[rp]])
+                lp++
+                rp--
+            } else if (sum < 0) {
+                lp++
+            } else {
+                rp--
+            }
+            if (lp === rp) {
+                break
+            }
+        }
+    }
+    return result
+};
+console.log(threeSum(nums));
+
 
 </script>
 </html>

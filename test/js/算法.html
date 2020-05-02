@@ -289,6 +289,50 @@
   // }
   // console.log(reverseWords("Let's take LeetCode contest"));
   
-
+/**
+    1-4-5
+    1-3-4
+*/
+// function ListNode(val) {
+//     this.val = val;
+//     this.next = null;
+// }
+// const a = new ListNode(1)
+// const b = new ListNode(4)
+// const c = new ListNode(5)
+// a.next = b
+// b.next = c
+// const aa = new ListNode(1)
+// const bb = new ListNode(4)
+// const cc= new ListNode(5)
+// aa.next = bb
+// bb.next = cc
+// var mergeTwoLists = function(l1, l2) {
+// 	let p1 = l1, p2 = l2;
+// 	while(true) {
+// 		if (l1.val < l2.val) {
+// 			l1 = l1.next
+// 		}
+// 	}
+// };
+// mergeTwoLists(a, aa)
+const nums = [0,0,1,1,1,2,2,3,3,4]
+var removeDuplicates = function(nums) {
+    const len = nums.length
+    if (len < 2) return len
+    let i = 0, j= 1, k = 0
+    while(j < len) {
+        if (nums[i] === nums[j]) {
+            j++
+            continue
+        }
+        nums[k + 1] = nums[j]
+        i = j
+        j++
+        k++
+    }
+    return k + 1
+};
+removeDuplicates(nums)
 </script>
 </html>

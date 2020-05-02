@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" width="500" height="400"></canvas>
+</body>
+<script>
+    const ctx = canvas.getContext('2d')
+    const H = 400, W = 500
+
+    function collide(s1, s2) {
+        if (s2) {
+            return (
+                s1.posX <= s2.posX + s2.width && 
+                s1.posX >= s2.posX - s1.width && 
+                s1.posY <= s2.posY - s2.height && 
+                s1.posY >= s2.posY - s1.height
+            )
+        }
+        return (
+            s1.posX <= 0 &&
+            s1.posX >= W - s1.width &&
+            s1.posY <= 0 &&
+            s1.posY >= H - s1.height
+        )
+    }
+    class Scene {
+        constructor() {
+            this.actors = []
+            this.update()
+        }
+        update() {
+            ctx.clearRect(0, 0, W, H)
+            this.actors.forEach(e => e.update())
+            requestAnimationFrame(this.update.bind(this))
+        }
+    }
+    class Block {
+        constructor() {
+            this.posX = 0
+            this.posY = 0
+            this.vx = 0
+            this.vy = 0
+            this.width = 40
+            this.height = 40
+        }
+        moveLeft() {
+            this.posX -= this.vx;
+        }
+        moveRight() {
+            this.posX += this.vx;
+        }
+        moveUp() {
+            this.posY -= this.vy;
+        }
+        moveDown() {
+            this.posY += this.vy;
+        }
+        update() {
+            
+            this.render()
+        }
+        render() {
+            ctx.fillRect(this.posX, this.posY, this.width, this.height)
+        }
+    }
+    const scene = new Scene()
+    const b = new Block({
+
+    })
+    scene.actors.push(b)
+</script>
+</html>

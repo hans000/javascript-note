@@ -8,8 +8,12 @@ function EventBus() {
   this.on = (type, fn) => {
     this.handle[type] ? this.handle[type].push(fn) : this.handle[type] = [fn]
   }
-  this.remove = (type, fn) => {
-    this.handle[type] = this.handle[type].filter(e => e !== fn)
+  this.off = (type, fn) => {
+    if (fn) {
+      this.handle[type] = this.handle[type].filter(e => e !== fn)
+    } else {
+      delete this.handle[type]
+    }
   }
   this.emit = (type) => {
     this.handle[type] && this.handle[type].forEach(e => e())
@@ -25,8 +29,10 @@ let bus = new EventBus()
 bus.on('click', fn1)
 bus.on('click', fn2)
 
-bus.on('dbclick', () => {
-  console.log(2);
-})
-bus.remove('click', fn1)
-bus.emit('click')
+// bus.on('dbclick', () => {
+//   console.log(2);
+// })
+bus.off('click')
+console.log(1, bus.handle);
+
+// bus.emit('click')
