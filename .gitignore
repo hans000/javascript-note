@@ -4,3 +4,4 @@ test.*
 .vscode/
 node_modules/
 note.*
+.vscode/

@@ -1,0 +1,19 @@
+{
+  "name": "javascript",
+  "version": "1.0.0",
+  "description": "是时候重新整理一下自己的仓库了，这个是最开始自己整理的，现在看了感觉好惭愧（不过也是好事，证明自己确实成长了许多），我并不到算删除他们，留着作为见证吧，现在重新梳理自己的知识（陆续更新上去），个人喜欢把前端的知识以游戏之类的案例展示，期待吧",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haima16/JavaScript.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haima16/JavaScript/issues"
+  },
+  "homepage": "https://github.com/haima16/JavaScript#readme"
+}
