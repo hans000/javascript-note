@@ -99,3 +99,9 @@ ul:not(:first-child)::after {
 ![mc](./assets/mc.png)
 
 源码：[链接](https://github.com/haima16/JavaScript-Case/tree/master/stage-1/树形结构) [仓库](https://github.com/haima16/JavaScript-Case)
+
+## 补充
+
+老早前写过的canvas版，[链接](https://github.com/haima16/JavaScript-Case/树形结构/master/stage-2/canvas/mind)
+
+![1590892476415](assets/1590892476415.png)
