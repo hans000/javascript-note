@@ -98,4 +98,4 @@ ul:not(:first-child)::after {
 
 ![mc](./assets/mc.png)
 
-源码：[链接](https://github.com/haima16/JavaScript-Case/tree/master/stage-1/树形结构)
+源码：[链接](https://github.com/haima16/JavaScript-Case/tree/master/stage-1/树形结构) [仓库](https://github.com/haima16/JavaScript-Case)
