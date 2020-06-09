@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="input">
+</body>
+<script>
+    input.addEventListener('paste', (e) => {
+        // if (!(e.clipboardData && e.clipboardData.items)) {
+        //     return;
+        // }
+        console.log(e.clipboardData.getData('text/html'));
+        
+        // e.clipboardData.items.forEach((item) => {
+        //     console.log(item.kind);
+        // })
+
+        // if (item.kind === "string") {
+        // item.getAsString(function (str) {
+        //     // str 是获取到的字符串
+        // })
+        // } else if (item.kind === "file") {
+        // var pasteFile = item.getAsFile();
+        // // pasteFile就是获取到的文件
+        // }
+    })
+</script>
+</html>
