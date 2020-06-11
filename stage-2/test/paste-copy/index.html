@@ -28,5 +28,18 @@
         // // pasteFile就是获取到的文件
         // }
     })
+
+    function People() {
+
+    }
+    People.prototype.eat = () => {
+        console.log(this);
+        
+    }
+    People.prototype.say = (sth) => {
+        console.log(sth);
+        
+    }
+    new People().eat()
 </script>
 </html>
