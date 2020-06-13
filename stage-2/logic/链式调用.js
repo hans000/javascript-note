@@ -1,3 +1,15 @@
+/**
+ * 测试Promise then方法的第二个参数和catch的优先级
+ * then > catch
+ */
+Promise.reject(1).then(function(value) {
+    console.log('success', value);
+}, function(value) {
+    console.log('error', value);
+}).catch(function(error) {
+    console.log('catch', error);
+})
+
 function LazyMan(name) {
     this.name = name;
     this.queue = [];

@@ -29,17 +29,18 @@
         // }
     })
 
-    function People() {
+    // 测试async/await中的不会
+    // async function test () {
+    //     try {
+    //         const a = await Promise.reject(1)
+    //         console.log(a);
+    //         console.log(2);
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
+    // test()
 
-    }
-    People.prototype.eat = () => {
-        console.log(this);
-        
-    }
-    People.prototype.say = (sth) => {
-        console.log(sth);
-        
-    }
-    new People().eat()
+
 </script>
 </html>

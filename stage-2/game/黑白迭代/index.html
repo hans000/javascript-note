@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>黑白迭代</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .layout {
+            margin: 30px auto;
+            width: 400px;
+            overflow: hidden;
+        }
+        .tile {
+            float: left;
+            width: 48px;
+            height: 48px;
+            background-color: #eee;
+            margin: 1px;
+        }
+        .tile.mark {
+            background-color: #333;
+        }
+        .tile:hover {
+            opacity: .7; 
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        .ctrl {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="root">
+        <h1>黑白迭代</h1>
+        <div class="ctrl">
+            <button id="reset">重置</button>
+        </div>
+        <div class="layout"></div>
+    </div>
+</body>
+<script>
+    // 初始化
+    const layout = document.querySelector('.layout');
+    const reset = document.querySelector('#reset');
+    const create = document.querySelector('#create');
+    const frg = document.createDocumentFragment();
+    const row = 8, col = 8;
+    const map = Array.from({ length: row * col }, () => false);
+    
+    // 初始化页面
+    map.forEach((value, index) => {
+        const node = document.createElement('div')
+        node.classList.add('tile')
+        node.index = index
+        node.value = value
+        frg.appendChild(node)
+    })
+
+    layout.appendChild(frg)
+    
+    // 添加事件
+    layout.addEventListener('click', ({ target }) => {
+        if (target.classList.contains('tile')) {
+            findUpdateNodes(target.index).forEach(node => {
+                update(node)
+            })
+        }
+    })
+    reset.onclick = () => {
+        map.forEach((v, i) => {
+            if (v) {
+                map[i] = false
+                layout.children[i].classList.remove('mark')
+            }
+        })
+    }
+    // 查找需求更新的节点
+    function findUpdateNodes(index) {
+        const nodes = [layout.children[index]]
+        const offset = [-1, 0, 0, 1, 1, 0, 0, -1]
+
+        for (let i = 0; i < offset.length; i+=2) {
+            const oy = offset[i]
+            const ox = offset[i + 1]
+            const newIndex = index + oy * col + ox
+            // 排除非法边界
+            if (newIndex < 0 || 
+                newIndex >= row * col || 
+                index % col === 0 && newIndex + 1 === index ||
+                (index + 1) % col === 0 && newIndex - 1 === index) {
+                continue
+            }
+            nodes.push(layout.children[newIndex])
+        }
+        return nodes
+    }
+    // 更新节点状态
+    function update(node) {
+        const i = node.index
+        const v = map[i]
+        map[i] = !v
+        node.value = !v
+        if (v) {
+            node.classList.remove('mark')
+        } else {
+            node.classList.add('mark')
+        }
+    }
+</script>
+</html>
