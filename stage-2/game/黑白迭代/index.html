@@ -53,13 +53,12 @@
     const frg = document.createDocumentFragment();
     const row = 8, col = 8;
     const map = Array.from({ length: row * col }, () => false);
-    
+
     // 初始化页面
     map.forEach((value, index) => {
         const node = document.createElement('div')
         node.classList.add('tile')
         node.index = index
-        node.value = value
         frg.appendChild(node)
     })
 
@@ -106,7 +105,6 @@
         const i = node.index
         const v = map[i]
         map[i] = !v
-        node.value = !v
         if (v) {
             node.classList.remove('mark')
         } else {

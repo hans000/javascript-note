@@ -24,7 +24,8 @@
 - [「mojangson-parser」](https://github.com/haima16/mojangson-parser)  ··········································································解析minecraft nbt | [npm](https://www.npmjs.com/package/paptor) `ts`
 - [「paptor」](https://github.com/haima16/paptor)  ··································································································数据适配 | [npm](https://www.npmjs.com/package/mojangson-parser) `ts`
 - 「[纯CSS的成就系统|组织架构图](https://github.com/haima16/JavaScript-Case/tree/master/stage-1/树形结构)」·······················································`CSS`
-- [「还原最强大脑-黑白迭代」](https://github.com/haima16/JavaScript-Case/tree/master/stage-1/树形结构)···································································`原生js` `游戏`
+- [「还原最强大脑-黑白迭代-原生」](https://github.com/haima16/JavaScript-Case/tree/master/stage-1/树形结构)·······················································`原生js` `游戏`
+- [「还原最强大脑-黑白迭代-react版」](https://github.com/haima16/JavaScript-Case/tree/master/stage-3/react-test)··················································`react` `游戏`
 
 
 
