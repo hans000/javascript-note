@@ -5,9 +5,8 @@ interface IProps {
     value: boolean
     onClick: (index: number) => void
 }
-interface IState {
+interface IState { }
 
-}
 export default class Tile extends Component<IProps, IState> {
     private clickHandle = () => {
         this.props.onClick(this.props.index)

@@ -5,9 +5,8 @@ interface IProps {
     data: boolean[]
     onClick: (index: number) => void
 }
-interface IState {
+interface IState { }
 
-}
 export default class Pane extends Component<IProps, IState> {
     render() {
         return (

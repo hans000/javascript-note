@@ -105,11 +105,7 @@
         const i = node.index
         const v = map[i]
         map[i] = !v
-        if (v) {
-            node.classList.remove('mark')
-        } else {
-            node.classList.add('mark')
-        }
+        node.classList.toggle('mark')
     }
 </script>
 </html>

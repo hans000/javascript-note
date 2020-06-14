@@ -2,9 +2,7 @@ import React, { Component } from 'react'
 import Pane from './Pane'
 import './index.css'
 
-interface IProps {
-
-}
+interface IProps { }
 interface IState {
     data: boolean[]
 }
