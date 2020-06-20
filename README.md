@@ -25,7 +25,8 @@
 - [「paptor」](https://github.com/haima16/paptor)  ··································································································数据适配 | [npm](https://www.npmjs.com/package/mojangson-parser) `ts`
 - 「[纯CSS的成就系统|组织架构图](https://github.com/haima16/JavaScript-Case/tree/master/stage-1/树形结构)」·······················································`CSS`
 - [「还原最强大脑-黑白迭代-原生」](https://github.com/haima16/JavaScript-Case/tree/master/stage-1/树形结构)·······················································`原生js` `游戏` | [掘金链接](https://juejin.im/post/5ee5f99ae51d45789a7f27c7)
-- [「还原最强大脑-黑白迭代-react版」](https://github.com/haima16/JavaScript-Case/tree/master/stage-3/react-test)··················································`react` `游戏` | [掘金链接](https://juejin.im/post/5ee5f99ae51d45789a7f27c7)
+- [「还原最强大脑-黑白迭代-react版」](https://github.com/haima16/JavaScript-Case/tree/master/stage-3/react-test)··················································`react` `游戏` | [掘金链接](https://juejin.im/post/5ee5f99ae51d45789a7f27c7) [在线试玩](https://hans000.gitee.io/turn-black-and-white/)
+- [「还原最强大脑-黑白无双-react版」](https://github.com/haima16/JavaScript-Case/tree/master/stage-3/react-test)··················································`react` `游戏` | [在线试玩](https://hans000.gitee.io/either-black-or-white/)
 
 
 

@@ -11,12 +11,12 @@ function App() {
     return (
         <div className="App">
           {/* <Test001 /> */}
-          {/* <BlackWhiteTurn /> */}
+          <BlackWhiteTurn />
           {/* <ForwardRef /> */}
           {/* <Children /> */}
           {/* <Game2 /> */}
           {/* <Animate /> */}
-          <BlackWhiteBoth />
+          {/* <BlackWhiteBoth /> */}
         </div>
     );
 }
