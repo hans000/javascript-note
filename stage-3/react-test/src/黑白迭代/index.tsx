@@ -4,7 +4,8 @@ import './index.css'
 
 interface IProps { }
 interface IState {
-    data: boolean[]
+    data: boolean[],
+    coordinate: number[][],
 }
 
 const ROW = 8
@@ -31,9 +32,11 @@ function turn(sourceData: boolean[], index: number) {
     }
     return data
 }
+export function convert(index: number) {
+    return [index / ROW | 0, index % ROW]
+}
 function getFlipX(index: number) {
-    const row = index / ROW | 0
-    const col = index % ROW
+    const [row, col] = convert(index)
     return ROW * row + 7 - col
 }
 function countBlackTiles(data: boolean[]) {
@@ -41,9 +44,11 @@ function countBlackTiles(data: boolean[]) {
 }
 export default class BlackWhiteTurn extends Component<IProps, IState> {
     private isRunning = false;
+    private path: number[] = []
 
     public state: IState = {
-        data: Array.from({ length: ROW ** 2 }, () => false)
+        data: Array.from({ length: ROW ** 2 }, () => false),
+        coordinate: [],
     }
     private clickHandle = (index: number) => {
         const data = turn(this.state.data, index)
@@ -62,6 +67,7 @@ export default class BlackWhiteTurn extends Component<IProps, IState> {
     private generate = () => {
         this.isRunning = true
         let data = Array.from({ length: ROW ** 2 }, () => false)
+        this.path = []
         while(1) {
             const count = countBlackTiles(data)
             if (count > 35 && count < 50) {
@@ -69,16 +75,35 @@ export default class BlackWhiteTurn extends Component<IProps, IState> {
             }
             const num = Math.random() * 64 | 0;
             data = turn(data, num)
-            data = turn(data, getFlipX(num))
+            const num2 = getFlipX(num)
+            data = turn(data, num2)
+            this.path.push(num, num2)
         }
+        this.setState({
+            data,
+            coordinate: [],
+        })
+    }
+    private reset = () => {
+        let initData = Array.from({ length: ROW ** 2 }, () => false)
+        const data = this.path.reduce((s, v) => {
+            s = turn(s, v)
+            return s
+        }, initData)
         this.setState({
             data
         })
     }
-    private reset = () => {
+    private clear = () => {
         this.isRunning = false
         this.setState({
-            data: Array.from({ length: ROW ** 2 }, () => false)
+            data: Array.from({ length: ROW ** 2 }, () => false),
+            coordinate: [],
+        })
+    }
+    private cheat = () => {
+        this.setState({
+            coordinate: this.path.map(v => convert(v))
         })
     }
     public render() {
@@ -87,9 +112,18 @@ export default class BlackWhiteTurn extends Component<IProps, IState> {
                 <div className="ctrl">
                     <h2>黑白迭代</h2>
                     <button onClick={this.reset}>重置</button>
+                    <button onClick={this.clear}>清空</button>
                     <button onClick={this.generate}>生成</button>
+                    <button onClick={this.cheat}>提示</button>
                 </div>
                 <Pane data={this.state.data} onClick={this.clickHandle} />
+                <div className="tips">
+                    {
+                        this.state.coordinate.map((arr, index) => {
+                            return <span key={index} style={{ padding: '10px' }}>{`(${arr[0]}, ${arr[1]})`}</span>
+                        })
+                    }
+                </div>
             </div>
         )
     }
