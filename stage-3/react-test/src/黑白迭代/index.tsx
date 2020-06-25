@@ -42,6 +42,17 @@ function getFlipX(index: number) {
 function countBlackTiles(data: boolean[]) {
     return data.reduce((s, v) => v ? s + 1 : s, 0)
 }
+function filter(path: number[]) {
+    path = path.sort((a, b) => a - b)
+    return path.reduce((s, v) => {
+        if (s[s.length - 1] === v) {
+            s.pop()
+        } else {
+            s.push(v)
+        }
+        return s
+    }, [])
+}
 export default class BlackWhiteTurn extends Component<IProps, IState> {
     private isRunning = false;
     private path: number[] = []
@@ -85,6 +96,7 @@ export default class BlackWhiteTurn extends Component<IProps, IState> {
         })
     }
     private reset = () => {
+        this.isRunning = true
         let initData = Array.from({ length: ROW ** 2 }, () => false)
         const data = this.path.reduce((s, v) => {
             s = turn(s, v)
@@ -102,8 +114,11 @@ export default class BlackWhiteTurn extends Component<IProps, IState> {
         })
     }
     private cheat = () => {
+        const path = filter(this.path)
+        console.log(path);
+        
         this.setState({
-            coordinate: this.path.map(v => convert(v))
+            coordinate: path.map(v => convert(v))
         })
     }
     public render() {
