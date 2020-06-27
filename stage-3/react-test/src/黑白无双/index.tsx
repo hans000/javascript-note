@@ -23,10 +23,7 @@ export default class BlackWhiteTurn extends Component<IProps, IState> {
     private findUpdateNodes = (index: number) => {
         const data = [...this.state.data]
         // 前右下左上下
-        const offset = [-1, 0, 0, 0, 1, 0, 1, 0, 0, 0, -1, 0, 0, 0, -1, 0, 0, 1]
-        // 自身取反
-        data[index] = !data[index]
-        
+        const offset = [0, 0, 0, -1, 0, 0, 0, 1, 0, 1, 0, 0, 0, -1, 0, 0, 0, -1, 0, 0, 1]
         // 查找周围，取反
         for (let i = 0; i < offset.length; i+=3) {
             const oy = offset[i]

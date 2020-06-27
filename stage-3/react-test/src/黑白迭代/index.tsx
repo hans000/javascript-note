@@ -12,10 +12,7 @@ const ROW = 8
 
 function turn(sourceData: boolean[], index: number) {
     const data = [...sourceData]
-    const offset = [-1, 0, 0, 1, 1, 0, 0, -1]
-    // 自身取反
-    data[index] = !data[index]
-    
+    const offset = [0, 0, -1, 0, 0, 1, 1, 0, 0, -1]
     // 查找四周，取反
     for (let i = 0; i < offset.length; i+=2) {
         const oy = offset[i]
