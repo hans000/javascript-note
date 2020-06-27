@@ -27,10 +27,12 @@
 
 - [「mojangson-parser」](https://github.com/haima16/mojangson-parser)  ··········································································解析minecraft nbt | [npm](https://www.npmjs.com/package/mojangson-parser) `ts`
 - [「paptor」](https://github.com/haima16/paptor)  ··································································································数据适配 | [npm](https://www.npmjs.com/package/mojangson-parser) `ts`
+- [「media-player」](https://www.npmjs.com/package/@hans000/media-player)  ··································································································音乐播放器内核 音频可视化 | [npm](https://www.npmjs.com/package/mojangson-parser) `ts`
 - 「[纯CSS的成就系统|组织架构图](https://github.com/haima16/JavaScript-Case/tree/master/stage-1/树形结构)」·······················································`CSS`
 - [「还原最强大脑-黑白迭代-原生」](https://github.com/haima16/JavaScript-Case/tree/master/stage-1/树形结构)·······················································`原生js` `游戏` | [掘金](https://juejin.im/post/5ee5f99ae51d45789a7f27c7)
 - [「还原最强大脑-黑白迭代-react版」](https://github.com/haima16/JavaScript-Case/tree/master/stage-3/react-test)··················································`react` `游戏` | [掘金](https://juejin.im/post/5ee5f99ae51d45789a7f27c7) [试玩](https://hans000.gitee.io/turn-black-and-white/)
 - [「还原最强大脑-黑白无双-react版」](https://github.com/haima16/JavaScript-Case/tree/master/stage-3/react-test)··················································`react` `游戏` | [掘金](https://juejin.im/post/5eedc0abf265da02d421d065) [试玩](https://hans000.gitee.io/either-black-or-white/)
+- [「还原最强大脑-旋转拼图-react版」](https://github.com/haima16/JavaScript-Case/tree/master/stage-3/react-test)··················································`react` `游戏` | [试玩](https://hans000.gitee.io/rotate-jigsaw/)
 
 
 
