@@ -6,12 +6,14 @@ import ForwardRef from './ref-forwardRef'
 import Children from './children'
 import Game2 from './game02'
 import Animate from './animate'
+import RotateJigsaw from './旋转拼图'
 
 function App() {
     return (
         <div className="App">
           {/* <Test001 /> */}
-          <BlackWhiteTurn />
+          {/* <BlackWhiteTurn /> */}
+          <RotateJigsaw />
           {/* <ForwardRef /> */}
           {/* <Children /> */}
           {/* <Game2 /> */}
