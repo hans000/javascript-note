@@ -7,13 +7,15 @@ import Children from './children'
 import Game2 from './game02'
 import Animate from './animate'
 import RotateJigsaw from './旋转拼图'
+import CustomHooks from './自定义Hooks'
 
 function App() {
     return (
         <div className="App">
+          {/* <CustomHooks /> */}
           {/* <Test001 /> */}
-          {/* <BlackWhiteTurn /> */}
-          <RotateJigsaw />
+          <BlackWhiteTurn />
+          {/* <RotateJigsaw /> */}
           {/* <ForwardRef /> */}
           {/* <Children /> */}
           {/* <Game2 /> */}
