@@ -3,8 +3,6 @@ export const G_WIDTH = 360 //容器宽度，
 export const WIDTH_DOT = 28 // 旋钮大小
 export const ROW_DOT = ROW - 1 // 旋钮行数
 
-const total = ROW ** 2
-
 export function initDotList() {
     const row = ROW - 1
     return Array.from({ length: (row ** 2) }, (_ ,i) => {
@@ -17,12 +15,15 @@ export function getRandNum(max: number) {
 }
 
 export function initData() {
-    const list = [0, 1, 2, 3]
-    return Array.from({ length: total }, (_, i) => {
-        const row = (i / ROW | 0) >= ROW / 2 ? 1 : 0
-        const col = i % ROW >= ROW / 2 ? 1 : 0
-        return list[row * 2 + col]
-    })
+    // return Array.from({ length: total }, (_, i) => {
+    //     const row = (i / ROW | 0) >= ROW / 2 ? 1 : 0
+    //     const col = i % ROW >= ROW / 2 ? 1 : 0
+    //     return row * 2 + col
+    // })
+    return [0, 1, 2, 3].reduce((s, e) => {
+        s.push(...Array.from({ length: ROW / 2 }, () => e))
+        return s
+    }, [])
 }
 
 export function turn(sourceData: number[], index: number) {
