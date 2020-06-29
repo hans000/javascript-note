@@ -10,20 +10,18 @@ export function initDotList() {
     })
 }
 
+const total = ROW ** 2
+
 export function getRandNum(max: number) {
     return Math.random() * max | 0
 }
 
 export function initData() {
-    // return Array.from({ length: total }, (_, i) => {
-    //     const row = (i / ROW | 0) >= ROW / 2 ? 1 : 0
-    //     const col = i % ROW >= ROW / 2 ? 1 : 0
-    //     return row * 2 + col
-    // })
-    return [0, 1, 2, 3].reduce((s, e) => {
-        s.push(...Array.from({ length: ROW / 2 }, () => e))
-        return s
-    }, [])
+    return Array.from({ length: total }, (_, i) => {
+        const row = (i / ROW | 0) >= ROW / 2 ? 1 : 0
+        const col = i % ROW >= ROW / 2 ? 1 : 0
+        return row * 2 + col
+    })
 }
 
 export function turn(sourceData: number[], index: number) {
