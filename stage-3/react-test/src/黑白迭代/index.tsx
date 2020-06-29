@@ -123,9 +123,9 @@ export default class BlackWhiteTurn extends Component<IProps, IState> {
             <div className='black-white-turn'>
                 <div className="ctrl">
                     <h2>黑白迭代</h2>
-                    <button onClick={this.reset}>重置</button>
-                    <button onClick={this.clear}>清空</button>
                     <button onClick={this.generate}>生成</button>
+                    <button onClick={this.clear}>清空</button>
+                    <button onClick={this.reset}>恢复</button>
                     <button onClick={this.cheat}>提示</button>
                 </div>
                 <Pane data={this.state.data} onClick={this.clickHandle} />
