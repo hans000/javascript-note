@@ -8,13 +8,15 @@ import Game2 from './game02'
 import Animate from './animate'
 import RotateJigsaw from './旋转拼图'
 import CustomHooks from './自定义Hooks'
+import Puzzle from './数字华容道'
 
 function App() {
     return (
         <div className="App">
+          <Puzzle />
           {/* <CustomHooks /> */}
           {/* <Test001 /> */}
-          <BlackWhiteTurn />
+          {/* <BlackWhiteTurn /> */}
           {/* <RotateJigsaw /> */}
           {/* <ForwardRef /> */}
           {/* <Children /> */}
