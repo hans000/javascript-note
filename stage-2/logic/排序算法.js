@@ -65,10 +65,23 @@ function quickSort(data, start = 0, end = data.length - 1) {
     quickSort(data, start, j - 1)
     quickSort(data, j + 1, end)
 }
+/**
+ * 归并排序
+ */
+function mergeSort(data, start = 0, end = data.length - 1) {
+    if (data.length === 1) {
+        return data
+    }
+    const i = data.length / 2 | 0;
+    mergeSort(data, start, i)
+    mergeSort(data, i + 1, end)
+
+}
 
 // bubbleSort(data)
 // insertSort(data)
 // selectSort(data)
-quickSort(data)
+// quickSort(data)
+mergeSort(data)
 
 console.log(data);
