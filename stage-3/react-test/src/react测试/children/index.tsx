@@ -5,6 +5,7 @@ import React from "react"
  * 当标签内是文本时，原样输出
  * 当标签内是一个时，为对象
  * 当标签内是数据大于1时，为数组
+ * 有时这种设定会很麻烦，因此react提供了转化的api，React.toArray
  */
 
 export default function() {
@@ -34,7 +35,7 @@ export default function() {
 
 class Child extends React.Component {
     public componentDidMount() {
-        console.log(this.props.children);
+        console.log(React.Children.toArray(this.props.children));
         
     }
     public render() {

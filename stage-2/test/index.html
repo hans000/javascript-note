@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src='./paptor.js'></script>
+<body>
+    
+</body>
+<script>
+    const data = {
+        name: 'Jack',
+        age: 20,
+        number: '18812345678'
+    }
+
+    // 提取需要的属性 pick prop
+    console.log(paptor.objectAdaptor(data, [['age'], ['number']]));
+    // { age: 20, number: '18812345678' }
+
+    // 提取需求的属性并重命名属性名 pick prop and rename prop
+    console.log(paptor.objectAdaptor(data, [['age', 'Age'], ['number', 'Number']]));
+    // { Age: 20, Number: '18812345678' }
+
+</script>
+</html>
