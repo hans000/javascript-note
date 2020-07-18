@@ -12,10 +12,12 @@ import Animate from './react测试/animate'
 import CustomHooks from './自定义Hooks'
 import Test01 from './react测试/测试复杂类型'
 import Key from './react测试/key属性问题'
+import Game2048 from './games/Game2048'
 
 function App() {
     return (
         <div className="App">
+          <Game2048 />
           {/* <Test01 /> */}
           {/* <Key /> */}
           {/* <NumberPuzzle /> */}
