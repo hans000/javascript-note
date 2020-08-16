@@ -49,8 +49,8 @@ function convert(index: number) {
 function canSweep(sourceData: number[], prev: number, next: number) {
     const [r1, c1] = convert(prev)
     const [r2, c2] = convert(next)
-    const [minCol, maxCol] = c1 <= c2 ? [c1, c2] : [c2, c1]
-    const [minRow, maxRow] = r1 <= r2 ? [r1, r2] : [r2, r1]
+    // const [minCol, maxCol] = c1 <= c2 ? [c1, c2] : [c2, c1]
+    // const [minRow, maxRow] = r1 <= r2 ? [r1, r2] : [r2, r1]
 
     // horizontal
     for (let i = 0; i < ROW; i++) {

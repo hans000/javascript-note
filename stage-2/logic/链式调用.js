@@ -2,13 +2,13 @@
  * 测试Promise then方法的第二个参数和catch的优先级
  * then > catch
  */
-Promise.reject(1).then(function(value) {
-    console.log('success', value);
-}, function(value) {
-    console.log('error', value);
-}).catch(function(error) {
-    console.log('catch', error);
-})
+// Promise.reject(1).then(function(value) {
+//     console.log('success', value);
+// }, function(value) {
+//     console.log('error', value);
+// }).catch(function(error) {
+//     console.log('catch', error);
+// })
 
 function LazyMan(name) {
     this.name = name;
@@ -50,4 +50,33 @@ LazyMan.prototype = {
     }
 }
 
-new LazyMan('jack').sleep(2).eat('shit').sleep(3).eat('shit');
+// new LazyMan('jack').sleep(2).eat('shit').sleep(3).eat('shit');
+
+function promisify(func) {
+    return (...arg) => {
+        return () => new Promise((resolve, reject) => {
+            func(...arg, (err, arg) => {
+                err ? reject(err) : resolve(arg)
+            })
+        })
+    }
+}
+
+function test(text, callback) {
+    setTimeout(() => {
+        console.log(text);
+        callback(null, 'ok')
+    }, 1000);
+}
+const chain = []
+chain.push(promisify(test)(1))
+chain.push(promisify(test)(2))
+chain.push(promisify(test)(3))
+
+let handle = Promise.resolve()
+
+setTimeout(() => {
+    while (chain.length) {
+        handle = handle.then(chain.shift())
+    }
+}, 0)

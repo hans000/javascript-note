@@ -16,3 +16,35 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.App {
+  height: 10000px;
+}
+/* 清除滑条样式 */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  background: none;
+}
+
+/*chrome--------------------------------------------start*/
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0);
+  border-radius: 6px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(201, 201, 202, 1);
+  border-radius: 6px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(162, 162, 163, 1);
+}
