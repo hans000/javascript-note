@@ -16,9 +16,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-.App {
+/* .App {
   height: 10000px;
-}
+} */
 /* 清除滑条样式 */
 ::-webkit-scrollbar {
   width: 0;
