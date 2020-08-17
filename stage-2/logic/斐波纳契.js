@@ -32,16 +32,15 @@
 // console.log(fib(900));
 
 function fib(num) {
-    let a = 0,
-        b = 1,
-        s = 0;
+    let a = 0
+    let b = 1
     while (num > 0) {
+        const a1 = a
         a = b
-        s = a + b
+        b = a1 + b
         num--
     }
-    return s
+    return a
 }
-console.log(fib(1));
-console.log(fib(2));
-console.log(fib(3));
+
+console.log(fib(900));
