@@ -34,7 +34,7 @@
 - [「还原最强大脑-黑白无双-react版」](https://github.com/hans000/veg-javascript/tree/master/stage-3/react-test)··················································`react` `游戏` | [掘金](https://juejin.im/post/5eedc0abf265da02d421d065) [试玩](https://hans000.gitee.io/either-black-or-white/)
 - [「还原最强大脑-旋转拼图-react版」](https://github.com/hans000/veg-javascript/tree/master/stage-3/react-test)··················································`react` `游戏` | [试玩](https://hans000.gitee.io/rotate-jigsaw/)
 - [「还原最强大脑-数字华容道-react版」](https://github.com/hans000/veg-javascript/tree/master/stage-3/react-test)·············································`react` `游戏` | [试玩](https://hans000.gitee.io/number-puzzle/)
-- [「2048游戏-react版」](https://github.com/hans000/veg-javascript/tree/master/stage-3/react-test)·············································`react` `游戏`
+- [「2048游戏-react版」](https://github.com/hans000/veg-javascript/tree/master/stage-3/react-test)··············································································`react` `游戏`
 
 
 
