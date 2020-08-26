@@ -22,25 +22,37 @@
 // console.log(fib(35));
 // console.log(fib(9000));
 
-// function fib(num, a = 0, b = 1) {
-//     if (num <= 0) {
-//         return a
+function fib(num, a = 0, b = 1) {
+    if (num <= 0) {
+        return a
+    }
+    debugger
+    return fib(num - 1, b, a + b)
+}
+
+console.log(fib(900));
+
+// function fib(num) {
+//     let a = 0
+//     let b = 1
+//     while (num > 0) {
+//         const a1 = a
+//         a = b
+//         b = a1 + b
+//         num--
 //     }
-//     return fib(num - 1, b, a + b)
+//     return a
 // }
 
 // console.log(fib(900));
 
-function fib(num) {
-    let a = 0
-    let b = 1
-    while (num > 0) {
-        const a1 = a
-        a = b
-        b = a1 + b
-        num--
-    }
-    return a
-}
-
-console.log(fib(900));
+// function tailFactorial(n, total) {
+//     if (n === 1) return total;
+//     return tailFactorial(n - 1, n * total);
+// }
+   
+// function factorial(n) {
+//     return tailFactorial(n, 1);
+// }
+   
+// factorial(100000) // 120
