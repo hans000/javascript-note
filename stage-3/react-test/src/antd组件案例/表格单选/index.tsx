@@ -1,3 +1,14 @@
+/**
+ * 表格单选功能
+ * 
+ * antd中的Table组件如何设置了rowSelection属性会开启复选框功能
+ * 但是在某些情况下我们需要单选，那么如何实现呢？
+ * 
+ * 思路：通过实现onChange方法，修改selectedRowKeys和selectedRows字段
+ * 由于表头的复选框没有属性控制，只能使用样式覆盖的方式display: none; 
+ * 
+ */
+
 import React, { useState } from 'react'
 import { Table, Button } from 'antd'
 import './index.css' // 通过覆盖样式的方式吧多选控件隐藏
