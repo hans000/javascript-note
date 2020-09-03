@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react'
+import Test from './测试依赖复杂对象'
 
 export default function() {
     const [flag, setFlag] = useState(false)
@@ -13,11 +14,13 @@ export default function() {
     }
 
     return (
-        <div>
-            <button onClick={useCallback(handleFlag, [flag])}>switch flag</button>
-            <button onClick={useCallback(handle, [flag])}>click me</button>
-            <div>状态{+flag}</div>
-            <div>结果{result}</div>
-        </div>
+        // <div>
+        //     <button onClick={useCallback(handleFlag, [flag])}>switch flag</button>
+        //     <button onClick={useCallback(handle, [flag])}>click me</button>
+        //     <div>状态{+flag}</div>
+        //     <div>结果{result}</div>
+        // </div>
+        
+        <Test />
     )
 }
