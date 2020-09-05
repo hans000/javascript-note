@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import MyModal, { ITableParams } from './MyModal'
+import MyModal, { ITableParams } from './ComplexModal'
 
 export default class index extends Component {
 
@@ -59,9 +59,8 @@ export default class index extends Component {
         return (
             <div>
                 <button onClick={this.showHandle}>click me</button>
-                <button onClick={this.showHandle}>click me</button>
-
                 <MyModal loadTreeData={this.loadTreeData} loadTableData={this.loadTableData} />
+
             </div>
         )
     }

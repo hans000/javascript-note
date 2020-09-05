@@ -7,15 +7,16 @@ import CustomHooks from './自定义Hooks'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
 function App() {
+
     return (
         <div className="App">
             <Router>
                 <Switch>
-                    <Route key='/hooks' path='/hooks' component={CustomHooks} />
-                    <Route key='/components' path='/components' component={Comps} />
-                    <Route key='/antd' path='/antd' component={AntdTest} />
-                    <Route key='/games' path='/games' component={Games} />
-                    <Route key='/test' path='/test' component={Test} />
+                    <Route key='hooks' path='/hooks' component={CustomHooks} />
+                    <Route key='components' path='/components' component={Comps} />
+                    <Route key='antd' path='/antd' component={AntdTest} />
+                    <Route key='games' path='/games' component={Games} />
+                    <Route key='test' path='/test' component={Test} />
                     <Route key='/' path='/' render={() => (
                         <>
                             <Link key='hooks' style={{ display: 'block' }} to='/hooks'>自定义Hooks</Link>

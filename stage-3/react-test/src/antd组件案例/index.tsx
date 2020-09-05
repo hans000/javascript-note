@@ -14,13 +14,13 @@ export default function() {
     return (
         <Switch>
             {
-                routes.map(item => <Route path={`/antd/${item.url}`} component={item.component} />)
+                routes.map(item => <Route key={item.url} path={`/antd/${item.url}`} component={item.component} />)
             }
             <Route path='/antd/single-table' component={SingleTable} />
             <Route path='/' render={() => (
                 <>
                     {
-                        routes.map(item => <Link style={{ display: 'block' }} to={`/antd/${item.url}`}>{item.title}</Link>)
+                        routes.map(item => <Link key={item.url} style={{ display: 'block' }} to={`/antd/${item.url}`}>{item.title}</Link>)
                     }
                 </>
             )} />
