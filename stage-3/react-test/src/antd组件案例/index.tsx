@@ -2,12 +2,16 @@ import React from "react";
 import Modal from './Modal组件使用'
 import SingleTable from './表格单选'
 import HsSelect from './封装实用的下拉框组件'
+import ComplexForm from './复杂表单'
 import { Route, Link, Switch } from "react-router-dom";
+import FormChange from "./表单测试字段更改";
 
 const routes = [
     { title: 'Modal组件使用', url: 'Modal', component: Modal },
     { title: '表格单选', url: 'SingleTable', component: SingleTable },
     { title: '封装实用的下拉框组件', url: 'HsSelect', component: HsSelect },
+    { title: '复杂表单', url: 'ComplexForm', component: ComplexForm },
+    { title: '表单测试字段更改', url: 'FormChange', component: FormChange },
 ]
 
 export default function() {

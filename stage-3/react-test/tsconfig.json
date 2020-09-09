@@ -21,6 +21,7 @@
     "strictNullChecks": false
   },
   "include": [
-    "src"
+    "src",
+    "types/*"
   ]
 }
