@@ -72,6 +72,13 @@ MyPromise.rejected = (reason) => {
 		rejected(reason)
 	})
 }
+MyPromise.all = (promiseList) => {
+
+}
+MyPromise.race = (promiseList) => {
+	
+}
+
 
 const p1 = () => new MyPromise((resolve) => {
 	console.log(1);

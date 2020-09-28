@@ -7,13 +7,20 @@ interface IProps {
 }
 function WrapList(props: IProps) {
     const [data, setData] = useState([])
+    const [key, setKey] = useState([])
     useEffect(() => {
         setData(() => props.data || [])
     }, [])
-    const clickHandle = () => {
+    const addHandle = () => {
         setData(data => [...data, ''])
+        setKey(key => [...key, Math.random().toString(36).slice(2)])
     }
     const removeHandle = (index: number) => () => {
+        setKey(key => {
+            const result = [...key]
+            result.splice(index, 1)
+            return result
+        })
         setData(data => {
             const result = [...data]
             result.splice(index, 1)
@@ -33,12 +40,12 @@ function WrapList(props: IProps) {
     }
     return (
         <div>
-            <Button onClick={clickHandle}>add</Button>
+            <Button onClick={addHandle}>add</Button>
             <Button onClick={submitHandle}>submit</Button>
             {
                 data.map((item: any, index: number) => {
                     return (
-                        <div key={index}>
+                        <div key={key[index]} className={key[index]}>
                             {
                                 React.createElement(props.form, {
                                     value: item,

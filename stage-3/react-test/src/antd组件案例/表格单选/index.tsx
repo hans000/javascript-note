@@ -10,7 +10,7 @@
  */
 
 import React, { useState } from 'react'
-import { Table, Button } from 'antd'
+import { Table, Button, Input } from 'antd'
 import './index.css' // 通过覆盖样式的方式吧多选控件隐藏
 
 const columns = [
@@ -48,6 +48,7 @@ export default function() {
     return (
         <div>
             <div>
+                <Input />
                 <Button onClick={clickHandle}>click me</Button>
             </div>
             <Table

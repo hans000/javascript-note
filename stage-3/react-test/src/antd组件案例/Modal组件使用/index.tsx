@@ -1,30 +1,40 @@
 import React, { Component, useEffect } from 'react'
 import MyModal, { ITableParams } from './ComplexModal'
 import useModal from './useModal';
-import { Button } from 'antd';
+import { Button, Modal } from 'antd';
 import HocModal from './HocModal';
 
 export default class index extends Component {
-    private show = () => {
-        const { show } = HocModal.setup({})
-        show()
-    }
-    private test = () => {
-        return 'abc'
-    }
     render() {
         return (
-            <div>
-                <Button onClick={this.show}>click me</Button>
-                <HocModal>
-                    {
-                        undefined && this.test()
-                    }
-                </HocModal>
-            </div>
+            <Modal width={800} style={{ height: 500 }} >
+                123
+            </Modal>
         )
     }
 }
+
+// export default class index extends Component {
+//     private show = () => {
+//         const { show } = HocModal.setup({})
+//         show()
+//     }
+//     private test = () => {
+//         return 'abc'
+//     }
+//     render() {
+//         return (
+//             <div>
+//                 <Button onClick={this.show}>click me</Button>
+//                 <HocModal>
+//                     {
+//                         undefined && this.test()
+//                     }
+//                 </HocModal>
+//             </div>
+//         )
+//     }
+// }
 
 // export default function() {
 //     const show = () => {

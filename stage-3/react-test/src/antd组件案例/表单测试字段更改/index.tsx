@@ -6,7 +6,6 @@ import { FormProps } from 'antd/lib/form';
 interface IProps extends FormProps {}
 
 class HorizontalLoginForm extends React.Component<IProps, {}> {
-
   handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     console.log(this.props.form.isFieldsTouched());
