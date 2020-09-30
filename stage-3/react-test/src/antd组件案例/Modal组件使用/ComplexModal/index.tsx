@@ -134,7 +134,7 @@ export default function MyModal(props: IProps) {
             }
             isFirst.current = false
             handleRef.current = {
-                columns: [{dataIndex: 'id',title: 'id'},{dataIndex: 'name', title: 'title'}],
+                columns: [{dataIndex: 'id',title: 'id'}, {dataIndex: 'name', title: 'title'}],
                 ...payload,
             }
         }
