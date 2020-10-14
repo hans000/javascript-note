@@ -9,22 +9,32 @@ interface IConfig {
     onOk?: () => boolean;
     onCancel?: () => boolean;
     render?: () => React.ReactNode;
+    id?: string;
 }
 
 SimpleModal.setup = (config?: IConfig): any => {};
+SimpleModal.store = {} as any;
 
 export default function SimpleModal(props: IProps) {
+    const isFirst = useRef(true)
     const [visible, setVisible] = useState(false);
-    const instRef = useRef<IConfig>(null)
+    const instRef = useRef<IConfig>(null);
 
     useEffect(() => {
         SimpleModal.setup = (config: IConfig = {}) => {
-            console.log(1);
             instRef.current = config
             setVisible(true)
+            isFirst.current = false
             // SimpleModal.setup = () => {
             //     setVisible(true)
             // }
+            if (config.id) {
+                SimpleModal.store[config.id] = () => setVisible(true)
+                return config.id
+            }
+            const id = Math.random().toString(36).slice(2)
+            SimpleModal.store[id] = () => setVisible(true)
+            return id
         }
     }, [])
 

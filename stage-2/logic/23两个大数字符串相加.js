@@ -1,13 +1,15 @@
 
-function add(a, b) {
-    const len = Math.max(a.length, b.length)
+function add(...args) {
+    if (!args.length) {
+        throw new Error('至少1个参数')
+    }
+    const len = args.sort((a, b) => b.length - a.length)[0].length
     const stack = []
     let carry = 0
     for (let i = 0; i < len; i++) {
-        const ta = +a[a.length - i - 1] || 0
-        const tb = +b[b.length - i - 1] || 0
-        const sum = ta + tb + carry
-        carry = sum > 9 ? 1 : 0
+        const tNum = args.map(num => +num[num.length - i - 1] || 0)
+        const sum = tNum.reduce((s, v) => s + v) + carry
+        carry = sum / 10 | 0
         const n = sum % 10
         stack.push(n)
     }
@@ -17,4 +19,7 @@ function add(a, b) {
     return stack.reverse().join('')
 }
 
+console.log(add('111'));
+console.log(add('111', '222'));
+console.log(add('111', '222', '3313'));
 console.log(add('111256212111125621212138111256212121382138', '111256111256212121382121112562121213812138'));

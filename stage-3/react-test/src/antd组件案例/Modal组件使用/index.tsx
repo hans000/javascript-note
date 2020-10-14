@@ -1,26 +1,27 @@
 import React, { Component, useEffect } from 'react'
 import MyModal, { ITableParams } from './ComplexModal'
 import useModal from './03Hooks测试';
-import { Button, Modal } from 'antd';
+import { Button, Form } from 'antd';
+// import { Modal } from 'antd';
 import SimpleModal from './02简单测试';
 import RefModal, { IPayload } from './01暴漏ref测试';
 
-export default () => {
-    const [Modal, { show }] = useModal({
-        onCancel:() => console.log('close'),
-        onOk: () => console.log('open'),
-    })
+// export default () => {
+//     const [Modal, { show }] = useModal({
+//         onCancel:() => console.log('close'),
+//         onOk: () => console.log('open'),
+//     })
 
-    return (
-        <div>
-            <Button onClick={show}>click me</Button>
-            <Button onClick={show}>click me2</Button>
-            <Modal>
-                waertyui
-            </Modal>
-        </div>
-    )
-}
+//     return (
+//         <div>
+//             <Button onClick={show}>click me</Button>
+//             <Button onClick={show}>click me2</Button>
+//             <Modal>
+//                 waertyui
+//             </Modal>
+//         </div>
+//     )
+// }
 
 // export default class index extends Component {
 //     private modalRef = React.createRef<IPayload>();
@@ -39,34 +40,42 @@ export default () => {
 //     }
 // }
 
-// export default class index extends Component {
-//     private clickHandle = () => {
-//         SimpleModal.setup({
-//             onCancel: () => Math.random() + .8 > 1,
-//             render: () => '测试内容'
-//         })
-//     }
-//     private clickHandle2 = () => {
-//         SimpleModal.setup({
-//             onCancel: () => Math.random() + .8 > 1,
-//             render: () => '测试内容2'
-//         })
-//     }
-//     render() {
-//         return (
-//             <div>
-//                 <Button onClick={this.clickHandle}>click me</Button>
-//                 <Button onClick={this.clickHandle2}>click me2</Button>
-//                 <SimpleModal>
-//                     {/* 测试内容 */}
-//                 </SimpleModal>
-//                 <SimpleModal>
-//                     {/* 测试内容2 */}
-//                 </SimpleModal>
-//             </div>
-//         )
-//     }
-// }
+export default class index extends Component {
+    private ref = React.createRef()
+    private id: string = '';
+    private id2: string = '';
+
+    private clickHandle = () => {
+        this.id = SimpleModal.setup({
+            onCancel: () => Math.random() + .6 > 1,
+            id: this.id
+            // render: () => '测试内容'
+        })
+    }
+    private clickHandle2 = () => {
+        this.id2 = SimpleModal.setup({
+            onCancel: () => Math.random() + .6 > 1,
+            id: this.id2
+            // render: () => '测试内容2'
+        })
+    }
+    render() {
+        console.log(this.ref);
+        
+        return (
+            <div>
+                <Button onClick={this.clickHandle}>click me</Button>
+                <Button onClick={this.clickHandle2}>click me2</Button>
+                <SimpleModal>
+                    测试内容
+                </SimpleModal>
+                <SimpleModal>
+                    测试内容2
+                </SimpleModal>
+            </div>
+        )
+    }
+}
 
 // export default class index extends Component {
 
