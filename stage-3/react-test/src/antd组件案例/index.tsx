@@ -8,6 +8,7 @@ import FormChange from "./表单测试字段更改";
 import HsInput from "./输入框.tsx";
 import Scroll from "./点击滚动指定位置";
 import FormList from "./表单列表";
+import ComplexTable from "./多级表格";
 
 const routes = [
     { title: 'Modal组件使用', url: 'Modal', component: Modal },
@@ -18,6 +19,7 @@ const routes = [
     { title: '点击滚动指定位置', url: 'Scroll', component: Scroll },
     { title: '输入框', url: 'HsInput', component: HsInput },
     { title: '表单列表', url: 'FormList', component: FormList },
+    { title: '多级表格', url: 'ComplexTable', component: ComplexTable },
 ]
 
 export default function() {

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 
 interface IProps {
-    // name: string;
+    name: string;
+    age: number;
     btnData: string[];
 }
 interface IState {
@@ -14,7 +15,7 @@ export default class Child extends Component<IProps, IState> {
     render() {
         return (
             <div>
-                {/* {this.props.btnData} */}
+                {this.props.name} - {this.props.age}
             </div>
         )
     }

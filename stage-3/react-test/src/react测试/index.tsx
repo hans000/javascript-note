@@ -12,7 +12,7 @@ import Com from './组件复用'
 export default function() {
     return (
         <div>
-            <Com />
+            <Hoc />
         </div>
     )
 }

@@ -67,6 +67,7 @@ class Scene {
     this.update()
   }
   initTree(node, max=0, i=0, par=null) {
+    debugger
     let children = node.children
     if (children && children.length) {
       this.markX++
