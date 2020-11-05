@@ -8,11 +8,12 @@ import Hooks from './Hooks测试'
 import FucntionTest from './测试function组件更新问题'
 import Hoc from './高阶组件'
 import Com from './组件复用'
+import ListKey from './测试数组组件key问题'
 
 export default function() {
     return (
         <div>
-            <Hoc />
+            <ListKey />
         </div>
     )
 }
