@@ -48,5 +48,5 @@
     "typescript": "^3.7.5"
   },
   "homepage": "./",
-  "proxy": "https://appmail.mail.10086.cn"
+  "proxy": "http://192.168.3.148:8080"
 }

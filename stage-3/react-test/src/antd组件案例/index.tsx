@@ -9,6 +9,9 @@ import HsInput from "./输入框.tsx";
 import Scroll from "./点击滚动指定位置";
 import FormList from "./表单列表";
 import ComplexTable from "./多级表格";
+import Fomula from "./公式编辑器";
+import Context from "./测试Context";
+import Tree from "./测试树组件";
 
 const routes = [
     { title: 'Modal组件使用', url: 'Modal', component: Modal },
@@ -20,6 +23,9 @@ const routes = [
     { title: '输入框', url: 'HsInput', component: HsInput },
     { title: '表单列表', url: 'FormList', component: FormList },
     { title: '多级表格', url: 'ComplexTable', component: ComplexTable },
+    { title: '公式编辑器', url: 'Fomula', component: Fomula },
+    { title: '测试Context', url: 'Context', component: Context },
+    { title: '测试树组件', url: 'Tree', component: Tree },
 ]
 
 export default function() {

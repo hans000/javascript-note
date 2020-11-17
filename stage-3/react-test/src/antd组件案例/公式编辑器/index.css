@@ -1,0 +1,68 @@
+.fomula-editor {
+    position: relative;
+}
+.fomula-editor__wrap {
+    position: absolute;
+    width: 100%;
+    top: calc(100% + 4px);
+    left: 0;
+    min-height: 50px;
+    box-shadow: 1px 1px 10px #aaa;
+}
+.fomula-editor__item {
+    padding: 4px 16px;
+    cursor: pointer;
+}
+.fomula-editor__item:hover {
+    background-color: #eee;
+}
+.fomula-editor__token {
+    background-color: blue;
+}
+.fomula-editor__cont {
+    position: relative;
+    min-height: 30px;
+    border: 1px solid #ccc;
+    background-color: #eee;
+}
+.fomula-editor__cont-wrap {
+    outline: none;
+    /* position: relative;
+    min-height: 30px;
+    border: 1px solid #ccc;
+    background-color: #eee; */
+}
+.fomula-editor__cursor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 20px;
+    background-color: #333;
+    animation: cursor 1s ease infinite;
+}
+.fomula-editor__input {
+    /* position: absolute;
+    width: 1px;
+    height: 1px;
+    color: transparent; */
+    display: inline-block;
+    left: 0;
+    top: 0;
+    width: 100%;
+    outline: none;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+}
+@keyframes cursor {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

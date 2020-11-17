@@ -1,26 +1,27 @@
-import React, { useRef } from 'react'
-import HsForm from '../components/HsForm'
-import { IField, FormType } from '../components/HsForm/HsForm'
-import { Button } from 'antd'
+import React from "react";
+import { Link, Route, Switch } from "react-router-dom";
+import LeaderFlex from './干部任免审批flex'
+import LeaderGrid from './干部任免审批grid'
 
-export default () => {
-    let ref = useRef<any>()
-    const data: IField[] = [
-        {
-            key: 'foo',
-            type: FormType.Input,
-            validatorConfig: {
-                label: 'foo测试'
-            }
-        }
-    ]
-    function clickHandle() {
-        console.log(ref.current);
-    }
+const routes = [
+    { title: '干部任免审批flex', url: 'LeaderFlex', component: LeaderFlex },
+    { title: '干部任免审批grid', url: 'LeaderGrid', component: LeaderGrid },
+]
+
+export default function() {
     return (
-        <div>
-            <Button onClick={clickHandle}>click</Button>
-            <HsForm data={data} wrappedComponentRef={ref} />
-        </div>
+        <Switch>
+            {
+                routes.map(item => <Route key={item.url} path={`/components/${item.url}`} component={item.component} />)
+            }
+            {/* <Route path='/antd/single-table' component={SingleTable} /> */}
+            <Route path='/' render={() => (
+                <>
+                    {
+                        routes.map(item => <Link key={item.url} style={{ display: 'block' }} to={`/components/${item.url}`}>{item.title}</Link>)
+                    }
+                </>
+            )} />
+        </Switch>
     )
 }
