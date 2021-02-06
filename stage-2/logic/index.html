@@ -6,7 +6,9 @@
     <title>Document</title>
 </head>
 <!-- <script src="./异步串行.js"></script> -->
+<script src="https://cdn.bootcdn.net/ajax/libs/lz-string/1.4.4/lz-string.js"></script>
 <script src="./30表格单元格.js"></script>
+<script src="./37流程图数据结果设计.js"></script>
 <body>
     <canvas id="canvas" width="800" height="600"></canvas>
 </body>
@@ -100,41 +102,64 @@
         }
     ]
     const ctx = canvas.getContext('2d')
+    const LENGTH = 50
+    const [list, lines] = getList()
+    list.forEach(drawRect)
+    lines.forEach(drawLine)
+    function drawLine(props) {
+        ctx.beginPath();
+        ctx.moveTo(props.x1 + 17, props.y1)
+        ctx.lineTo(props.x2 + 17, props.y2 + 28)
+        ctx.stroke()
+        ctx.closePath()
+    }
+    function drawRect(props) {
+        ctx.beginPath();
+        ctx.strokeRect(
+            props.left,
+            props.top,
+            30,
+            30,
+        )
+        ctx.fillText(props.value, props.left + 12, props.top + 18)
+        ctx.closePath()
+    }
+
     // filterLastChildrenProp(config)
     // console.log(config);
 
-    const list = [
-        { title: '1', parent: null },
-        { title: '1-1', parent: '1' },
-        { title: '1-2', parent: '1' },
-        { title: '1-1-1', parent: '1-1' },
-        { title: '1-1-2', parent: '1-1' },
-        { title: '1-2-1', parent: '1-2' },
-        { title: '1-2-2', parent: '1-2' },
-        { title: '2', parent: null },
-        { title: '1', parent: null },
-        { title: '3', parent: '3' },
-        { title: '1', parent: null },
-        { title: '1', parent: null },
-    ]
+    // const list = [
+    //     { title: '1', parent: null },
+    //     { title: '1-1', parent: '1' },
+    //     { title: '1-2', parent: '1' },
+    //     { title: '1-1-1', parent: '1-1' },
+    //     { title: '1-1-2', parent: '1-1' },
+    //     { title: '1-2-1', parent: '1-2' },
+    //     { title: '1-2-2', parent: '1-2' },
+    //     { title: '2', parent: null },
+    //     { title: '1', parent: null },
+    //     { title: '3', parent: '3' },
+    //     { title: '1', parent: null },
+    //     { title: '1', parent: null },
+    // ]
 
-    const tiles = init(config)
-    const LENGTH = 50
+    // const tiles = init(config)
+    // const LENGTH = 50
     // tiles.forEach(item => {
     //     draw(item)
     // })
 
     // console.log(toArray(config));
 
-    function draw(props) {
-        ctx.strokeRect(
-            props.left * LENGTH,
-            props.top * LENGTH,
-            props.width * LENGTH,
-            props.height * LENGTH,
-        )
-        ctx.fillText(props.title, props.left * LENGTH + 10, props.top * LENGTH + 30)
-    }
+    // function draw(props) {
+    //     ctx.strokeRect(
+    //         props.left * LENGTH,
+    //         props.top * LENGTH,
+    //         props.width * LENGTH,
+    //         props.height * LENGTH,
+    //     )
+    //     ctx.fillText(props.title, props.left * LENGTH + 10, props.top * LENGTH + 30)
+    // }
 
     // const test = [
     //     [
@@ -167,68 +192,68 @@
     //         '4-2': '4',
     //     }
     // ]
-    const excelHeader = new ExcelHeader()
-    excelHeader.add(0, '2', null)
-    excelHeader.add(0, '3', null)
-    excelHeader.add(0, '4', null)
+    // const excelHeader = new ExcelHeader()
+    // excelHeader.add(0, '2', null)
+    // excelHeader.add(0, '3', null)
+    // excelHeader.add(0, '4', null)
 
-    excelHeader.add(1, '2-1', '2')
-    excelHeader.add(1, '2-2', '2')
+    // excelHeader.add(1, '2-1', '2')
+    // excelHeader.add(1, '2-2', '2')
 
-    excelHeader.add(2, '4-2', '4')
-    excelHeader.add(2, '3', '3')
-    excelHeader.add(2, '2-2-1', '2-2')
-    excelHeader.add(2, '2-1-1', '2-1')
-    excelHeader.add(2, '4-1', '4')
-    excelHeader.add(2, '2-1-2', '2-1')
-    excelHeader.add(2, '2-2-2', '2-2')
-    const test = excelHeader.get()
+    // excelHeader.add(2, '4-2', '4')
+    // excelHeader.add(2, '3', '3')
+    // excelHeader.add(2, '2-2-1', '2-2')
+    // excelHeader.add(2, '2-1-1', '2-1')
+    // excelHeader.add(2, '4-1', '4')
+    // excelHeader.add(2, '2-1-2', '2-1')
+    // excelHeader.add(2, '2-2-2', '2-2')
+    // const test = excelHeader.get()
 
-    function buildTree(data) {
-        // 临时变量
-        const tmp = Array.from({ length: data.length }, () => ({}))
+    // function buildTree(data) {
+    //     // 临时变量
+    //     const tmp = Array.from({ length: data.length }, () => ({}))
 
-        for (let i = data.length - 1; i >= 0; i--) {
-            const item = data[i];
-            Object.keys(item).forEach(key => {
-                const parent = item[key]
-                if (i) {
-                    if (!data[i - 1][parent]) {
-                        // 构造上级节点
-                        data[i - 1][parent] = parent
-                    }
-                    if (!tmp[i][parent]) {
-                        tmp[i][parent] = { children: [] }
-                    }
-                }
-                const children = data.length - 1 > i
-                    ? tmp[i + 1][key]
-                        ? tmp[i + 1][key].children
-                        : []
-                    : []
-                if (i) {
-                    tmp[i][parent].children.push({
-                        title: key,
-                        children,
-                    })
-                } else {
-                    tmp[i][key] = {
-                        title: key,
-                        children,
-                    }
-                }
-            })
-        }
-        const result = Object.values(tmp[0])
-        console.log(JSON.stringify(result, null, 2));
-        return result
-    }
-    const tree = buildTree(test)
-    const tiless = init(tree)
-    console.log(toArray(tree));
-    tiless.forEach(item => {
-        draw(item)
-    })
+    //     for (let i = data.length - 1; i >= 0; i--) {
+    //         const item = data[i];
+    //         Object.keys(item).forEach(key => {
+    //             const parent = item[key]
+    //             if (i) {
+    //                 if (!data[i - 1][parent]) {
+    //                     // 构造上级节点
+    //                     data[i - 1][parent] = parent
+    //                 }
+    //                 if (!tmp[i][parent]) {
+    //                     tmp[i][parent] = { children: [] }
+    //                 }
+    //             }
+    //             const children = data.length - 1 > i
+    //                 ? tmp[i + 1][key]
+    //                     ? tmp[i + 1][key].children
+    //                     : []
+    //                 : []
+    //             if (i) {
+    //                 tmp[i][parent].children.push({
+    //                     title: key,
+    //                     children,
+    //                 })
+    //             } else {
+    //                 tmp[i][key] = {
+    //                     title: key,
+    //                     children,
+    //                 }
+    //             }
+    //         })
+    //     }
+    //     const result = Object.values(tmp[0])
+    //     console.log(JSON.stringify(result, null, 2));
+    //     return result
+    // }
+    // const tree = buildTree(test)
+    // const tiless = init(tree)
+    // console.log(toArray(tree));
+    // tiless.forEach(item => {
+    //     draw(item)
+    // })
 
 
 </script>

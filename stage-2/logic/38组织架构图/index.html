@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="./index.js"></script>
+<body>
+    <canvas id="canvas" width="800" height="600"></canvas>
+</body>
+<script>
+    let ctx = canvas.getContext('2d')
+
+    // const data = [
+    //     { id: 'a', value: 'a', nextIds: ['b', 'c', 'd'] },
+    //     { id: 'b', value: 'b', nextIds: [] },
+    //     { id: 'c', value: 'c', nextIds: ['e', 'ee'] },
+    //     { id: 'd', value: 'd', nextIds: ['f', 'g', 'gg'] },
+    //     { id: 'e', value: 'e', nextIds: [] },
+    //     { id: 'ee', value: 'ee', nextIds: [] },
+    //     { id: 'f', value: 'f', nextIds: [] },
+    //     { id: 'g', value: 'g', nextIds: [] },
+    //     { id: 'gg', value: 'gg', nextIds: [] },
+    // ]
+    const data = [
+        { id: 'a', value: 'a', nextIds: ['b', 'c', 'd'] },
+        { id: 'b', value: 'b', nextIds: ['e'] },
+        { id: 'c', value: 'c', nextIds: ['e'] },
+        { id: 'd', value: 'd', nextIds: ['f', 'g', 'gg'] },
+        { id: 'e', value: 'e', nextIds: ['h'] },
+        { id: 'f', value: 'f', nextIds: ['i'] },
+        { id: 'g', value: 'g', nextIds: ['i'] },
+        { id: 'gg', value: 'gg', nextIds: ['i'] },
+        { id: 'h', value: 'h', nextIds: ['k'] },
+        { id: 'i', value: 'i', nextIds: ['j'] },
+        { id: 'j', value: 'j', nextIds: ['k'] },
+        { id: 'k', value: 'k', nextIds: [] },
+    ]
+    // let tree = {
+    //     text: 'A',
+    //     children: [
+    //         {
+    //             text: 'B', children: [
+    //                 { text: 'D', children: [
+    //                     { text: 'G', children: [] },
+    //                     { text: 'H', children: [] },
+    //                     ]
+    //                 }
+    //             ]
+    //         },
+    //         {
+    //             text: 'C', children: [
+    //                 { text: 'e', children: [] },
+    //                 { text: 'F', children: [
+    //                     { text: 'I', children: [] }
+    //                     ] 
+    //                 }
+    //             ]
+    //         }
+    //     ]
+    // }
+    
+    let scene = new Scene(ctx, data, 'y')
+</script>
+</html>

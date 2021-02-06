@@ -59,6 +59,7 @@ export default function() {
                     selectedRowKeys,
                     onChange,
                 }}
+                pagination={{}}
                 rowKey='name' />
         </div>
     )
