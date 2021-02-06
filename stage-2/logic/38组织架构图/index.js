@@ -3,10 +3,11 @@ class Tile {
     static HEIGHT = 50
     static PADDIGN_X = 20
     static PADDIGN_Y = 10
-    constructor(scene, posX, posY, value) {
+    constructor(scene, id, posX, posY, value) {
         this.scene = scene
         this.posX = posX
         this.posY = posY
+        this.id = id
         this.prev = null
         this.next = null
         this.value = value
@@ -72,7 +73,10 @@ class Scene {
         this.lines = []
         this.markX = 0
         this.markY = 0
-        this.calcTree(this.buildTree(this.data))
+        this.tree = this.buildTree(this.data)
+        this.calcTree(this.tree)
+        this.calcLocation()
+        this.getList()
         this.update()
     }
     createMap(data) {
@@ -80,6 +84,46 @@ class Scene {
             s[k.id] = k
             return s
         }, {})
+    }
+    // isExist(node) {
+    //     return this.tiles.some(tile => tile.id === node.id)
+    // }
+    calcLocation() {
+        let root = this.tree
+        // root.left = 0
+        // root.top = 0
+        let minOffset = 0
+        const stack = [this.tree]
+        while (stack.length) {
+            const node = stack.shift()
+            stack.push(...node.children)
+            // const len = node.children.length
+            // const offset = width * (len - 1) / 2
+            node.children.forEach((item, index) => {
+                // const left = node.left - offset + width * index
+                item.list ? item.list.push(item.posX) : (item.list = [item.posX])
+                item.posX = this.calcAvg(item.list)
+                // item.top = node.top + height
+                // minOffset = Math.min(item.left, minOffset)
+            })
+        }
+        return { root, minOffset }
+    }
+    getList() {
+        const { root, minOffset } = this.calcLocation()
+        const stack = [root]
+        while (stack.length) {
+            const node = stack.shift()
+            // const last = this.tiles[this.tiles.length - 1]
+            // if (last && last.id === node.id) {
+            //     continue
+            // }
+            node.children.forEach((child) => {
+                this.lines.push(new Line(this, node, child, this.mode))
+            })
+            this.tiles.push(new Tile(this, node.id, node.posX, node.posY, node.value))
+            stack.push(...node.children)
+        }
     }
     buildTree(data) {
         const rootId = data[0].id
@@ -98,6 +142,9 @@ class Scene {
             ? this.calcTreeX(data)
             : this.calcTreeY(data)
     }
+    calcAvg(list) {
+        return list.reduce((s, v) => s += v) / list.length
+    }
     calcTreeY(node, max = 0, par = null) {
         let children = node.children
         if (children && children.length) {
@@ -112,20 +159,17 @@ class Scene {
             // 操作根节点
             this.markY--
             node.posX = X / children.length
+
             node.posY = (Tile.HEIGHT + Tile.PADDIGN_Y) * this.markY
 
             // core
-            this.tiles.push(new Tile(this, node.posX, node.posY, node.value))
-            par && this.lines.push(new Line(this, par, node, this.mode))
             return node.posX
         }
         // 操作根节点
         node.posX = (Tile.WIDTH + Tile.PADDIGN_X) * this.markX
-        node.posY = (Tile.HEIGHT + Tile.PADDIGN_Y) * this.markY
 
+        node.posY = (Tile.HEIGHT + Tile.PADDIGN_Y) * this.markY
         // core
-        this.lines.push(new Line(this, par, node, this.mode))
-        this.tiles.push(new Tile(this, node.posX, node.posY, node.value))
         this.markX++
         return node.posX
     }
@@ -146,7 +190,7 @@ class Scene {
             node.posY = Y / children.length
 
             // core
-            this.tiles.push(new Tile(this, node.posX, node.posY, node.value))
+            this.tiles.push(new Tile(this, node.id, node.posX, node.posY, node.value))
             par && this.lines.push(new Line(this, par, node, this.mode))
             return node.posY
         }
@@ -156,7 +200,7 @@ class Scene {
 
         // core
         this.lines.push(new Line(this, par, node, this.mode))
-        this.tiles.push(new Tile(this, node.posX, node.posY, node.value))
+        this.tiles.push(new Tile(this, node.id, node.posX, node.posY, node.value))
         this.markY++
         return node.posY
     }
@@ -165,6 +209,6 @@ class Scene {
         this.ctx.clearRect(0, 0, w, h)
         this.tiles.forEach(e => e.update())
         this.lines.forEach(e => e.update())
-        requestAnimationFrame(this.update.bind(this))
+        // requestAnimationFrame(this.update.bind(this))
     }
 }
