@@ -5,6 +5,7 @@ import Games from './games'
 import Comps from './组件测试'
 import CustomHooks from './自定义Hooks'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import D3 from './d3';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
                     <Route key='antd' path='/antd' component={AntdTest} />
                     <Route key='games' path='/games' component={Games} />
                     <Route key='test' path='/test' component={Test} />
+                    <Route key='d3' path='/d3' component={D3} />
                     <Route key='/' path='/' render={() => (
                         <>
                             <Link key='hooks' style={{ display: 'block' }} to='/hooks'>自定义Hooks</Link>
@@ -24,6 +26,7 @@ function App() {
                             <Link key='antd' style={{ display: 'block' }} to='/antd'>antd组件测试</Link>
                             <Link key='games' style={{ display: 'block' }} to='/games'>games</Link>
                             <Link key='test' style={{ display: 'block' }} to='/test'>react测试</Link>
+                            <Link key='graph' style={{ display: 'block' }} to='/d3'>d3</Link>
                         </>
                     )} />
                 </Switch>

@@ -3,12 +3,14 @@ const foo = [
     { id: 'a', value: 'a', nextIds: ['b', 'c', 'd'] },
     { id: 'b', value: 'b', nextIds: ['e'] },
     { id: 'c', value: 'c', nextIds: ['e'] },
-    { id: 'd', value: 'd', nextIds: ['f', 'g', 'gg'] },
+    { id: 'd', value: 'd', nextIds: ['f', 'g', 'gg', 'ggg'] },
     { id: 'e', value: 'e', nextIds: ['h'] },
     { id: 'f', value: 'f', nextIds: ['i'] },
     { id: 'g', value: 'g', nextIds: ['i'] },
     { id: 'gg', value: 'gg', nextIds: ['i'] },
-    { id: 'h', value: 'h', nextIds: ['k'] },
+    { id: 'ggg', value: 'ggg', nextIds: ['i'] },
+    { id: 'h', value: 'h', nextIds: ['hh'] },
+    { id: 'hh', value: 'hh', nextIds: ['k'] },
     { id: 'i', value: 'i', nextIds: ['j'] },
     { id: 'j', value: 'j', nextIds: ['k'] },
     { id: 'k', value: 'k', nextIds: [] },
@@ -43,16 +45,24 @@ function calcLocation(graph) {
     const stack = [graph]
     while (stack.length) {
         const node = stack.shift()
+        if (!node.children.length) {
+            continue
+        }
         stack.push(...node.children)
         const len = node.children.length
         const offset = width * (len - 1) / 2
+        let sumPosX = 0
         node.children.forEach((item, index) => {
-            const left = node.left - offset + width * index
+            const left = node.left - offset + width * (index + (len - 1) / 2)
             item.list ? item.list.push(left) : (item.list = [left])
             item.left = calcAvg(item.list)
+            sumPosX += item.left
             item.top = node.top + height
             minOffset = Math.min(item.left, minOffset)
         })
+        if (len > 1) {
+            node.left = sumPosX / node.children.length
+        }
     }
     return { root, minOffset }
 }

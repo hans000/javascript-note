@@ -100,9 +100,9 @@ class Scene {
             // const len = node.children.length
             // const offset = width * (len - 1) / 2
             node.children.forEach((item, index) => {
-                // const left = node.left - offset + width * index
-                item.list ? item.list.push(item.posX) : (item.list = [item.posX])
-                item.posX = this.calcAvg(item.list)
+                const posX = node.posX - item.posX
+                item.list ? item.list.push(posX) : (item.list = [posX])
+                // item.posX = this.calcAvg(item.list)
                 // item.top = node.top + height
                 // minOffset = Math.min(item.left, minOffset)
             })
@@ -110,14 +110,14 @@ class Scene {
         return { root, minOffset }
     }
     getList() {
-        const { root, minOffset } = this.calcLocation()
-        const stack = [root]
+        // const { root, minOffset } = this.calcLocation()
+        const stack = [this.tree]
         while (stack.length) {
             const node = stack.shift()
-            // const last = this.tiles[this.tiles.length - 1]
-            // if (last && last.id === node.id) {
-            //     continue
-            // }
+            const last = this.tiles[this.tiles.length - 1]
+            if (last && last.id === node.id) {
+                continue
+            }
             node.children.forEach((child) => {
                 this.lines.push(new Line(this, node, child, this.mode))
             })
@@ -158,6 +158,7 @@ class Scene {
 
             // 操作根节点
             this.markY--
+            // node.list ? node.list.push(par.posX) : (node.list = [par.posX])
             node.posX = X / children.length
 
             node.posY = (Tile.HEIGHT + Tile.PADDIGN_Y) * this.markY
@@ -167,7 +168,6 @@ class Scene {
         }
         // 操作根节点
         node.posX = (Tile.WIDTH + Tile.PADDIGN_X) * this.markX
-
         node.posY = (Tile.HEIGHT + Tile.PADDIGN_Y) * this.markY
         // core
         this.markX++
