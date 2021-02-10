@@ -4,7 +4,9 @@ const foo = [
     { id: 'b', value: 'b', nextIds: ['e'] },
     { id: 'c', value: 'c', nextIds: ['e'] },
     { id: 'd', value: 'd', nextIds: ['f', 'g', 'gg', 'ggg'] },
-    { id: 'e', value: 'e', nextIds: ['h'] },
+    { id: 'e', value: 'e', nextIds: ['h', 'ee', 'eee'] },
+    { id: 'ee', value: 'ee', nextIds: ['hh'] },
+    { id: 'eee', value: 'eee', nextIds: ['hh'] },
     { id: 'f', value: 'f', nextIds: ['i'] },
     { id: 'g', value: 'g', nextIds: ['i'] },
     { id: 'gg', value: 'gg', nextIds: ['i'] },
@@ -61,7 +63,7 @@ function calcLocation(graph) {
             minOffset = Math.min(item.left, minOffset)
         })
         if (len > 1) {
-            node.left = sumPosX / node.children.length
+            // node.left = sumPosX / node.children.length
         }
     }
     return { root, minOffset }

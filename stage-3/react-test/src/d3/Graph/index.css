@@ -8,6 +8,7 @@
     fill: #eee;
     stroke: #000;
     stroke-width: 1.5px;
+    background-color: #eee;
 }
   
 .node.fixed {
