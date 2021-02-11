@@ -17,6 +17,7 @@ export default () => {
     const [mode, setMode] = useState(0)
 
     useEffect(() => {
+        document.title = '数回 - by hans0000'
         load()
         update()
     }, [])
@@ -86,13 +87,9 @@ export default () => {
         setMode(() => 0)
         update()
     }
-    const demo = () => {
-        console.log(instRef.current.isCircle());
-        
-    }
     return (
         <div className='peak-turn'>
-            <h1>最强大脑-峰回路转</h1>
+            <h1>数回</h1>
             <div className={cls.join(' ')}>
                 {
                     (mode === 1 ? tiles : ans).map((tile, index) => <Tile scale={PeakTurn.scale} key={'tile' + index} onClick={tileClick} value={tile} index={index}/>)
@@ -115,7 +112,6 @@ export default () => {
                         )
                 }
                 <Button className='btn' type='primary' onClick={create}>出题</Button>
-                <Button className='btn' type='primary' onClick={demo}>demo</Button>
             </div>
             <ul className='peak-turn--desc'>
                 <li>规则：</li>
