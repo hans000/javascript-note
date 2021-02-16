@@ -1,9 +1,11 @@
 import React from "react";
 import { Route, Link, Switch } from "react-router-dom";
 import Graph from "./Graph";
+import Test from "./Test";
 
 const routes = [
-    { title: 'Graph', url: 'Modal', component: Graph },
+    { title: 'Graph', url: 'Graph', component: Graph },
+    { title: 'Test', url: 'Test', component: Test },
 ]
 
 export default function() {
