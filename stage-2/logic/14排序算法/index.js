@@ -68,20 +68,34 @@ function quickSort(data, start = 0, end = data.length - 1) {
 /**
  * 归并排序
  */
-function mergeSort(data, start = 0, end = data.length - 1) {
+function mergeSort(data) {
+    const merge = (left, right) => {
+        const result = []
+        while (left.length && right.length) {
+            if (left[0] < right[0]) {
+                result.push(left.shift())
+            } else {
+                result.push(right.shift())
+            }
+        }
+        return [...result, ...left, ...right]
+    }
+    const divide = (data) => {
+        const middle = Math.floor(data.length / 2)
+        const left = data.slice(0, middle)
+        const right = data.slice(middle)
+        return [left, right]
+    }
     if (data.length === 1) {
         return data
     }
-    const i = data.length / 2 | 0;
-    mergeSort(data, start, i)
-    mergeSort(data, i + 1, end)
-
+    const [left, right] = divide(data)
+    return merge(mergeSort(left), mergeSort(right))
 }
 
 // bubbleSort(data)
 // insertSort(data)
 // selectSort(data)
 // quickSort(data)
-mergeSort(data)
 
-console.log(data);
+console.log(mergeSort(data))
