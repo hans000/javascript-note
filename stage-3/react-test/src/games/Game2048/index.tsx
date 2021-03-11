@@ -1,31 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Core2048 from "./logic";
 import Tile from "./Tile";
 import './index.css'
+import useGesture from "./useGesture";
 
 const instance = new Core2048()
 
 export default function() {
+    const containerRef = useRef(null)
     const [data, setData] = useState(instance.getMap())
     const [score, setScore] = useState(0)
+    const gestureHandle = useGesture()
+
+    const handle = (code: number) => {
+        const state = instance.getState()
+        if (state === 'normal') {
+            instance.move(code)
+            setData(() => instance.getMap())
+            setScore(() => instance.getScore())
+        } else {
+            const timer = setTimeout(() => {
+                if (state === 'fail') {
+                    alert('Game over!')
+                } else if (state === 'finished') {
+                    alert('恭喜完成挑战!')
+                }
+                clearTimeout(timer)
+            }, 300)
+        }
+    }
+    // gestureHandle(handle)
     const handleKeyDown = (e: any) => {
         const code = e.keyCode
         if (code > 36 && code < 41) {
-            const state = instance.getState()
-            if (state === 'normal') {
-                instance.move(e.keyCode)
-                setData(() => instance.getMap())
-                setScore(() => instance.getScore())
-            } else {
-                const timer = setTimeout(() => {
-                    if (state === 'fail') {
-                        alert('Game over!')
-                    } else if (state === 'finished') {
-                        alert('恭喜完成挑战!')
-                    }
-                    clearTimeout(timer)
-                }, 300)
-            }
+            handle(e.keyCode)
         }
     }
     useEffect(() => {
@@ -35,7 +43,7 @@ export default function() {
         };
     }, [])
     return (
-        <div className='game2048 '>
+        <div className='game2048' ref={containerRef}>
             <div>
                 <span>分数{score}</span>
             </div>

@@ -1,8 +1,13 @@
+.game2048 {
+    text-align: center;
+    padding: 30px;
+}
 .game2048 .pane {
     position: relative;
     width: 310px;
     height: 310px;
     border: 1px solid #ccc;
+    margin: 0 auto;
 }
 
 .tile {
