@@ -17,7 +17,7 @@
 .black-white-turn .tile:hover {
     opacity: .7; 
 }
-h1 {
+.black-white-turn h1 {
     text-align: center;
     margin-bottom: 16px;
 }

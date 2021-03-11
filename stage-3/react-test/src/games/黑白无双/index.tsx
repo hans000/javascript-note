@@ -69,7 +69,7 @@ export default class BlackWhiteTurn extends Component<IProps, IState> {
     }
     public render() {
         return (
-            <div className='black-white-turn'>
+            <div className='either-black-white'>
                 <div className="ctrl">
                     <button onClick={this.reset}>重置</button>
                 </div>

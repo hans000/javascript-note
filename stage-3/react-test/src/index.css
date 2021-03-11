@@ -48,3 +48,9 @@ code {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(162, 162, 163, 1);
 }
+
+.nav-item {
+  display: block;
+  padding: 8px;
+  text-align: center;
+}

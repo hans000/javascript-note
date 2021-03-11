@@ -10,7 +10,7 @@
     margin: 0 auto;
 }
 
-.tile {
+.game2048 .tile {
     position: absolute;
     margin: 10px 0 0 10px;
     width: 65px;
@@ -22,39 +22,39 @@
     text-align: center;
     transition: .5s;
 }
-.tile0 {
+.game2048 .tile0 {
     background-color: #ccc;
 }
-.tile2 {
+.game2048 .tile2 {
     background-color: #6bd441;
 }
-.tile4 {
+.game2048 .tile4 {
     background-color: #ff8d8d;
 }
-.tile8 {
+.game2048 .tile8 {
     background-color: #e4e47f;
 }
-.tile16 {
+.game2048 .tile16 {
     background-color: #fba7d2;
 }
-.tile32 {
+.game2048 .tile32 {
     background-color: #1f9aaa;
 }
-.tile64 {
+.game2048 .tile64 {
     background-color: #0080ff;
 }
-.tile128 {
+.game2048 .tile128 {
     background-color: #343399;
 }
-.tile256 {
+.game2048 .tile256 {
     background-color: #c91783;
 }
-.tile512 {
+.game2048 .tile512 {
     background-color: #fd0100;
 }
-.tile1024 {
+.game2048 .tile1024 {
     background-color: #fab418;
 }
-.tile2048 {
+.game2048 .tile2048 {
     background-color: #ffff01;
 }

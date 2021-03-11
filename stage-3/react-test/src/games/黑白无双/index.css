@@ -1,33 +1,33 @@
 
-.black-white-turn {
+.either-black-white {
     margin: 30px auto;
     overflow: hidden;
     width: 840px;
 }
-.black-white-turn .pane {
+.either-black-white .pane {
     float: left;
     width: 240px;
     height: 240px;
     margin: 20px;
 }
 
-.black-white-turn .tile {
+.either-black-white .tile {
     float: left;
     width: 28px;
     height: 28px;
     background-color: #eee;
     margin: 1px;
 }
-.black-white-turn .tile.mark {
+.either-black-white .tile.mark {
     background-color: #333;
 }
-.black-white-turn .tile:hover {
+.either-black-white .tile:hover {
     opacity: .7; 
 }
-h1 {
+.either-black-white h1 {
     text-align: center;
     margin-bottom: 16px;
 }
-.black-white-turn .ctrl {
+.either-black-white .ctrl {
     text-align: center;
 }

@@ -25,10 +25,12 @@ export default class RotateJigsaw extends Component<{}, IState> {
         }
     }
     private reset = () => {
-        this.isRunning = true;
-        this.setState({
-            data: this.data
-        })
+        if (this.data) {
+            this.isRunning = true;
+            this.setState({
+                data: this.data
+            })
+        }
     }
     private clear = () => {
         this.isRunning = false;
@@ -55,7 +57,7 @@ export default class RotateJigsaw extends Component<{}, IState> {
             <div className='four-colors-pane'>
                 <div className="ctrl">
                     <button onClick={this.reset}>重置</button>
-                    <button onClick={this.clear}>清空</button>
+                    <button onClick={this.clear}>还原</button>
                     <button onClick={this.generate}>生成</button>
                 </div>
                 <Pane data={this.state.data} onClick={this.clickHandle}/>

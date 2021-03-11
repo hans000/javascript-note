@@ -17,7 +17,7 @@ export default class NumberPuzzle extends Component<{}, IState> {
     }
     private clickHandle = (index: number) => {
         const data = exchange(this.state.data, index)
-        this.setState({ data })
+        this.setState(() => ({ data }))
         if (this.isRunning) {
             if (JSON.stringify(data) === NumberPuzzle.dataString) {
                 alert('挑战成功！')
@@ -50,7 +50,7 @@ export default class NumberPuzzle extends Component<{}, IState> {
                 <div className="ctrl">
                     <h1>数字华容道</h1>
                     <button onClick={this.reset}>重置</button>
-                    <button onClick={this.clear}>清空</button>
+                    <button onClick={this.clear}>还原</button>
                     <button onClick={this.generate}>生成</button>
                 </div>
                 <Pane data={this.state.data} onClick={this.clickHandle}/>

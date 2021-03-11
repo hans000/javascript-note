@@ -9,7 +9,7 @@
     height: 400px;
     padding: 4px;
     margin: 0 auto;
-    border: 10px solid #aaa;
+    border: 10px solid #dd76bb;
 }
 .number-puzzle .ctrl {
     text-align: center;
@@ -17,13 +17,14 @@
 }
 .number-puzzle .tile {
     float: left;
-    width: 92px;
-    height: 92px;
+    width: 85px;
+    height: 85px;
     margin: 4px;
     background-color: #eee;
-    line-height: 98px;
+    line-height: 85px;
     text-align: center;
     font-size: 32px;
+    transition: .5s;
 }
 .number-puzzle .tile.mark {
     background-color: #fff;
