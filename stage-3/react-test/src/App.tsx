@@ -1,11 +1,20 @@
 import React from 'react';
-import Test from './react测试'
-import AntdTest from './antd组件案例'
-import Games from './games'
-import Comps from './组件测试'
-import CustomHooks from './自定义Hooks'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-import D3 from './d3';
+import PeakTurn from './games/峰回路转'
+import Game2048 from './games/Game2048'
+import Number16 from './games/数字华容道'
+import RotateJigsaw from './games/旋转拼图'
+import TurnBlackWhite from './games/黑白无双'
+import EitherBlackWhite from './games/黑白迭代'
+
+const routes = [
+    { title: '峰回路转', url: 'PeakTurn', component: PeakTurn },
+    { title: '数字2048', url: 'Game2048', component: Game2048 },
+    { title: '数字华容道', url: 'Number16', component: Number16 },
+    { title: '旋转拼图', url: 'RotateJigsaw', component: RotateJigsaw },
+    { title: '黑白无双', url: 'TurnBlackWhite', component: TurnBlackWhite },
+    { title: '黑白迭代', url: 'EitherBlackWhite', component: EitherBlackWhite },
+]
 
 function App() {
 
@@ -13,20 +22,14 @@ function App() {
         <div className="App">
             <Router>
                 <Switch>
-                    <Route key='hooks' path='/hooks' component={CustomHooks} />
-                    <Route key='components' path='/components' component={Comps} />
-                    <Route key='antd' path='/antd' component={AntdTest} />
-                    <Route key='games' path='/games' component={Games} />
-                    <Route key='test' path='/test' component={Test} />
-                    <Route key='d3' path='/d3' component={D3} />
-                    <Route key='/' path='/' render={() => (
+                    {
+                        routes.map(item => <Route key={item.url} path={`/${item.url}`} component={item.component} />)
+                    }
+                    <Route path='/' render={() => (
                         <>
-                            <Link key='hooks' style={{ display: 'block' }} to='/hooks'>自定义Hooks</Link>
-                            <Link key='components' style={{ display: 'block' }} to='/components'>组件测试</Link>
-                            <Link key='antd' style={{ display: 'block' }} to='/antd'>antd组件测试</Link>
-                            <Link key='games' style={{ display: 'block' }} to='/games'>games</Link>
-                            <Link key='test' style={{ display: 'block' }} to='/test'>react测试</Link>
-                            <Link key='graph' style={{ display: 'block' }} to='/d3'>d3</Link>
+                            {
+                                routes.map(item => <Link key={item.url} style={{ display: 'block' }} to={`/${item.url}`}>{item.title}</Link>)
+                            }
                         </>
                     )} />
                 </Switch>
