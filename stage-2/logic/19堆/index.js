@@ -1,4 +1,8 @@
 
+
+/**
+ * 大顶堆
+ */
 class Heap {
     constructor() {
         this.size = 0
@@ -7,10 +11,14 @@ class Heap {
     isEmpty() {
         return this.size === 0
     }
+    /**
+     * 插入一个元素，插入末尾，然后上浮
+     */
     insert(elt) {
-        let i
-        for (i = ++this.size; elt > this.data[i / 2 | 0]; i = i / 2 | 0) {
+        let i = ++this.size
+        while (elt > this.data[i / 2 | 0]) {
             this.data[i] = this.data[i / 2 | 0]
+            i = i / 2 | 0
         }
         this.data[i] = elt
     }
