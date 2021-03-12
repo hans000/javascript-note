@@ -1,6 +1,7 @@
 .game2048 {
     text-align: center;
     padding: 30px;
+    user-select: none;
 }
 .game2048 .pane {
     position: relative;

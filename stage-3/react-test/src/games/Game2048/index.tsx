@@ -10,7 +10,6 @@ export default function() {
     const containerRef = useRef(null)
     const [data, setData] = useState(instance.getMap())
     const [score, setScore] = useState(0)
-    const gestureHandle = useGesture()
 
     const handle = (code: number) => {
         const state = instance.getState()
@@ -29,7 +28,7 @@ export default function() {
             }, 300)
         }
     }
-    // gestureHandle(handle)
+    useGesture(handle)
     const handleKeyDown = (e: any) => {
         const code = e.keyCode
         if (code > 36 && code < 41) {

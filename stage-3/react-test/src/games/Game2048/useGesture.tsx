@@ -1,21 +1,29 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 const threshold = 50
 
 /**
- * dir up -> 0 right -> 1 down -> 2 left -> 3
+ * left 37 up 38 right 39 down 40
+ * dir up -> 1 right -> 2 down -> 3 left -> 0
  */
-export default function useGesture() {
-    const [dir, setDir] = useState(0)
-    const [startPos, setStartPos] = useState([0, 0])
-    const [endPos, setEndPos] = useState([0, 0])
+export default function useGesture(callback: (dir: number) => void) {
+    const pressedRef = useRef(false)
+    const startPosRef = useRef([0, 0])
+    const endPosRef = useRef([0, 0])
+    const [index, setIndex] = useState(0)
 
     function handleMouseDown(e: MouseEvent) {
-        setStartPos([e.clientX, e.clientY])
-        
+        pressedRef.current = true
+        startPosRef.current = [e.clientX, e.clientY]
+    }
+    function handleMouseMove(e: MouseEvent) {
+        if (pressedRef.current) {
+            endPosRef.current = [e.clientX, e.clientY]
+        }
     }
     function handleMouseUp(e: MouseEvent) {
-        setEndPos([e.clientX, e.clientY])
+        pressedRef.current = false
+        setIndex(index => index + 1)
     }
     function analyse(startPos: number[], endPos: number[]) {
         if (getDistance(startPos ,endPos) < threshold) {
@@ -25,10 +33,10 @@ export default function useGesture() {
         const [x2, y2] = endPos
         const dx = x2 - x1
         const dy = y2 - y1
-        if (dx > dy) {
-            return dx > 0 ? 1 : 3
+        if (Math.abs(dx) > Math.abs(dy)) {
+            return dx > 0 ? 2 : 0
         } else {
-            return dy > 0 ? 2 : 0
+            return dy > 0 ? 3 : 1
         }
     }
     function getDistance(startPos: number[], endPos: number[]) {
@@ -39,21 +47,19 @@ export default function useGesture() {
     useEffect(() => {
         window.addEventListener('mousedown', handleMouseDown)
         window.addEventListener('mouseup', handleMouseUp)
+        window.addEventListener('mousemove', handleMouseMove)
         return () => {
             window.removeEventListener('mousedown', handleMouseDown)
             window.removeEventListener('mouseup', handleMouseUp)
+            window.removeEventListener('mousemove', handleMouseMove)
         }
     }, [])
-    function mhandle(callback?: (dir: number) => void) {
-        console.log('dir', dir);
-    }
     useEffect(() => {
+        const startPos = startPosRef.current
+        const endPos = endPosRef.current
         const dir = analyse(startPos, endPos)
-        setDir(dir)
         if (dir !== -1) {
-            mhandle()
+            callback(dir + 37)
         }
-    }, [JSON.stringify(endPos)])
-  
-    return mhandle
-  }
+    }, [index])
+}
