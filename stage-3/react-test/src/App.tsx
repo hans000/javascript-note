@@ -17,6 +17,8 @@ const routes = [
     { title: '数字2048', url: 'Game2048', component: Game2048 },
 ]
 
+const subDomain = 'veg-game'
+
 function App() {
 
     return (
@@ -24,13 +26,13 @@ function App() {
             <Router>
                 <Switch>
                     {
-                        routes.map(item => <Route key={item.url} path={`/${item.url}`} component={item.component} />)
+                        routes.map(item => <Route key={item.url} path={`/${subDomain}/${item.url}`} component={item.component} />)
                     }
-                    <Route path='/' render={() => (
+                    <Route path={`/`} render={() => (
                         <div>
                             <h2 style={{ textAlign: 'center', padding: 16 }}>游戏目录</h2>
                             {
-                                routes.map(item => <Link key={item.url} className='nav-item' to={`/${item.url}`}>{item.title}</Link>)
+                                routes.map(item => <Link key={item.url} className='nav-item' to={`/${subDomain}/${item.url}`}>{item.title}</Link>)
                             }
                         </div>
                     )} />
