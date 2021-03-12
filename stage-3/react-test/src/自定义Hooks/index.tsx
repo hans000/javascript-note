@@ -1,6 +1,7 @@
 import { Button, Input, Select, Table } from "antd";
 import React from "react";
 import useForm from "./useForm";
+import useGesture from "./useGesture";
 import useTableRequest from "./useTableRequest";
 
 export default function() {
@@ -25,6 +26,8 @@ export default function() {
         })
     }
     const { list, loading, pagination, reqTableData } = useTableRequest(reqTable)
+    
+    useGesture(console.log)
 
     function submit() {
         reqTableData(data)
