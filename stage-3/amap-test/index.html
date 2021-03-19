@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body,
+        #container {
+          width: 100%;
+          height: 100%;
+        }
+        #ctrl {
+          position: absolute;
+          top: 0;
+          right: 0;
+        }
+    </style>
+</head>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=232dd56c3963ff900af61387066f1785&plugin=AMap.PolygonEditor,AMap.CircleEditor"></script>
+<script src="./lib.js"></script>
+<body>
+    <div id="container"></div>
+    <div id="ctrl">
+      <input id="search"/>
+      <div>
+        <button id="btnAdd">新增</button>
+        <button id="btnDel">删除</button>
+        <button id="btnFit">自适应</button>
+      </div>
+    </div>
+</body>
+<script type="text/javascript">
+    var map = new AMap.Map("container", {
+        center: [116.471354, 39.994257],
+        zoom: 16.8
+    });
+
+    const markers = createMarkers([116.471354, 39.994257])
+    const inst = createInstance(map, markers)
+    btnAdd.onclick = inst.btnAdd
+    btnDel.onclick = inst.btnDel
+    btnFit.onclick = inst.btnFit
+
+    // AMap.plugin('AMap.DistrictSearch', () => {
+    //     const search = new AMap.DistrictSearch()
+    //     console.log(search);
+    // })
+
+  </script>
+</html>
