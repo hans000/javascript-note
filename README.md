@@ -4,10 +4,6 @@
 
 ## 前言
 
-是时候重新整理一下自己的仓库了，这个是最开始自己整理的，现在看了感觉好惭愧（不过也是好事，证明自己确实成长了许多），我并不到算删除他们，留着作为见证吧，现在重新梳理（陆续更新上去）
-
-个人喜欢把前端的知识以游戏之类的案例展示，计划每月写几个游戏案例，期待吧
-
 点击对应名字的可以跳转到对应的项目文件下，里面readme有详细说明，后面有分类说明、掘金文章，在线试玩，npm地址等。欢迎star⭐
 
 源码目录说明
@@ -34,7 +30,7 @@
 - [「还原最强大脑-黑白无双-react版」](https://github.com/hans000/veg-javascript/tree/master/stage-3/react-test)··················································`react` `游戏` | [掘金](https://juejin.im/post/5eedc0abf265da02d421d065) [试玩](https://hans000.gitee.io/either-black-or-white/)
 - [「还原最强大脑-旋转拼图-react版」](https://github.com/hans000/veg-javascript/tree/master/stage-3/react-test)··················································`react` `游戏` | [试玩](https://hans000.gitee.io/rotate-jigsaw/)
 - [「还原最强大脑-数字华容道-react版」](https://github.com/hans000/veg-javascript/tree/master/stage-3/react-test)·············································`react` `游戏` | [试玩](https://hans000.gitee.io/number-puzzle/)
-- [「2048游戏-react版」](https://github.com/hans000/veg-javascript/tree/master/stage-3/react-test)··············································································`react` `游戏`
+- [「2048游戏-react版」](https://github.com/hans000/veg-javascript/tree/master/stage-3/react-test)··············································································`react` `游戏`  | [试玩](https://hans000.gitee.io/veg-game/#/Game2048)
 
 
 
