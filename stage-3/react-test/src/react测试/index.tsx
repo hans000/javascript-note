@@ -9,11 +9,12 @@ import FucntionTest from './测试function组件更新问题'
 import Hoc from './高阶组件'
 import Com from './组件复用'
 import ListKey from './测试数组组件key问题'
+import HooksProblem from './hook使用问题'
 
 export default function() {
     return (
         <div>
-            <ListKey />
+            <HooksProblem />
         </div>
     )
 }

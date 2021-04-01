@@ -19,8 +19,11 @@
         }
     </style>
 </head>
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
 <script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=232dd56c3963ff900af61387066f1785&plugin=AMap.PolygonEditor,AMap.CircleEditor"></script>
 <script src="./lib.js"></script>
+<script src="./api.js"></script>
+
 <body>
     <div id="container"></div>
     <div id="ctrl">
@@ -37,12 +40,20 @@
         center: [116.471354, 39.994257],
         zoom: 16.8
     });
-
+    getCurPos().then(res => {
+      console.log(res);
+    })
     const markers = createMarkers([116.471354, 39.994257])
     const inst = createInstance(map, markers)
     btnAdd.onclick = inst.btnAdd
     btnDel.onclick = inst.btnDel
     btnFit.onclick = inst.btnFit
+
+    // fetch('http://gps09.com/Ajax/DevicesAjax.asmx/GetDevicesHistory', {
+    //     method: 'post',
+    //     body: JSON.stringify({DeviceID:1075567,Start:'2021-03-19 08:33:12',End:'2021-03-19 11:27',TimeZone:'China Standard Time',ShowLBS:0}),
+
+    // }).then(console.log)
 
     // AMap.plugin('AMap.DistrictSearch', () => {
     //     const search = new AMap.DistrictSearch()

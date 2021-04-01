@@ -1,11 +1,7 @@
 // 1 2 5纸币若干
 // 如果支付6元，有多少种
-function sum(list) {
-    return list.reduce((s, v) => {
-        s += v
-        return s
-    }, 0)
-}
+const sum = list => list.reduce((s, v) => s += v, 0);
+
 /**
  * 递归的形式查找
  */
