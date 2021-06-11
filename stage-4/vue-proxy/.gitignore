@@ -1,0 +1,9 @@
+node_modules
+#ignore idea files
+/.idea/
+/.vscode/
+yarn-error.log
+/dist/
+/.history
+*.zip
+*.rar

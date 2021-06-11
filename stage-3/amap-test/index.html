@@ -17,14 +17,27 @@
           top: 0;
           right: 0;
         }
+        img {
+          position: absolute;
+          top: 0;
+        }
+        .mask {
+          position: absolute;
+          background-image: radial-gradient(transparent, #000);
+          width: 100%;
+          height: 100%;
+        }
     </style>
 </head>
 <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
-<script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=232dd56c3963ff900af61387066f1785&plugin=AMap.PolygonEditor,AMap.CircleEditor"></script>
-<script src="./lib.js"></script>
-<script src="./api.js"></script>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=232dd56c3963ff900af61387066f1785&plugin=AMap.PolygonEditor,AMap.CircleEditor,AMap.PolyEditor,AMap.Polygon,AMap.Polyine,Map3D"></script>
+<!-- <script src="./lib.js"></script>
+<script src="./polyEditor.js"></script>
+<script src="./api.js"></script> -->
 
 <body>
+    <img src="https://ss3.baidu.com/9fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/0824ab18972bd40797d8db1179899e510fb3093a.jpg"/>
+    <div class="mask"> </div>
     <div id="container"></div>
     <div id="ctrl">
       <input id="search"/>
@@ -36,18 +49,61 @@
     </div>
 </body>
 <script type="text/javascript">
-    var map = new AMap.Map("container", {
-        center: [116.471354, 39.994257],
-        zoom: 16.8
-    });
-    getCurPos().then(res => {
-      console.log(res);
-    })
-    const markers = createMarkers([116.471354, 39.994257])
-    const inst = createInstance(map, markers)
-    btnAdd.onclick = inst.btnAdd
-    btnDel.onclick = inst.btnDel
-    btnFit.onclick = inst.btnFit
+    // const center = [116.471354, 39.994257]
+    // const map = new AMap.Map("container", {
+    //     center,
+    //     zoom: 18,
+    //     pitch: 50,
+    //     buildingAnimation: false,
+    //     showIndoorMap: false,
+    //     viewMode: '3D',
+    // });
+
+    // const object3DLayer = new AMap.Object3DLayer()
+    // map.add(object3DLayer)
+
+    // const tile = new AMap.Object3D.Wall({
+    //   height: 8000,
+    //   color: '#000099',
+    //   path: [
+    //     [116.471354, 39.994257],
+    //     [116.471354 - 0.002, 39.994257],
+    //     [116.471354 - 0.002, 39.994257 - 0.002],
+    //     [116.471354, 39.994257 - 0.002],
+    //   ]
+    // })
+    // tile.transparent = true
+    // tile.backOrFront = 'front'
+    // object3DLayer.add(tile)
+
+    
+		// const circle = new AMap.Circle({
+		// 	center,
+		// 	map,
+		// 	radius:100,
+		// 	fillColor:'blue',
+		// 	strokeWeight:1,
+		// 	strokeColor:'white',
+		// 	fillOpacity:0.05
+		// })
+
+    // function animate() {
+    //   circle.setRadius((circle.getRadius() + 1) % 100)
+    //   AMap.Util.requestAnimFrame(animate)
+    // }
+
+    // AMap.Util.requestAnimFrame(animate)
+    
+    // getCurPos().then(res => {
+    //   console.log(res);
+    // })
+    // const markers = createMarkers([116.471354, 39.994257])
+    // const inst = createInstance(map, markers)
+
+    // const inst = createPolyEditorInstance(map)
+    // btnAdd.onclick = inst.btnAdd
+    // btnDel.onclick = inst.btnDel
+    // btnFit.onclick = inst.btnFit
 
     // fetch('http://gps09.com/Ajax/DevicesAjax.asmx/GetDevicesHistory', {
     //     method: 'post',

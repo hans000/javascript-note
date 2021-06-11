@@ -1,8 +1,9 @@
 const path = require("path")
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
 
 module.exports = {
-    mode: 'development', // development production
+    mode: 'production', // development production
     entry: './src/index.ts',
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -26,6 +27,10 @@ module.exports = {
             filename: 'index.html',
             template: './src/index.html'
         }),
+        new webpack.DefinePlugin({
+            __DEV__: false,
+            // __DEV__: JSON.stringify(true),
+        })
     ],
     devServer: {
         contentBase: path.join(__dirname, "dist"),

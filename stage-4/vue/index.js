@@ -12,7 +12,7 @@ data.name = 'World';
 // =========================================================
 
 const isObject = target => target !== null && typeof target === 'object'
-const hasOwnProperty = (target,key) => Object.prototype.hasOwnProperty.call(target,key)
+const hasOwnProperty = (target, key) => Object.prototype.hasOwnProperty.call(target, key)
 const hasChanged = (oldVal, newVal) => oldVal === newVal
 function effect(fn, options = {}) {
     // 创建响应式 effect
