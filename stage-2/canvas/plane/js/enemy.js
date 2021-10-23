@@ -12,8 +12,8 @@ class Enemy extends Sprite {
     this.bulletCB = 2000
     this.attackTime = -1
     this.boomConfig = new Map([
-      [2, [1.5, 1, 0.5]],
-      [3, [2, 2, 1]]
+      [2, [1.2, 1, 0.5]],
+      [3, [1.6, 1.6, 1]]
     ])
   }
   collide(bullets, w, h) {

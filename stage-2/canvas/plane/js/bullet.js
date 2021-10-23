@@ -18,8 +18,6 @@ class Bullet extends Sprite {
   }
   createParticle() {
     let p = new Particle();
-    p.sizeX = .5;
-    p.sizeY = .5;
     p.vx = Math.random() - .5;
     p.vy = Math.random() - .5;
     p.color = `#${Math.random().toString(16).substr(3, 6)}`;

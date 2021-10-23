@@ -1,1 +1,0 @@
-- zustand Bear necessities for state management in React
