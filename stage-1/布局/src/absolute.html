@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * { margin: 0; padding: 0; }
+        :root {
+            --width: 700px;
+            --img-wrap-width: 200px;
+        }
+
+        main {
+            max-width: var(--width);
+            background-color: #eee;
+            margin: 0 auto;
+        }
+        .img-wrap {
+
+        }
+        img {
+            display: inline-block;
+        }
+
+
+        .scene--top {
+            padding: 24px;
+            margin-top: 24px;
+            min-height: 150px;
+            background-color: rgb(255, 126, 126);
+        }
+        .scene--top h2 {
+            display: inline-block;
+            width: calc(100% - var(--img-wrap-width));
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .scene--top .img-wrap {
+            display: inline-block;
+            position: absolute;
+            overflow: hidden;
+            width: var(--img-wrap-width);
+            height: 0;
+            padding-bottom: 150px;
+            margin-left: calc(var(--width) - var(--img-wrap-width) - 24px * 2);
+            margin-top: 24px;
+        }
+        .scene--top p {
+            margin-right: var(--img-wrap-width);
+        }
+        @media (max-width: 700px) {
+            .scene--top h2 {
+                width: 100%;
+            }
+            .scene--top .img-wrap {
+                position: initial;
+                height: 0;
+                padding-bottom: 56%;
+                text-align: center;
+                width: 100%;
+                margin: 0;
+            }
+            .scene--top p {
+                margin: 0;
+            }
+        }
+
+        .scene--center {
+            padding: 24px;
+            margin-top: 24px;
+            min-height: 150px;
+            background-color: rgb(126, 251, 255);
+        }
+        .scene--center h2 {
+            display: inline-block;
+            width: calc(100% - var(--img-wrap-width));
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .scene--center .img-wrap {
+            display: inline-block;
+            position: absolute;
+            overflow: hidden;
+            width: var(--img-wrap-width);
+            height: 0;
+            padding-bottom: 150px;
+            margin-left: calc(- var(--img-wrap-width));
+            margin-top: 24px;
+        }
+        .scene--center p {
+            margin-right: var(--img-wrap-width);
+        }
+        @media (max-width: 700px) {
+            .scene--center h2 {
+                width: 100%;
+            }
+            .scene--center .img-wrap {
+                position: initial;
+                height: 0;
+                padding-bottom: 56%;
+                text-align: center;
+                width: 100%;
+                margin: 0;
+            }
+            .scene--center p {
+                margin: 0;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <main>
+        <div class="scene--top">
+            <div class="img-wrap">
+                <img src="../assets/1.jpeg" />
+            </div>
+            <h2>滕王阁序</h2>
+            <p>豫章故郡，洪都新府。星分翼轸，地接衡庐。襟三江而带五湖，控蛮荆而引瓯越。物华天宝，龙光射牛斗之墟；人杰地灵，徐孺下陈蕃之榻。雄州雾列，俊采星驰。台隍枕夷夏之交，宾主尽东南之美。都督阎公之雅望，棨戟遥临；宇文新州之懿范，襜帷暂驻。十旬休假，胜友如云；千里逢迎，高朋满座。腾蛟起凤，孟学士之词宗；紫电青霜，王将军之武库。家君作宰，路出名区；童子何知，躬逢胜饯。</p>
+        </div>
+
+        <div class="scene--center">
+            <h2>滕王阁序</h2>
+            <div class="img-wrap">
+                <img src="../assets/1.jpeg" />
+            </div>
+            <p>豫章故郡，洪都新府。星分翼轸，地接衡庐。襟三江而带五湖，控蛮荆而引瓯越。物华天宝，龙光射牛斗之墟；人杰地灵，徐孺下陈蕃之榻。雄州雾列，俊采星驰。台隍枕夷夏之交，宾主尽东南之美。都督阎公之雅望，棨戟遥临；宇文新州之懿范，襜帷暂驻。十旬休假，胜友如云；千里逢迎，高朋满座。腾蛟起凤，孟学士之词宗；紫电青霜，王将军之武库。家君作宰，路出名区；童子何知，躬逢胜饯。</p>
+        
+        </div>
+    </main>
+</body>
+</html>
