@@ -13,3 +13,7 @@ export interface PageConfig {
     name: string
     component: any
 }
+
+export type Vector = Vector2 | Vector3
+export type Vector2 = [number, number]
+export type Vector3 = [number, number, number]

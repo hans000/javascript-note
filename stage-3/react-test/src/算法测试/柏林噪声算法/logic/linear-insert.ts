@@ -1,7 +1,7 @@
 import { CanvasWidth, CanvasHeight } from "../constants"
 import { drawLineByPoints } from "../tools"
 import { Point } from "../type"
-import { ease } from "../utils"
+import { fade } from "../utils"
 
 export default class LinearInsert {
     private points: Point[] = []
@@ -39,8 +39,7 @@ export default class LinearInsert {
 
         for (let i = 0; i < segmentCount; i++) {
             const x = p1.x + i * dx
-            const y = p1.y + ease(i / 100) * (p2.y - p1.y)
-            // const y = p1.y + fade(i / 100) * (p2.y - p1.y)
+            const y = p1.y + fade(i / 100) * (p2.y - p1.y)
             this.segments.push({ x, y })
         }
     }

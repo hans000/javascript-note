@@ -1,7 +1,7 @@
 import { CanvasWidth, CanvasHeight } from "../constants"
 import { drawLineByPoints } from "../tools"
 import { Point } from "../type"
-import { ease, perlin } from "../utils"
+import { FadeType, perlin1 } from "../utils"
 
 const Scale = 4
 const Gap = 0.1
@@ -13,6 +13,9 @@ export default class Perlin1Demision {
     private offset = 0
     private offset2 = 0
     private canvas: HTMLCanvasElement
+    private fadeType: FadeType = 'fade'
+    private amplitude = 1
+    private frequency = 1
 
     constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas;
@@ -27,7 +30,7 @@ export default class Perlin1Demision {
         this.ctx.clearRect(0, 0, 800, 600)
         drawLineByPoints(this.ctx, this.points)
         drawLineByPoints(this.ctx, this.points2)
-        this.drawSelectBox()
+        // this.drawSelectBox()
     }
     private drawSelectBox() {
         this.ctx.beginPath()
@@ -43,27 +46,40 @@ export default class Perlin1Demision {
         this.handleFrame = requestAnimationFrame(() => this.update())
     }
     private initData() {
-        const Count = 200
+        const Count = (100 / this.frequency) | 0
         this.points = []
         this.points2 = []
         const dx = CanvasWidth / Count
-        const o = this.offset * Count / 100 * Gap / Scale
+        // const Gap = this.frequency
+        const o = this.offset //* Count / 100 * Gap / Scale
         for (let i = 0; i < Count; i++) {
             const x = dx * i
-            const y = perlin(i * Gap + o) + 100
+            const y = (perlin1(i * Gap + o, this.fadeType) + 100) * this.amplitude
             // const y = Math.random() * 200 + 100
             this.points.push({ x, y })
         }
-        const oo = this.offset2 * Count / (100 / .75) * Gap
-        for (let i = 0; i < Count; i++) {
-            const x = dx * i
-            const y = perlin(i * Gap / Scale + oo + o) * Scale + 350
-            // const y = Math.random() * 200 + 100
-            this.points2.push({ x, y })
-        }
+        // const oo = this.offset2 * Count / (100 / .75) * Gap
+        // for (let i = 0; i < Count; i++) {
+        //     const x = dx * i
+        //     const y = (perlin(i * Gap / Scale + oo + o, this.fadeType) * Scale + 350) * this.amplitude
+        //     // const y = Math.random() * 200 + 100
+        //     this.points2.push({ x, y })
+        // }
     }
     public load() {
         this.update()
+    }
+
+    public setFadeType(type: FadeType) {
+        this.fadeType = type
+    }
+
+    public setAmplitude(amplitude: number) {
+        this.amplitude = amplitude
+    }
+
+    public setFrequency(frequency: number) {
+        this.frequency = frequency
     }
 
     public setOffset(offset: number) {

@@ -23,3 +23,7 @@ export function drawLineByPoints(ctx: CanvasRenderingContext2D, points: Point[])
     ctx.stroke()
     ctx.closePath()
 }
+
+export function drawPixels(ctx: CanvasRenderingContext2D, data: number[], width: number, height: number, dx = 0, dy = 0) {
+    ctx.putImageData(new ImageData(new Uint8ClampedArray(data), width, height), dx, dy)
+}
