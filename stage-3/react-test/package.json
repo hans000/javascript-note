@@ -52,7 +52,7 @@
     "@types/react-addons-perf": "^0.14.18",
     "babel-plugin-import": "^1.13.0",
     "customize-cra": "^1.0.0",
-    "node-sass": "^4.5.3",
+    "node-sass": "^7.0.0",
     "react-addons-perf": "^15.4.2",
     "react-app-rewired": "^2.1.6",
     "sass-loader": "^8.0.2",
