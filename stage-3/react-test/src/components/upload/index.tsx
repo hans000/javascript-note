@@ -1,7 +1,17 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
-import { Button, SvgIcon } from '..';
 import UploadIcon from '@assets/images/icons/exit.svg'
+
+function Button(props: any) {
+  return (
+    <div></div>
+  )
+}
+function SvgIcon(props: any) {
+  return (
+    <div></div>
+  )
+}
 
 interface FileListItem {
   uid: string

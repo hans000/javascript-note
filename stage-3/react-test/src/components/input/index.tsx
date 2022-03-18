@@ -1,9 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { SvgIcon } from '..'
 import CloseIcon from '@assets/images/icons/eye-close.svg'
 import OpenIcon from '@assets/images/icons/eye-open.svg'
-import { classNamesParser } from '@shared/utils'
 
 interface IProps {
   value?: string
@@ -57,6 +55,17 @@ const Wrapper = styled.div`
     }
   }
 `
+
+
+function classNamesParser(arg: any) {
+  return ''
+}
+
+function SvgIcon(props: any) {
+  return (
+    <span></span>
+  )
+}
 
 export default function Input(props: IProps) {
   const [value, setValue] = React.useState('')

@@ -4,7 +4,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import ArrowRight from '@assets/images/icons/arrow-right.svg'
-import { SvgIcon } from '..'
+
+function SvgIcon(props: any) {
+  return (
+    <div></div>
+  )
+}
 
 interface IProps {
   value?: string
