@@ -1,0 +1,21 @@
+.hr-modal__left {
+    position: absolute;
+    width: 200px;
+    height: 100%;
+    border-right: 1px solid #eee;
+}
+.hr-modal__right {
+    margin-left: 200px;
+    height: 100%;
+}
+.hr-modal .ant-modal-body {
+    padding: 0;
+}
+.hr-modal--single .ant-table-header-column .ant-checkbox-wrapper {
+    display: none;
+}
+.hr-modal__wrap {
+    position: relative;
+    height: 400px;
+    overflow-y: auto;
+}

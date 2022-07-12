@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas style="border:1px solid #eee;display: block;" id="canvas" width="600" height="400"></canvas>
+</body>
+<script src="./logic.js"></script>
+<script>
+    const canvas = document.querySelector('#canvas')
+    const { top: x, left: y } = canvas.getBoundingClientRect()
+    const ctx = canvas.getContext('2d')
+    const list = []
+    const HEIGHT = 600, WIDTH = 400
+    const params = {
+        left: 0,
+        top: 0,
+        right: HEIGHT,
+        bottom: WIDTH,
+    }
+    const tree = new QuadNode(params)
+
+    canvas.onclick = (e) => {
+        const circle = new Circle(e.clientX - x, e.clientY - y, 20)
+        list.push(circle)
+        tree.add(circle)
+    }
+    function render() {
+        ctx.fillStyle = 'pink'
+        ctx.clearRect(0, 0, HEIGHT, WIDTH)
+        list.forEach(e => e.draw(ctx))
+        tree.render(ctx)
+        requestAnimationFrame(render)
+    }
+    render()
+
+
+
+</script>
+</html>

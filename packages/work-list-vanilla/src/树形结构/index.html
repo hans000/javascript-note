@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="canvas" width="500" height="500"></canvas>
+</body>
+<script src="./scene.js"></script>
+<script>
+  let ctx = canvas.getContext('2d')
+  
+  let tree = {
+    text: 'A',
+    children: [
+      {
+        text: 'B', children: [
+          { text: 'D', children: [
+              { text: 'G', children: [] },
+              { text: 'H', children: [] },
+            ]
+          }
+        ]
+      },
+      {
+        text: 'C', children: [
+          { text: 'E', children: [] },
+          { text: 'F', children: [
+              { text: 'I', children: [] }
+            ] 
+          }
+        ]
+      }
+    ]
+  }
+  
+  let scene = new Scene(ctx, tree)
+</script>
+</html>

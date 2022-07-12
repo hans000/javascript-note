@@ -1,0 +1,44 @@
+html, body {
+	margin: 0;
+	overflow: hidden;
+	font-family: sans-serif;
+	background: #13091B;
+	height: 100%;
+}
+
+body {
+    background: url(https://p1.music.126.net/gAmIGjlWnYXE_0O8LFp5-w==/109951164382001054.jpg) no-repeat;
+    background-size: cover;
+}
+
+#canvas {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+audio {
+    visibility: hidden;
+}
+
+#play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+	color: #13091B;
+	background: #007A99;
+	display: block;
+	width: 150px;
+    height: 45px;
+    line-height: 45px;
+	font-size: 18px;
+	cursor: pointer;
+	border-radius: 4px;
+	letter-spacing: 0.1em;
+	z-index: 1;
+    text-align: center;
+    text-decoration: none;
+}

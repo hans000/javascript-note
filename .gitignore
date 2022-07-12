@@ -1,0 +1,8 @@
+*.pptx
+*.ppt
+test.*
+.vscode/
+node_modules/
+note.*
+.vscode/
+*.log

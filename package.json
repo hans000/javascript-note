@@ -1,0 +1,15 @@
+{
+  "name": "javascript-note",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "hans0000",
+  "private": true,
+  "license": "ISC",
+  "devDependencies": {
+    "ts-node": "^10.8.2",
+    "typescript": "^4.7.4"
+  }
+}

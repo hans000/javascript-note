@@ -1,0 +1,31 @@
+// @devices-handset: "(max-width: 600px)";
+// @devices-tablet: "(min-width: 600px) and (max-width: 1000px)";
+// @devices-web: "(min-width: 1000px)";
+
+@xsmall: 480px;
+@small: 768px;
+@medium: 960px;
+@large: 1200px;
+
+@color: red;
+
+// @viewport-points: @xsmall, @small, @medium, @large, @xlarge;
+
+.xsmall(@rule) { @media (max-width: @xsmall) { @rule(); } }
+.small(@rule) { @media (max-width: @small) { @rule(); } }
+.medium(@rule) { @media (max-width: @medium) { @rule(); } }
+.large(@rule) { @media (max-width: @large) { @rule(); } }
+.xlarge(@rule) { @media (min-width: @large) { @rule(); } }
+
+.single-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.multi-ellipsis(@line: 3) {
+    overflow: hidden;
+    display: -webkit-box;    
+    -webkit-box-orient: vertical;    
+    -webkit-line-clamp: @line;    
+}

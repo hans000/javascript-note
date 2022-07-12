@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" width="600px" height="400px"></canvas>
+</body>
+<script>
+    const ctx = canvas.getContext('2d')
+    const width = 600, height = 400, cell = 50
+    const ratio = window.devicePixelRatio
+
+    addShape([
+        [1, 3],
+        [2, 5],
+        [4, 4],
+    ])
+
+    addShape([
+        [7, 1],
+        [8, 2],
+        [6, 6],
+        [5, 1],
+    ])
+
+
+    function addShape(points) {
+        drawGrid()
+        drawShape(points)
+        drawOutline(getOutlinePoints(points))
+    }
+
+    function getOutlinePoints(points) {
+        const xList = points.map(e => e[0])
+        const yList = points.map(e => e[1])
+        const x1 = Math.min(...xList)
+        const x2 = Math.max(...xList)
+        const y1 = Math.min(...yList)
+        const y2 = Math.max(...yList)
+
+        return [
+            [x1, y1],
+            [x1, y2],
+            [x2, y2],
+            [x2, y1],
+            [x1, y1],
+        ]
+    }
+
+    function drawOutline(points) {
+        ctx.fillStyle = '#999'
+        ctx.beginPath()
+        points.forEach((e, i) => {
+            let [x, y] = e
+            x = x * cell
+            y = y * cell
+            i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)
+        })
+        ctx.stroke()
+    }
+
+    function drawShape(points) {
+        ctx.fillStyle = '#999'
+        ctx.beginPath()
+        points.forEach((e, i) => {
+            let [x, y] = e
+            x = x * cell
+            y = y * cell
+            i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)
+        })
+        ctx.fill()
+    }
+
+    function drawGrid() {
+        ctx.fillStyle = '#aaa'
+        ctx.beginPath()
+        for (let i = 0, col = width / cell; i < col; i++) {
+            for (let j = 0, row = height / cell; j < row; j++) {
+                ctx.arc(cell * i, cell * j, 2, 0, 2 * Math.PI, false)
+                ctx.closePath()
+            }
+        }
+        ctx.fill()
+    }
+
+</script>
+</html>

@@ -1,0 +1,22 @@
+@import '../../utils/index.less';
+
+.card {
+    border: 1px solid #edeced;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 16px;
+    &:hover {
+        cursor: pointer;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, .1);
+    }
+
+    > h3 {
+        .single-ellipsis;
+    }
+    > p {
+        word-break: break-all;
+        .multi-ellipsis(2);
+    }
+}

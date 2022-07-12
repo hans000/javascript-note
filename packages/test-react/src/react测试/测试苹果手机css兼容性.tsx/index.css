@@ -1,0 +1,6 @@
+/* .apple input[disabled] {
+    color: red;
+} */
+.apple input:disabled {
+    color: red;
+}

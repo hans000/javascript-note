@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>demo by hans</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    ul {
+      list-style: none;
+    }
+    ul {
+      width: 150px;
+    }
+    li {
+      float: left;
+      width: 40px;
+      height: 40px;
+      margin: 10px 0 0 10px;
+      background-color: #eee;
+    }
+    .main {
+      position: relative;
+    }
+    .ctrl {
+      position: absolute;
+      top: 0;
+      left: 200px;
+      padding-top: 10px;
+    }
+    .clearfix::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+    .active {
+      background-color: rgb(0, 194, 0);
+    }
+  </style>
+</head>
+<body>
+  <div id="app" class="main">
+    <ul class="tile clearfix">
+      <li @click="select(i)" v-for="(e, i) in list" :key="i" :class="{active: !!e}"></li>
+    </ul>
+    <div class="ctrl">
+      <button @click="reset()">reset</button>
+      <button @click="reset(1)">all</button>
+      <div class="hex">
+        hex: <span>0x{{getHex}}</span>
+      </div>
+      <div class="dec">
+        dec: <span>{{getDec}}</span>
+      </div>
+      <div class="bin">
+        bin: <span>0b{{getBin}}</span>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: '#app',
+    data: {
+      list: new Array(15).fill(0),
+    },
+    methods: {
+      select(e) {
+        this.list.splice(e, 1, !this.list[e]);
+      },
+      reset(flag) {
+        for (let i = 0, len = this.list.length; i < len; i++) {
+          this.list.splice(i, 1, !!flag);
+        }
+      },
+    },
+    computed: {
+      getHex() {
+        return parseInt(this.list.map(e => +e).join(''), 2).toString(16);
+      },
+      getDec() {
+        return parseInt(this.list.map(e => +e).join(''), 2).toString(10);
+      },
+      getBin() {
+        return parseInt(this.list.map(e => +e).join(''), 2).toString(2);
+      }
+    }
+  })
+</script>
+</html>

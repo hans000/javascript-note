@@ -1,0 +1,10 @@
+packages:
+    - 'packages/code-list'
+    - 'packages/game-react'
+    - 'packages/game-vanilla'
+    - 'packages/html-css-layout'
+    - 'packages/logic-list'
+    - 'packages/test-react'
+    - 'packages/test-vanilla'
+    - 'packages/work-list-react'
+    - 'packages/work-list-vanilla'

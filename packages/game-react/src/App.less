@@ -1,0 +1,45 @@
+@import './utils/index.less';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto;
+    justify-content: space-around;
+    margin-top: 24px;
+    .card {
+        flex: 0 0 calc(25% - 16px);
+        &.placeholder {
+            opacity: 0;
+            margin: 0;
+            padding: 0;
+            cursor: default;
+        }
+    }
+
+    .medium({
+        width: auto;
+        margin: 24px;
+        .card {
+            flex-basis: calc(33.3333% - 16px);
+        }
+    });
+    
+    .small({
+        .card {
+            flex-basis: calc(50% - 16px);
+        }
+    });
+
+    .xsmall({
+        .card {
+            flex-basis: calc(100%);
+        }
+    });
+}

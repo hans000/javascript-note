@@ -1,0 +1,10 @@
+.game2 .layout {
+    margin-top: 50px;
+    width: 375;
+}
+.game2 .layout .tile {
+    width: 74px;
+    height: 74px;
+    padding: 0 1px 1px 0;
+    background-color: #eee;
+}
