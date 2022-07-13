@@ -16,6 +16,12 @@
 - work-list-react react实现的一些解决方案（[预览](https://hans000.github.io/javascript-note/work-list-react/index.html)）
 - work-list-vanilla 原生js实现的一些解决方案
 
+## 项目外一些工程
+- [easy-interceptor一款集成了模拟和拦截请求并拥有一定编程能力的谷歌浏览器插件](https://github.com/hans000/easy-interceptor)
+- [easynote-tampermonkey一款提取网页内容的tampermonkey插件](https://github.com/hans000/easynote-tampermonkey)
+- [wmplayer封装AudioContext，实现对音频的控制和解析，用于做播放器或者音频特效](https://github.com/hans000/wmplayer)
+- [sync-session跨页面同步sessionstorage](https://github.com/hans000/sync-session)
+
 ### code-list
 - 常用类型判断
 - 惰性函数
