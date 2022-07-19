@@ -48,6 +48,8 @@
 - react中合并class
 - schedule
 - url相关
+- 数组树节点路径查找
+
 ### game-react
 - [峰回路转](https://hans000.github.io/javascript-note/game-react/index.html#/number-ring)
 - [黑白迭代](https://hans000.github.io/javascript-note/game-react/index.html#/black-white-turn)
