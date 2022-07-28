@@ -19,7 +19,7 @@ jobs:
       - name: Run a multi-line script
         run: |
           pnpm install
-          pnpm run build
+          pnpm run build:all
           
       - name: Deploy
         if: success()
