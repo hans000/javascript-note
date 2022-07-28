@@ -1,6 +1,5 @@
 {
-  "name": "react",
-  "private": true,
+  "name": "game-react",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",

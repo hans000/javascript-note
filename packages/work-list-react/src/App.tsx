@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Home from './pages'
 import AnchorPage from './pages/anchor'
 import AnimateEnter from './pages/animate-enter'
+import DropdownPage from './pages/dropdown'
 import GridviewPage from './pages/gridview'
 import InfiniteScroll from './pages/infinite-scroll'
 import MultiPagesStateSync from './pages/multi-pages-state-sync'
@@ -25,6 +26,7 @@ const config: Array<{
   { label: '多行文本省略', key: 'multi-text', component: <MultiTextPage /> },
   { label: '无限滚动', key: 'infiniate-scroll', component: <InfiniteScroll /> },
   { label: '滚动容器', key: 'scroll-container', component: <ScrollContainerPage /> },
+  { label: '下拉', key: 'dropdown', component: <DropdownPage /> },
 ]
 
 const Wrapper = styled.div`

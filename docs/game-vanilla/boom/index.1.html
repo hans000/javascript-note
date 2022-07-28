@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>demo by hans</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .main {
+            width: 800px;
+            margin: 40px auto;
+        }
+        .wrap {
+            position: relative;
+            width: 400px;
+            margin: 40px auto;
+        }
+        .title {
+            padding-bottom: 20px;
+        }
+        #scene {
+            width: 400px;
+            height: 400px;
+        }
+        #scene li.tile {
+            float: left;
+            text-align: center;
+            background-color: #eee;
+            border: 1px solid #aaa;
+        }
+        #scene li.tile:hover {
+            background-color: #add6ff;
+        }
+        .wrap:hover .tail {
+            bottom: 400px;
+        }
+        .tail {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 0;
+            transition: .5s;
+            box-shadow: 0 0 3rem 0.5rem rgb(240, 255, 23);
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="wrap">
+            <div class="title">
+                <span><button id="reset">刷新地图</button></span>
+                <label for="">数量：<span id="curr">0</span>/<span id="total">10</span></label>
+            </div>
+            <ul id="scene"></ul>
+            <!-- <div class="tail"></div> -->
+        </div>
+    </div>
+</body>
+<script>
+    let $ = sel => document.querySelector(sel);
+    let $$ = sel => document.querySelectorAll(sel);
+    let log = console.log.bind(console);
+    let scene = $('#scene')
+
+
+
+    function Scene(data) {
+        this.map = [];
+        this.scale = 10;
+        this.bombCount = 20;
+        this.bombSign = '☢';
+    }
+    Scene.prototype = {
+        init() {
+            this.find = [];
+            this.initmap();
+            this.initUI();
+            this.bindEvent();
+            this.load && this.load();
+            return this;
+        },
+        initUI() {
+            const CELL = 400 / this.scale - 2;
+            this.items = [];
+            let frg = document.createDocumentFragment();
+            for (let i = 0; i < this.scale; i++) {
+                for (let j = 0; j < this.scale; j++) {
+                    let li = document.createElement('LI');
+                    li.x = i;
+                    li.y = j;
+                    li.classList.add('tile');
+                    li.style.width = CELL + 'px';
+                    li.style.height = CELL + 'px';
+                    li.style.lineHeight = CELL + 'px';
+                    li.mark = this.map[i][j];
+                    this.items.push(li);
+                    frg.appendChild(li);
+                }
+            }
+            scene.appendChild(frg);
+        },
+        initmap() {
+            let self = this;
+            for (let i = 0; i < self.scale; i++) {
+                self.map.push(new Array(self.scale).fill(0));
+            }
+            for (let i = 0; i < self.bombCount; i++) {
+                while (1) {
+                    let x = rand(0, self.scale);
+                    let y = rand(0, self.scale);
+                    if (!self.map[x][y]) {
+                        self.map[x][y] = self.bombSign;
+                        break;
+                    }
+                }
+            }
+            for (let i = 0; i < self.scale; i++) {
+                for (let j = 0; j < self.scale; j++) {
+                    if (self.map[i][j] !== self.bombSign) {
+                        let count = 0;
+                        self.adjNode(i, j, function (e) {
+                            if (e === self.bombSign) {
+                                count++;
+                            }
+                        })
+                        self.map[i][j] = count;
+                    }
+                }
+            }
+        },
+        adjNode(row, col, callback) {
+            let offset = [-1, -1, -1, 0, -1, 1, 0, -1, 0, 1, 1, -1, 1, 0, 1, 1];
+            for (let k = 0; k < 16; k += 2) {
+                let x = row + offset[k];
+                let y = col + offset[k + 1];
+
+                if (x < 0 ||
+                    y < 0 ||
+                    x >= this.scale ||
+                    y >= this.scale) {
+                    continue;
+                }
+                callback && callback(this.map[x][y], x * this.scale + y);
+            }
+        },
+        bindEvent() {
+            let self = this;
+            window.addEventListener('contextmenu', function (e) {
+                e.preventDefault();
+                let tag = e.target;
+                if (tag.nodeName === 'LI' && !tag.isOpen) {
+                    if (tag.isBomb) {
+                        self.find.splice(self.find.indexOf(tag), 1);
+                    } else {
+                        self.find.push(tag);
+                    }
+                    tag.isBomb = !tag.isBomb;
+                    tag.style.backgroundColor = tag.isBomb ? '#f60' : '#eee';
+                }
+                self.update();
+                return false;
+            })
+            window.addEventListener('click', function (e) {
+                let tag = e.target;
+                if (tag.nodeName === 'LI' && !tag.isBomb && !tag.isOpen) {
+                    if (tag.mark === self.bombSign) {
+                        for (const o of self.items) {
+                            o.innerHTML = o.mark ? o.mark : '';
+                            if (o.mark === self.bombSign) {
+                                o.style.backgroundColor = 'red'
+                            }
+                        }
+                        alert('当前是雷！');
+                    } else {
+                        if (tag.mark === 0) {
+                            let arr = [tag];
+                            tag.isOpen = true;
+                            while (arr.length) {
+                                let node = arr.pop();
+                                self.adjNode(node.x, node.y, function (e, i) {
+                                    let item = self.items[i];
+                                    if (item.mark === 0 && !item.isOpen) {
+                                        arr.push(item);
+                                    } else {
+                                        item.innerHTML = item.mark ? item.mark : '';
+                                    }                             
+                                    item.style.backgroundColor = 'white';
+                                    item.isOpen = true;
+                                })
+                            }
+                        } else {
+                            tag.innerHTML = tag.mark;
+                            tag.style.backgroundColor = 'white';
+                        }
+                    }
+                }
+                self.update();
+            })
+        },
+        update() {
+            // 注册点击事件
+            this.click && this.click();
+            // 判断游戏是否结束
+            if (this.find.length === this.bombCount) {
+                if (this.find.every(e => e.mark === this.bombSign)) {
+                    this.success && this.success();
+                } else {
+                    this.fail && this.fail();
+                }
+            }
+        },
+        reset() {
+            this.init();
+            this.load && this.load();
+        },
+    }
+    function rand(min, max) {
+        return min + Math.random() * (max - min) | 0;
+    }
+    let game = new Scene();
+    game.click = function () {
+        curr.innerHTML = this.find.length;
+    }
+    game.load = function () {
+        total.innerHTML = this.bombCount;
+    }
+    game.success = function () {
+        
+    }
+    game.fail = function () {
+        
+    }
+    game.init();
+
+    reset.onclick = function () {
+        scene.innerHTML = '';
+        game.reset();
+    }
+    
+</script>
+</html>

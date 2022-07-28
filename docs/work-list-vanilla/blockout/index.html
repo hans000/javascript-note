@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    canvas {
+      display: block;
+      margin: 0 auto;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="text-align: center">移动使用a w控制</h2>
+  <canvas class="canvas" width="400" height="550"></canvas>
+</body>
+<script src="./scene.js"></script>
+<script>
+  let canvas = document.querySelector('.canvas')
+  let ctx = canvas.getContext('2d')
+  Scene.CTX = ctx
+  let game = new Scene(ctx)
+</script>
+</html>

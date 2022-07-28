@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "clean:dependency": "rimraf node_modules && rimraf node_modules packages/*/node_modules",
+    "dev:work-list-react": "pnpm run dev --filter \"work-list-react\"",
+    "dev:test-react": "pnpm run dev --filter \"test-react\"",
+    "build:all": "pnpm run build --filter \"!test-react\" --filter \"!code-list\" --filter \"!logic-list\""
+  },
   "keywords": [],
   "author": "hans0000",
   "private": true,

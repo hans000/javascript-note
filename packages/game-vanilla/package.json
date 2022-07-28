@@ -1,0 +1,16 @@
+{
+  "name": "game-vanilla",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "node ./script.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "fs-extra": "^10.1.0",
+    "globby": "^13.1.2"
+  }
+}
