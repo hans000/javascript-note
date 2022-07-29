@@ -21,7 +21,7 @@ const Wrapper = styled.div<{ labelRect: DOMRect }>`
                 display: block;
             }
             &.full {
-                width: 100vw;
+                width: 100%;
                 left: 0;
             }
             &.before {
