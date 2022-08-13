@@ -5,6 +5,7 @@ import styleImport from 'vite-plugin-style-import'
 import externalGlobals from 'rollup-plugin-external-globals'
 const __DEV__ = process.env.NODE_ENV === 'development'
 import { resolve } from 'path'
+import path from "path-browserify"
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,6 +16,14 @@ export default defineConfig({
         javascriptEnabled: true
       }
     }
+  },
+  define: {
+    'process.env': {},
+  },
+  resolve: {
+    alias: {
+      path: "path-browserify",
+    },
   },
   build: {
     // minify: false,
