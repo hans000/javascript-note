@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="content">
+        <canvas id="canvas"></canvas>
+        <a href="javascript:;" id="play-btn">PLAY</a>
+    </div>
+</body>
+<script src="./mplayer.js"></script>
+<script>
+    const btn = document.getElementById("play-btn");
+    const canvas = document.getElementById("canvas");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const bufferLength = 256
+    const ctx = canvas.getContext("2d");
+    const WIDTH = canvas.width;
+    const HEIGHT = canvas.height;
+    const barWidth = WIDTH / bufferLength * 1.5;
+    let barHeight;
+
+    const mplayer = new MPlayer('1.mp3', {
+        auto: false,
+        fftSize: 512,
+    })
+
+    mplayer.onload = () => {
+        btn.onclick = () => {
+            mplayer.start()
+            renderFrame();
+        }
+    }
+
+    function renderFrame() {
+        requestAnimationFrame(renderFrame);
+        const dataArray = mplayer.getData()
+        ctx.clearRect(0, 0, WIDTH, HEIGHT);
+        for (var i = 0, x = 0; i < bufferLength; i++) {
+            barHeight = dataArray[i];
+            var r = barHeight + 25 * (i / bufferLength);
+            var g = 250 * (i / bufferLength);
+            var b = 50;
+            ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+            ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
+            x += barWidth + 2;
+        }
+    }
+</script>
+</html>
