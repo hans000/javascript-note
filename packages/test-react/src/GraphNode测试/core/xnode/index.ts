@@ -1,7 +1,17 @@
 import 'reflect-metadata'
+import { randId } from '../model'
 
 export interface IXNode {
-    getValue(): any
+}
+
+export class XNode {
+    public static key = 'XNode'
+    private _id = randId()
+
+    public get id() {
+        return this._id
+    }
+
 }
 
 export interface NodeOptions {
@@ -35,9 +45,16 @@ export function enumerate(list: string[] | NodeOptions) {
     }
 }
 
+export function output(options?: NodeOptions) {
+    return function(target: Object, propertyKey: string) {
+        Reflect.defineMetadata('XNode:output:' + propertyKey, options, target.constructor)
+    }
+}
+
 export interface AnalysisResult {
     input: NodeOptions[],
     enumerate: NodeOptions[]
+    output: NodeOptions[]
 }
 
 
@@ -45,6 +62,7 @@ export function analysis(ctor: Object) {
     const result: AnalysisResult = {
         input: [],
         enumerate: [],
+        output: [],
     }
     Reflect.getMetadataKeys(ctor).forEach(metadataKey => {
         const index = metadataKey.lastIndexOf(':')
@@ -59,6 +77,12 @@ export function analysis(ctor: Object) {
         }
         if (type === 'XNode:enumerate') {
             result.enumerate.push({
+                key,
+                ...options,
+            })
+        }
+        if (type === 'XNode:ouput') {
+            result.output.push({
                 key,
                 ...options,
             })

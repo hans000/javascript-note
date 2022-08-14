@@ -1,6 +1,8 @@
-import { enumerate, input, IXNode } from ".";
+import { enumerate, input, IXNode, output, XNode } from ".";
 
-export class OperationNode implements IXNode {
+export class OperationNode extends XNode {
+    public static key = 'OperationNode'
+
     @input()
     a = 1;
 
@@ -13,6 +15,7 @@ export class OperationNode implements IXNode {
     @enumerate(['add', 'substract', 'multiple', 'divide'])
     type = 'add'
 
+    @output()
     getValue() {
         switch (this.type) {
             case 'add':
