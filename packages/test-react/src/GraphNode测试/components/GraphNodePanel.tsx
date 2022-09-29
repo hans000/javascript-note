@@ -28,6 +28,7 @@ const config = [
 
 export default function GraphNodePanel(props: {
     spriteProps: SpriteProps
+    isFirstNode: boolean
     onLink: (props: {
         key: string
         type: 'input' | 'output'
@@ -43,7 +44,7 @@ export default function GraphNodePanel(props: {
                         {
                             config.map(item => {
                                 return (
-                                    <Tile onLink={(type) => {
+                                    <Tile isFirstNode={props.isFirstNode} onLink={(type) => {
                                         props.onLink({
                                             key: item.key,
                                             type,
