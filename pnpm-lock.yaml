@@ -83,6 +83,7 @@ importers:
       react-dom: ^18.0.0
       react-draggable: ^4.4.5
       react-markdown: ^8.0.3
+      react-node-graph: ^1.1.1
       react-router-dom: ^6.3.0
       react-scripts: 3.4.1
       reflect-metadata: ^0.1.13
@@ -111,6 +112,7 @@ importers:
       react-dom: 18.2.0_react@18.2.0
       react-draggable: 4.4.5_react-dom@18.2.0+react@18.2.0
       react-markdown: 8.0.3_d9efaa4a57b9ddc48121b447e3437c81
+      react-node-graph: 1.1.1_react@18.2.0
       react-router-dom: 6.3.0_react-dom@18.2.0+react@18.2.0
       react-scripts: 3.4.1_typescript@4.7.4
       reflect-metadata: 0.1.13
@@ -4717,6 +4719,13 @@ packages:
       ripemd160: 2.0.2
       safe-buffer: 5.2.1
       sha.js: 2.4.11
+    dev: false
+
+  /create-react-class/15.7.0:
+    resolution: {integrity: sha512-QZv4sFWG9S5RUvkTYWbflxeZX+JG7Cz0Tn33rQBJ+WFQTqTfUTjMjiv9tnfXazjsO5r0KhPs+AqCjyrQX6h2ng==}
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
     dev: false
 
   /create-require/1.1.1:
@@ -12534,6 +12543,14 @@ packages:
       text-table: 0.2.0
     dev: false
 
+  /react-dom/0.14.10_react@18.2.0:
+    resolution: {integrity: sha512-kDs8SWFb8Sry4NAplhpJbZEeAnTPir/m+s9s+lkdqA2a89BzmWGnEgGG/CfmhULjv1ogc4oHrjMfAvFNruT3jQ==}
+    peerDependencies:
+      react: ^0.14.10
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /react-dom/18.2.0_react@18.2.0:
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
     peerDependencies:
@@ -12542,6 +12559,12 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-draggable/1.3.7:
+    resolution: {integrity: sha512-kkf6rp2mZpXhPh7YU8dxEs2GFqLTBBcbwdYNV2/UPxQEMgOsvc7cqK54Sh7IxXC/ByI6EUiosRf/MMDvnibF9A==}
+    dependencies:
+      classnames: 2.3.1
     dev: false
 
   /react-draggable/4.4.5_react-dom@18.2.0+react@18.2.0:
@@ -12592,6 +12615,23 @@ packages:
       vfile: 5.3.4
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /react-node-graph/1.1.1_react@18.2.0:
+    resolution: {integrity: sha512-ogWybSAcLiQaIIi/sOQjOvZOd9bORxyWouQtvHGK2BQVydiH7S47GBnWUm/pDKMDrBEp5zeSlD+FoZfo8/RWhw==}
+    peerDependencies:
+      react: '>=0.13.0 <0.15.0 || ^0.14.0-beta3'
+    dependencies:
+      react: 18.2.0
+      react-dom: 0.14.10_react@18.2.0
+      react-draggable: 1.3.7
+      react-onclickoutside: 5.11.1
+    dev: false
+
+  /react-onclickoutside/5.11.1:
+    resolution: {integrity: sha512-iZKK+qUsGuqz+O3O/LtvDWkwmoqagC0EtRybhCJ3hawi9PF0ZaVrLnR24lqovbuvvUeA+cd1cWALOw+l1tfeaQ==}
+    dependencies:
+      create-react-class: 15.7.0
     dev: false
 
   /react-refresh/0.13.0:

@@ -27,6 +27,7 @@ const Wrapper = styled.div`
 export default function Tile(props: {
     type: 'input' | 'output'
     children: React.ReactNode
+    isFirstNode: boolean
     onLink: (type: 'input'| 'output') => void
 }) {
 
@@ -34,11 +35,11 @@ export default function Tile(props: {
 
     return (
         <Wrapper className={clsx({ [props.type]: true })}>
-            { isLeft && <Dot onClick={() => {
+            { isLeft && <Dot isFirstNode={props.isFirstNode} onClick={() => {
                 props.onLink('input')
             }} className="dot" /> }
             <div className="content">{props.children}</div>
-            { !isLeft && <Dot onClick={() => {
+            { !isLeft && <Dot isFirstNode={props.isFirstNode} onClick={() => {
                 props.onLink('output')
             }} className="dot" /> }
         </Wrapper>

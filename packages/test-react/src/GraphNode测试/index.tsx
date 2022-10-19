@@ -1,11 +1,12 @@
 import { Button, Col, Input, InputNumber, Row, Select } from "antd"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
-import GraphNodePanel from "./components/GraphNodePanel"
 import { Scene, SpriteProps } from "./core/model"
 import { analysis } from "./core/xnode"
 import Interpolation from "./core/xnode/InterpolationNode"
 import { OperationNode } from "./core/xnode/OperationNode"
+// @ts-ignore
+import ReactNodeGraph from 'react-node-graph'
 
 const Wrapper = styled.div`
     width: 400px;
@@ -16,12 +17,24 @@ Scene.registXNode(OperationNode)
 Scene.registXNode(Interpolation)
 const scene = new Scene()
 
+const exampleGraph = {
+    "nodes":[
+      {"nid":0,"type":"Timer","x":89,"y":82,"fields":{"in":[{"name":"reset"},{"name":"pause"},{"name":"max"}],"out":[{"name":"out"}]}},
+      {"nid":1,"type":"MathMult","x":284,"y":82,"fields":{"in":[{"name":"in"},{"name":"factor"}],"out":[{"name":"out"}]}},
+      {"nid":2,"type":"Vector3","x":486,"y":188,"fields":{"in":[{"name":"xyz"},{"name":"x"},{"name":"y"},{"name":"z"}],"out":[{"name":"xyz"},{"name":"x"},{"name":"y"},{"name":"z"}]}}
+    ],
+    "connections":[
+    //   {"from_node": nid,"from":"field_name","to_node": nid,"to":"field_name"},
+    ]
+  }
+
 export default function GraphNodeTest() {
 
     const [schema, setSchema] = useState(analysis(OperationNode))
     const [result, setResult] = useState(0)
     const [type, setType] = useState('')
     const [data, setData] = useState<SpriteProps[]>([])
+    const [isFirstNode, setIsFirstNode] = useState(false)
 
     return (
         <Wrapper>
@@ -36,15 +49,19 @@ export default function GraphNodeTest() {
                 scene.add(type)
                 setData(scene.toJson())
             }}>添加</Button>
-            {
+            <ReactNodeGraph data={exampleGraph} ></ReactNodeGraph> 
+            {/* {
                 data.map((item) => {
                     return (
-                        <GraphNodePanel onLink={(props) => {
+                        <GraphNodePanel isFirstNode={isFirstNode} onLink={(props) => {
+                            if (! isFirstNode) {
+                                setIsFirstNode(true)
+                            }
                             console.log(props)
                         }} spriteProps={item} key={item.id} />
                     )
                 })
-            }
+            } */}
             {/* <div>
                 <svg>
                     <path d={'M 0 0 C50 0 50 100 100 100 l-1 0 l-5 -5 m5 5 l-5 5'} strokeWidth={2} stroke="red" fill="transparent" />
