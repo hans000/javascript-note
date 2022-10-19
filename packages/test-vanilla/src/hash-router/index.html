@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <button onclick="router.navigate('/')">home</button>
+        <button onclick="router.navigate('/app')">app</button>
+    </div>
+    <div id="root"></div>
+</body>
+<script src="./router.js"></script>
+<script>
+    const router = new Router()
+    router.add('/', () => {
+        return `<p>home</p>`
+    })
+    router.add('/app', () => {
+        return `<p>app</p>`
+    })
+    router.listen((html) => {
+        const root = document.querySelector('#root')
+        root.innerHTML = html
+    })
+</script>
+</html>
